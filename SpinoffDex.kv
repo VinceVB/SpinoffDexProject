@@ -1,0 +1,86 @@
+#:kivy 1.11.1
+<SpinoffDex>:
+    manager: manager
+    theGrid: theGrid
+    dex_page_nr: dex_page_nr
+    dex_page: dex_page
+
+    ScreenManager:
+        id: manager
+        Screen:
+            id: sc1
+            name: 'dex_list'
+            BoxLayout:
+                orientation: 'vertical'
+                RelativeLayout:
+                    size_hint_y: 0.25
+                    Button:
+                        id: 'dex_page_nr'
+                        text: 'Top'
+                        on_press:
+                            manager.current = 'dex_page'
+
+                ScrollView:
+                    size_hint_y: 0.75
+                    GridLayout:
+                        id: theGrid
+                        cols: 1
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        size: root.width, self.minimum_height
+                        row_default_height: 80
+                        spacing: 10
+                        padding: 10
+
+        Screen:
+            id: dex_page
+            name: 'dex_page'
+            number:
+            on_pre_enter:
+                dex_page_nr.text = app.root.set_text(self.number, 1)
+                dex_page_name.text = app.root.set_text(self.number, 2)
+                dex_page_type1.text = app.root.set_text(self.number, 3)
+                dex_page_type2.text = app.root.set_text(self.number, 4)
+
+
+
+
+            ScrollView:
+                size_hint_y: 1
+                GridLayout:
+                    cols: 1
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    size: root.width, self.minimum_height
+                    row_default_height: 80
+                    spacing: 10
+                    padding: 10
+                    Button:
+                        id: dex_list_back
+                        text: 'Back'
+                        size_hint_y: 0.1
+                        on_press:
+                            manager.current = 'dex_list'
+                    Button:
+                        id: dex_page_nr
+                    Button:
+                        id: dex_page_name
+                    Button:
+                        id: dex_page_type1
+                    Button:
+                        id: dex_page_type2
+
+
+
+
+
+
+
+<DexEntry>
+    cols:4
+    rows:2
+    on_press:
+        app.root.dex_page.number = int(self.id[3:])
+        app.root.manager.current = 'dex_page'
+
+        #DELETEself.testo()
