@@ -106,6 +106,22 @@ md_abilities = {
                 'Wonder Guard': 'Only moves which hit this Pokémon super-effectively may be used against it. Typeless moves also deal damage, which includes thrown items.'
 }
 
+# IQ String
+iq_string = '\n\n'\
+            '•1 star: 0-9\n' \
+            '•2 stars: 10-49\n' \
+            '•3 stars: 50-99\n' \
+            '•4 stars: 100-149\n' \
+            '•5 stars: 150-199\n' \
+            '•6 stars: 200-299\n' \
+            '•7 stars: 300-399\n' \
+            '•8 stars: 400-499\n' \
+            '•9 stars: 500-599\n' \
+            '•10 stars: 600-699\n' \
+            '•11 stars: 700-989\n' \
+            '•MAX: 990 or more (IQ can reach up to 999)\n'
+
+
 # Dictionary of all evolution items and their descriptions / locations
 evo_item_dict = {'Water Stone': '[size=16][color=000011]Location:[/color][/size]\n'
                                 '• [u]Northwind Field[/u]\n'
