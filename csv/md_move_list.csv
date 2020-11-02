@@ -1,0 +1,414 @@
+Move,ID,Type,Power,PP,Accuracy% Var 1,Accuracy% Var 2,Accuracy% Total,Critical Hit%,Weight,Strikes,Range Actual,Range AI usage,Max Ginseng,Magic Coat,Snatch,Mouth,Freeze,Taunt,Dialog,Unk9
+Nothing,0,Normal,0,99,0,0,0.00%,0%,0,2-5,User,Forbidden,0,No,No,No,No,No,0,0
+Iron Tail,1,Steel,20,10,125,78,78.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Ice Ball,2,Ice,1,15,125,68,68.00%,2%,10,5,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Yawn,3,Normal,4,17,125,125,Sure Hit,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,Yes,Yes,No,11,75
+Lovely Kiss,4,Normal,0,13,100,78,100.00%,12%,15,1,All enemies within a 1-tile range,All enemies within a 1-tile range,0,Yes,No,Yes,Yes,No,2,75
+Nightmare,5,Ghost,4,15,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Morning Sun,6,Normal,4,12,125,125,Sure Hit,12%,15,1,User + Allies on the floor,"Allies on the floor, when damaged",0,No,Yes,No,Yes,No,4,75
+Vital Throw,7,Fighting,14,17,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Dig,8,Ground,12,12,125,100,100.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,20,75
+Thrash,9,Normal,18,12,125,78,78.00%,12%,15,3,Adjacent Pokémon,Enemy in front,99,No,No,No,Yes,Yes,12,75
+Sweet Scent,10,Normal,2,22,100,100,100.00%,12%,10,1,Enemies in the room,Enemies in the room,0,Yes,No,No,Yes,No,15,75
+Charm,11,Normal,2,22,75,100,75.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Rain Dance,12,Water,2,12,125,125,Sure Hit,12%,15,1,Pokémon on the floor,Enemies in the room,0,No,No,No,Yes,No,6,75
+Confuse Ray,13,Ghost,2,13,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Hail,14,Ice,2,13,125,125,Sure Hit,12%,15,1,Pokémon on the floor,Enemies in the room,0,No,No,No,Yes,No,6,75
+Aromatherapy,15,Grass,2,12,125,125,Sure Hit,12%,15,1,Allies in the room,"Allies in the room, when statused",0,No,Yes,No,No,No,16,75
+Bubble,16,Water,4,15,125,88,88.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Encore,17,Normal,2,12,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Cut,18,Normal,10,10,125,84,84.00%,12%,30,1,All enemies within a 1-tile range,Enemy in front,99,No,No,No,Yes,Yes,2,75
+Rage,19,Normal,4,22,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Super Fang,20,Normal,2,17,100,90,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,Yes,Yes,Yes,11,75
+Pain Split,21,Normal,2,22,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Torment,22,Dark,2,16,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,Yes,Yes,No,11,75
+String Shot,23,Bug,2,16,75,78,75.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,0,Yes,No,No,Yes,No,14,75
+Swagger,24,Normal,2,18,100,90,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Snore,25,Normal,4,16,125,95,95.00%,12%,15,1,Special,Forbidden,99,No,No,Yes,Yes,Yes,10,75
+Heal Bell,26,Normal,2,12,125,125,Sure Hit,12%,15,1,Allies in the room,"Allies in the room, when statused",0,No,Yes,No,No,No,16,75
+Screech,27,Normal,2,22,100,88,100.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,Yes,Yes,No,3,75
+Rock Throw,28,Rock,5,16,125,90,90.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Rock Smash,29,Fighting,1,99,100,100,100.00%,12%,20,1,Wall in front,Forbidden,0,No,No,No,Yes,Yes,25,75
+Rock Slide,30,Rock,14,13,125,90,90.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Weather Ball,31,Normal,10,15,125,90,90.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Whirlpool,32,Water,2,17,125,78,78.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Fake Tears,33,Dark,2,22,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,Yes,Yes,No,11,75
+Sing,34,Normal,2,17,100,84,100.00%,12%,10,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,Yes,Yes,No,3,75
+Spite,35,Ghost,2,15,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Air Cutter,36,Flying,2,17,125,90,90.00%,50%,10,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Smokescreen,37,Normal,2,10,100,78,100.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,No,Yes,No,3,75
+Pursuit,38,Dark,8,17,125,100,Sure Hit,12%,30,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Doubleslap,39,Normal,4,17,125,70,70.00%,2%,15,2-5,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Mirror Move,40,Flying,2,7,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Overheat,41,Fire,20,10,125,84,84.00%,12%,15,1,All enemies within a 1-tile range,All enemies within a 1-tile range,99,No,No,No,No,Yes,2,75
+Aurora Beam,42,Ice,10,17,125,65,65.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Memento,43,Dark,2,15,100,100,100.00%,12%,10,1,Enemies in the room,Enemies in the room,0,No,No,No,Yes,No,15,75
+Octazooka,44,Water,8,15,125,88,88.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,Yes,Yes,Yes,14,75
+Flatter,45,Dark,2,17,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,Yes,Yes,No,11,75
+Astonish,46,Ghost,6,17,125,88,88.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Will-O-Wisp,47,Fire,2,17,100,78,100.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,No,Yes,No,3,75
+Return,48,Normal,2,12,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,Yes,11,75
+Grudge,49,Ghost,2,12,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Strength,50,Normal,20,12,100,100,100.00%,12%,20,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Counter,51,Fighting,2,17,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Flame Wheel,52,Fire,12,11,125,88,88.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,No,Yes,3,75
+Flamethrower,53,Fire,18,12,125,88,88.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,No,Yes,14,75
+Odor Sleuth,54,Normal,2,22,100,100,100.00%,12%,10,1,Enemies in the room,Enemies in the room,0,No,No,No,Yes,No,15,75
+Sharpen,55,Normal,2,17,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Double Team,56,Normal,2,17,125,125,Sure Hit,12%,10,1,User,Enemies in the room,0,No,Yes,No,Yes,No,19,75
+Gust,57,Flying,4,19,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Harden,58,Normal,2,22,125,125,Sure Hit,12%,15,1,User,All enemies within a 1-tile range,0,No,Yes,No,Yes,No,19,75
+Disable,59,Normal,2,9,100,78,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Razor Wind,60,Normal,16,13,125,100,100.00%,50%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,28,75
+Bide,61,Normal,2,15,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Crunch,62,Dark,16,13,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,Yes,Yes,Yes,11,75
+Bite,63,Dark,7,19,125,90,90.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,Yes,Yes,Yes,11,75
+Thunder,64,Electric,24,9,125,73,73.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Thunderpunch,65,Electric,6,17,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Endeavor,66,Normal,2,12,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,Yes,11,75
+Facade,67,Normal,14,12,125,84,84.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Karate Chop,68,Fighting,10,18,125,90,90.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Clamp,69,Water,6,17,125,78,78.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Withdraw,70,Water,2,32,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Constrict,71,Normal,2,22,125,90,90.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Brick Break,72,Fighting,14,12,125,88,88.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Rock Tomb,73,Rock,10,12,125,60,60.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Focus Energy,74,Normal,2,27,125,125,Sure Hit,12%,30,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Focus Punch,75,Fighting,20,10,125,100,100.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,20,75
+Giga Drain,76,Grass,12,10,125,88,88.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Reversal,77,Fighting,2,17,125,90,90.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Smellingsalt,78,Normal,12,15,125,88,88.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Spore,79,Grass,2,19,100,100,100.00%,12%,10,1,Enemies in the room,Enemies in the room,0,Yes,No,No,Yes,No,15,75
+Leech Life,80,Bug,4,19,125,90,90.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,Yes,Yes,Yes,11,75
+Slash,81,Normal,14,11,125,88,88.00%,50%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Silver Wind,82,Bug,12,13,125,95,95.00%,12%,30,1,Enemies in the room,Enemies in the room,99,No,No,No,Yes,Yes,15,75
+Metal Sound,83,Steel,2,17,100,88,100.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,No,Yes,No,3,75
+Grasswhistle,84,Grass,2,13,100,90,100.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,Yes,Yes,No,3,75
+Tickle,85,Normal,2,17,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Spider Web,86,Bug,2,16,100,100,100.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,No,Yes,No,3,75
+Crabhammer,87,Water,18,12,125,88,88.00%,50%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Haze,88,Ice,2,13,125,125,Sure Hit,12%,15,1,Pokémon in the room,Allies in the room,0,No,No,No,Yes,No,17,75
+Mean Look,89,Normal,2,12,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Cross Chop,90,Fighting,20,10,125,84,84.00%,50%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Outrage,91,Dragon,18,9,125,78,78.00%,12%,15,2-5,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Low Kick,92,Fighting,7,22,125,90,90.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Ancientpower,93,Rock,12,12,125,88,88.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Synthesis,94,Grass,2,12,125,125,Sure Hit,12%,15,1,User,"User, when damaged",0,No,Yes,No,Yes,No,21,75
+Agility,95,Psychic,2,22,125,125,Sure Hit,12%,10,1,Allies in the room,Enemies in the room,0,No,Yes,No,Yes,No,16,75
+Rapid Spin,96,Normal,4,17,125,90,90.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Icy Wind,97,Ice,5,13,125,84,84.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Mind Reader,98,Normal,2,12,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Cosmic Power,99,Psychic,2,19,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Sky Attack,100,Flying,30,9,125,90,90.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,28,75
+Powder Snow,101,Ice,4,17,125,90,90.00%,12%,20,1,Enemies in the room,Enemy in front,99,No,No,No,Yes,Yes,15,75
+Follow Me,102,Normal,2,15,125,100,Sure Hit,12%,10,1,User,Enemies in the room,0,No,No,No,Yes,No,19,75
+Meteor Mash,103,Steel,20,9,100,88,88.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Endure,104,Normal,2,17,75,100,75.00%,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Rollout,105,Rock,1,14,125,68,68.00%,12%,15,5,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Scary Face,106,Normal,2,14,70,100,70.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Psybeam,107,Psychic,12,17,125,84,84.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Psywave,108,Psychic,2,19,100,88,100.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,0,No,No,No,Yes,Yes,14,75
+Psychic,109,Psychic,18,10,125,88,88.00%,12%,10,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Psycho Boost,110,Psychic,28,8,125,90,90.00%,12%,10,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Hypnosis,111,Psychic,2,17,100,60,100.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,No,Yes,No,3,75
+Uproar,112,Normal,10,17,125,100,Sure Hit,12%,10,1,Allies in the room,Enemies in the room,0,No,No,Yes,Yes,No,16,75
+Water Spout,113,Water,30,8,125,84,84.00%,12%,10,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Signal Beam,114,Bug,14,15,125,84,84.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Psych Up,115,Normal,2,17,125,125,Sure Hit,12%,15,1,Facing Pokémon,Facing Pokémon,0,No,No,No,Yes,No,30,75
+Submission,116,Fighting,15,17,125,84,84.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Recover,117,Normal,2,12,125,125,Sure Hit,12%,15,1,User,"User, when damaged",0,No,Yes,No,Yes,No,19,75
+Earthquake,118,Ground,5,10,100,65,65.00%,12%,20,1,Enemies and allies in the room,Enemy in front,99,No,No,No,Yes,Yes,18,75
+Nature Power,119,Normal,2,27,125,125,Sure Hit,12%,15,1,Special,Enemy in front,0,No,No,No,Yes,Yes,10,75
+Lick,120,Ghost,4,22,100,100,100.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,Yes,Yes,Yes,11,75
+Flail,121,Normal,2,17,100,100,100.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Tail Whip,122,Normal,2,22,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Selfdestruct,123,Normal,80,12,125,100,Sure Hit,12%,15,1,All Pokémon within a 1-tile range,Enemy in front,0,No,No,No,Yes,Yes,26,75
+Stun Spore,124,Grass,2,17,100,78,100.00%,12%,15,1,All enemies within a 1-tile range,All enemies within a 1-tile range,0,Yes,No,No,Yes,No,2,75
+Bind,125,Normal,4,17,125,78,78.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Shadow Punch,126,Ghost,6,8,125,125,Sure Hit,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Shadow Ball,127,Ghost,16,10,125,88,88.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Charge,128,Electric,10,25,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,20,75
+Thunderbolt,129,Electric,18,10,125,84,84.00%,12%,30,1,All enemies within a 1-tile range,All enemies within a 1-tile range,99,No,No,No,Yes,Yes,2,75
+Mist,130,Ice,2,19,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Fissure,131,Ground,2,14,35,100,35.00%,12%,20,1,Enemy in front,Enemy in front,0,No,No,No,Yes,Yes,11,75
+Extremespeed,132,Normal,16,12,125,88,88.00%,12%,25,1,Enemy within 2 tiles,Enemy within 2 tiles,99,No,No,No,Yes,Yes,13,75
+Extrasensory,133,Psychic,16,12,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Safeguard,134,Normal,2,15,125,125,Sure Hit,12%,10,1,Allies in the room,Enemies in the room,0,No,Yes,No,Yes,No,16,75
+Absorb,135,Grass,1,18,125,88,88.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,Yes,Yes,Yes,11,75
+Sky Uppercut,136,Fighting,16,12,125,90,90.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Skill Swap,137,Psychic,2,17,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Sketch,138,Normal,2,1,100,125,100.00%,12%,20,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Headbutt,139,Normal,6,17,125,90,90.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Double-Edge,140,Normal,15,17,125,88,88.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Sandstorm,141,Rock,2,14,125,125,Sure Hit,12%,15,1,Pokémon on the floor,Enemies in the room,0,No,No,No,Yes,No,6,20
+Sand-Attack,142,Ground,2,22,80,100,80.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,No,Yes,No,3,75
+Sand Tomb,143,Ground,4,17,125,73,73.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Spark,144,Electric,12,15,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Swift,145,Normal,10,8,125,125,Sure Hit,12%,30,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Kinesis,146,Psychic,2,17,100,84,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Smog,147,Poison,4,17,125,73,73.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Growth,148,Normal,2,22,125,125,Sure Hit,12%,15,1,User,Enemies in the room,0,No,Yes,No,Yes,No,19,75
+Sacred Fire,149,Fire,20,10,125,88,88.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Sheer Cold,150,Ice,2,12,35,100,35.00%,12%,20,1,Enemy in front,Enemy in front,0,No,No,No,Yes,Yes,11,75
+Solarbeam,151,Grass,24,9,125,100,100.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,28,75
+Sonicboom,152,Normal,2,22,100,90,100.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,0,No,No,No,Yes,Yes,14,75
+Fly,153,Flying,14,12,125,100,100.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,20,75
+Tackle,154,Normal,7,22,100,95,95.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Explosion,155,Normal,50,12,125,100,Sure Hit,12%,15,1,All Pokémon within a 2-tile range,Enemy within 2 tiles,0,No,No,No,Yes,Yes,27,75
+Dive,156,Water,12,12,125,100,100.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,20,75
+Fire Blast,157,Fire,24,9,100,88,88.00%,12%,30,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,No,Yes,3,75
+Waterfall,158,Water,16,12,125,88,88.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Muddy Water,159,Water,18,10,125,84,84.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Stockpile,160,Normal,2,17,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,Yes,Yes,No,19,75
+Slam,161,Normal,16,12,125,78,78.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Twister,162,Dragon,8,15,125,90,90.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Bullet Seed,163,Grass,10,10,125,78,78.00%,2%,10,2-5,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Twineedle,164,Bug,6,15,125,80,80.00%,2%,30,2,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Softboiled,165,Normal,2,15,125,100,Sure Hit,12%,15,1,Aliies in the room,"Allies in the room, when damaged",0,No,Yes,No,Yes,No,16,75
+Egg Bomb,166,Normal,10,15,125,78,78.00%,12%,30,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Faint Attack,167,Dark,6,8,125,125,Sure Hit,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Barrage,168,Normal,1,17,125,78,78.00%,2%,10,2-5,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Minimize,169,Normal,2,27,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Seismic Toss,170,Fighting,2,22,100,100,100.00%,12%,30,1,Enemy in front,Enemy in front,0,No,No,No,Yes,Yes,11,75
+Supersonic,171,Normal,2,10,100,55,100.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,Yes,Yes,No,3,75
+Taunt,172,Dark,2,20,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Moonlight,173,Normal,2,12,125,125,Sure Hit,12%,10,1,User + Allies on the floor,"Allies in the room, when damaged",0,No,Yes,No,Yes,No,5,75
+Peck,174,Flying,4,22,125,95,95.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Arm Thrust,175,Fighting,2,17,125,78,78.00%,2%,30,2-5,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Horn Attack,176,Normal,8,18,125,95,95.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Horn Drill,177,Normal,2,12,35,100,35.00%,12%,25,1,Enemy in front,Enemy in front,0,No,No,No,Yes,Yes,11,75
+Wing Attack,178,Flying,6,22,125,95,95.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Aerial Ace,179,Flying,10,8,125,125,Sure Hit,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Icicle Spear,180,Ice,2,22,125,70,70.00%,2%,20,2-5,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Swords Dance,181,Normal,2,17,125,125,Sure Hit,12%,15,1,User,Enemies in the room,0,No,Yes,No,Yes,No,19,20
+Vine Whip,182,Grass,8,15,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Conversion,183,Normal,2,22,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Conversion 2,184,Normal,2,22,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Helping Hand,185,Normal,2,17,125,100,Sure Hit,12%,10,1,Allies in the room,Enemies in the room,0,No,No,No,Yes,No,22,75
+Iron Defense,186,Steel,2,17,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Teleport,187,Psychic,2,15,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Thundershock,188,Electric,1,17,125,88,88.00%,2%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Shock Wave,189,Electric,7,8,125,125,Sure Hit,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Quick Attack,190,Normal,4,13,125,88,88.00%,12%,25,1,Enemy within 2 tiles,Enemy within 2 tiles,99,No,No,No,Yes,Yes,13,75
+Sweet Kiss,191,Normal,2,15,100,84,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,Yes,Yes,No,11,75
+Thunder Wave,192,Electric,2,17,50,100,50.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Zap Cannon,193,Electric,20,9,125,73,73.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Block,194,Normal,2,12,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Howl,195,Normal,2,27,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,Yes,Yes,No,19,75
+Poison Gas,196,Poison,2,27,100,84,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Toxic,197,Poison,2,12,100,90,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Poison Fang,198,Poison,10,15,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Poisonpowder,199,Poison,2,22,100,84,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Poison Sting,200,Poison,3,19,125,73,73.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Spike Cannon,201,Normal,3,17,125,70,70.00%,2%,10,2-5,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Acid Armor,202,Poison,2,27,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Take Down,203,Normal,8,19,125,88,88.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Jump Kick,204,Fighting,14,13,125,95,95.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Bounce,205,Flying,16,11,125,100,100.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,20,75
+Hi Jump Kick,206,Fighting,16,11,125,90,90.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Tri Attack,207,Normal,6,17,100,100,100.00%,12%,25,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,No,Yes,3,75
+Dragon Claw,208,Dragon,16,10,125,88,88.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Trick,209,Psychic,2,17,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Triple Kick,210,Fighting,8,15,125,70,70.00%,2%,25,3,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Drill Peck,211,Flying,16,13,125,88,88.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Mud Sport,212,Ground,2,17,125,100,Sure Hit,12%,10,1,Pokémon on the floor,Enemies in the room,0,No,No,No,Yes,No,6,75
+Mud-Slap,213,Ground,4,16,125,84,84.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Thief,214,Dark,2,20,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Amnesia,215,Psychic,2,22,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Night Shade,216,Ghost,2,17,100,100,100.00%,12%,25,1,All enemies within a 1-tile range,All enemies within a 1-tile range,0,No,No,No,Yes,Yes,2,75
+Growl,217,Normal,2,20,100,100,100.00%,12%,10,1,Enemies in the room,Enemy within 2 tiles,0,Yes,No,Yes,Yes,No,15,75
+Slack Off,218,Normal,2,17,125,100,Sure Hit,12%,15,1,User,"User, when damaged",0,No,Yes,No,Yes,No,19,75
+Surf,219,Water,18,11,125,88,88.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Role Play,220,Psychic,2,17,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Needle Arm,221,Grass,12,11,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Double Kick,222,Fighting,6,14,100,87,87.00%,3%,20,2,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Sunny Day,223,Fire,2,12,125,125,Sure Hit,12%,10,1,Pokémon on the floor,Enemies in the room,0,No,No,No,Yes,No,6,75
+Leer,224,Normal,2,27,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Wish,225,Normal,2,15,125,100,Sure Hit,12%,10,1,User,Enemies in the room,0,No,No,No,Yes,No,19,75
+Fake Out,226,Normal,8,17,125,88,88.00%,12%,20,1,Enemy within 2 tiles,Enemy within 2 tiles,99,No,No,No,Yes,Yes,13,75
+Sleep Talk,227,Normal,2,17,125,125,Sure Hit,12%,15,1,Special,Forbidden,0,No,No,Yes,Yes,No,10,75
+Pay Day,228,Normal,8,22,125,90,90.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Assist,229,Normal,2,27,125,95,95.00%,12%,15,1,Special,Enemy in front,99,No,No,No,Yes,Yes,10,75
+Heat Wave,230,Fire,10,15,125,90,90.00%,12%,10,1,Enemies in the room,Enemies in the room,99,No,No,No,No,Yes,15,75
+Sleep Powder,231,Grass,2,19,100,78,100.00%,12%,15,1,All enemies within a 1-tile range,All enemies within a 1-tile range,0,Yes,No,No,Yes,No,2,75
+Rest,232,Psychic,2,10,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Ingrain,233,Grass,2,22,125,100,Sure Hit,12%,20,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Confusion,234,Psychic,5,22,100,100,100.00%,12%,10,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Body Slam,235,Normal,12,17,125,90,90.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Swallow,236,Normal,2,15,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,Yes,Yes,No,21,75
+Curse,237,Normal,2,17,100,125,100.00%,12%,20,1,Special,Enemy in front,0,No,No,No,Yes,No,10,75
+Frenzy Plant,238,Grass,30,10,125,84,84.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Hydro Cannon,239,Water,30,9,125,84,84.00%,12%,20,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Hydro Pump,240,Water,24,9,125,84,84.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Hyper Voice,241,Normal,18,12,125,90,90.00%,12%,30,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,Yes,Yes,Yes,3,75
+Hyper Beam,242,Normal,30,8,100,90,90.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Superpower,243,Fighting,24,11,125,90,90.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Steel Wing,244,Steel,14,10,125,90,90.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Spit Up,245,Normal,20,12,125,88,88.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,Yes,Yes,Yes,11,75
+Dynamicpunch,246,Fighting,10,13,125,78,78.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Guillotine,247,Normal,2,12,35,100,35.00%,12%,20,1,Enemy in front,Enemy in front,0,No,No,No,Yes,Yes,11,75
+Vicegrip,248,Normal,6,22,125,90,90.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Knock Off,249,Dark,4,22,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Pound,250,Normal,8,22,125,90,90.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Razor Leaf,251,Grass,4,17,100,84,84.00%,50%,15,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Baton Pass,252,Normal,2,19,100,125,100.00%,12%,10,1,Pokémon in the room,Pokémon in the room,0,No,No,No,Yes,No,17,75
+Petal Dance,253,Grass,7,17,125,87,87.00%,12%,25,2-5,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Splash,254,Normal,2,50,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Bubblebeam,255,Water,6,19,100,100,100.00%,12%,20,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Doom Desire,256,Steel,24,11,125,88,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Belly Drum,257,Normal,2,10,100,100,100.00%,12%,25,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Barrier,258,Psychic,2,22,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Light Screen,259,Psychic,2,14,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Scratch,260,Normal,8,22,125,90,90.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Hyper Fang,261,Normal,16,13,125,88,88.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,Yes,Yes,Yes,11,75
+Ember,262,Fire,7,18,125,90,90.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,No,Yes,3,75
+Secret Power,263,Normal,14,10,125,88,88.00%,12%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Dizzy Punch,264,Normal,6,17,125,90,90.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Bulk Up,265,Fighting,2,22,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Imprison,266,Psychic,2,15,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Featherdance,267,Flying,2,22,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Whirlwind,268,Normal,2,27,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Beat Up,269,Dark,2,15,100,100,100.00%,12%,15,1,Allies on the floor,Enemy in front,0,No,No,No,Yes,No,4,75
+Blizzard,270,Ice,24,10,125,84,84.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Stomp,271,Normal,12,17,125,90,90.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Blast Burn,272,Fire,30,8,125,84,84.00%,12%,25,1,All enemies within a 1-tile range,All enemies within a 1-tile range,99,No,No,Yes,No,Yes,2,75
+Flash,273,Normal,2,22,100,84,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Teeter Dance,274,Normal,2,15,100,100,100.00%,12%,15,1,Pokémon on the floor,Pokémon on the floor,0,No,No,No,Yes,No,6,75
+Crush Claw,275,Normal,14,15,125,90,90.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Blaze Kick,276,Fire,16,13,125,88,88.00%,50%,30,1,Enemy in front,Enemy in front,99,No,No,No,No,Yes,11,75
+Present,277,Normal,2,19,100,90,100.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,No,No,No,Yes,Yes,3,75
+Eruption,278,Fire,30,10,125,84,84.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,No,Yes,3,75
+Sludge,279,Poison,12,22,125,88,88.00%,12%,25,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Sludge Bomb,280,Poison,18,10,125,84,84.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Glare,281,Normal,2,22,100,78,100.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Transform,282,Normal,2,1,125,125,Sure Hit,12%,15,1,User,Enemies on the floor,0,No,No,No,Yes,No,19,75
+Poison Tail,283,Poison,10,17,125,88,88.00%,50%,30,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Roar,284,Normal,2,14,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,Yes,Yes,No,11,75
+Bone Rush,285,Ground,12,12,125,70,70.00%,2%,25,2-5,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Camouflage,286,Normal,2,22,125,100,Sure Hit,12%,20,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Covet,287,Normal,8,27,125,88,88.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Tail Glow,288,Bug,2,22,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Bone Club,289,Ground,12,15,125,88,88.00%,12%,25,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Bonemerang,290,Ground,10,14,125,87,87.00%,12%,10,2,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Fire Spin,291,Fire,4,19,125,73,73.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,No,Yes,11,75
+Fire Punch,292,Fire,14,13,125,100,100.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,No,Yes,11,75
+Perish Song,293,Normal,2,15,25,125,25.00%,12%,10,1,Enemies on the floor,Enemies in the room,0,No,No,Yes,Yes,No,7,75
+Wrap,294,Normal,4,22,100,88,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Spikes,295,Ground,2,22,125,125,Sure Hit,12%,10,1,Tile below user,Enemies in the room,0,No,No,No,Yes,No,24,75
+Magnitude,296,Ground,2,15,100,100,100.00%,12%,20,1,Enemies and allies in the room,Enemy in front,0,No,No,No,Yes,Yes,18,75
+Magical Leaf,297,Grass,12,8,125,125,Sure Hit,12%,30,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Magic Coat,298,Psychic,2,19,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Mud Shot,299,Ground,12,13,125,65,65.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Mach Punch,300,Fighting,8,22,125,90,90.00%,12%,20,1,Enemy within 2 tiles,Enemy within 2 tiles,99,No,No,No,Yes,Yes,13,75
+Protect,301,Normal,2,10,75,100,75.00%,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Defense Curl,302,Normal,2,27,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Rolling Kick,303,Fighting,12,13,100,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Substitute,304,Normal,2,7,100,125,100.00%,12%,15,1,Facing Pokémon,Enemy in front,0,No,Yes,No,Yes,No,30,75
+Detect,305,Fighting,2,12,75,100,75.00%,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Pin Missile,306,Bug,4,17,125,78,78.00%,1%,10,2-5,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Water Sport,307,Water,2,19,125,100,Sure Hit,12%,10,1,Pokémon on the floor,Enemies in the room,0,No,No,No,Yes,No,6,75
+Water Gun,308,Water,5,17,125,88,88.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Mist Ball,309,Psychic,14,10,125,88,88.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Water Pulse,310,Water,12,12,125,88,88.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Fury Attack,311,Normal,1,22,125,70,70.00%,1%,20,2-5,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Fury Swipes,312,Normal,4,19,125,78,78.00%,1%,25,2-5,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Destiny Bond,313,Ghost,2,12,100,125,100.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,No,No,No,Yes,No,3,75
+False Swipe,314,Normal,40,15,100,100,100.00%,12%,30,1,Enemy in front,Enemy in front,0,No,No,No,Yes,Yes,11,75
+Foresight,315,Normal,2,22,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Mirror Coat,316,Psychic,2,15,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Future Sight,317,Psychic,16,13,125,90,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Milk Drink,318,Normal,2,15,125,125,Sure Hit,12%,15,1,User + Allies on the floor,"Allies on the floor, when damaged",0,No,Yes,Yes,Yes,No,5,75
+Calm Mind,319,Psychic,2,19,125,125,Sure Hit,12%,15,1,User,Enemies in the room,0,No,Yes,No,Yes,No,19,75
+Mega Drain,320,Grass,8,17,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Mega Kick,321,Normal,16,12,125,84,84.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Mega Punch,322,Normal,16,12,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Megahorn,323,Bug,24,10,125,84,84.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Hidden Power,324,None,2,12,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Metal Claw,325,Steel,10,15,125,90,90.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Attract,326,Normal,2,10,100,78,100.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,No,Yes,No,3,75
+Mimic,327,Normal,2,17,100,100,100.00%,12%,15,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Frustration,328,Normal,2,20,100,100,100.00%,12%,30,1,Enemy in front,Enemy in front,0,No,No,No,Yes,Yes,11,75
+Leech Seed,329,Grass,2,17,100,90,100.00%,12%,15,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,Yes,No,No,Yes,No,3,75
+Metronome,330,Normal,2,22,100,125,100.00%,12%,15,1,Special,Enemy in front,0,No,No,No,Yes,Yes,10,75
+Dream Eater,331,Psychic,20,13,125,100,100.00%,12%,30,1,Enemy in front,"Enemy in front, when asleep",99,No,No,Yes,Yes,Yes,11,75
+Acid,332,Poison,8,17,125,88,88.00%,12%,30,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Meditate,333,Psychic,2,22,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Snatch,334,Dark,2,17,125,100,Sure Hit,12%,10,1,User,Enemies in the room,0,No,No,No,Yes,No,19,75
+Luster Purge,335,Psychic,14,12,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Leaf Blade,336,Grass,14,12,125,88,88.00%,50%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Recycle,337,Normal,2,17,125,100,Sure Hit,12%,15,1,All TMs in the bag,Forbidden,0,No,No,No,Yes,No,23,75
+Reflect,338,Psychic,2,22,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Refresh,339,Normal,2,17,125,100,Sure Hit,12%,15,1,Allies in the room,"Allies in the room, when statused",0,No,Yes,No,No,No,16,75
+Revenge,340,Fighting,12,12,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Dragon Rage,341,Dragon,2,17,100,100,100.00%,12%,20,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,No,No,No,Yes,Yes,3,75
+Dragonbreath,342,Dragon,12,12,125,88,88.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,Yes,Yes,Yes,14,75
+Dragon Dance,343,Dragon,2,22,125,125,Sure Hit,12%,15,1,User,Enemy in front,0,No,Yes,No,Yes,No,19,75
+Ice Punch,344,Ice,14,12,125,88,88.00%,12%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Ice Beam,345,Ice,15,8,125,88,88.00%,12%,20,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Fury Cutter,346,Bug,2,14,125,87,87.00%,12%,15,2,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Comet Punch,347,Normal,3,19,125,80,80.00%,1%,30,2-5,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Skull Bash,348,Normal,10,15,125,100,100.00%,12%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,20,75
+Lock-On,349,Normal,2,12,125,100,Sure Hit,12%,15,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Rock Blast,350,Rock,4,17,100,80,80.00%,1%,30,2-5,"Enemy in front, cuts corners","Enemy in front, cuts corners",99,No,No,No,Yes,Yes,3,75
+Cotton Spore,351,Grass,2,13,70,100,70.00%,12%,15,1,Enemy in front,Enemy in front,0,Yes,No,No,Yes,No,11,75
+Struggle,352,Normal,30,1,100,100,100.00%,12%,30,1,Enemy in front,Enemy in front,0,No,No,No,Yes,Yes,11,75
+Aeroblast,353,Flying,20,12,125,84,84.00%,50%,20,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+Volt Tackle,354,Electric,24,12,125,84,84.00%,12%,10,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,99,No,No,No,Yes,Yes,14,75
+regular attack,355,None,1,17,125,93,93.00%,0%,70,1,Enemy in front,Enemy in front,1,No,No,No,Yes,Yes,11,75
+is watching,356,None,2,17,80,84,67.20%,6%,10,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+???,357,Dark,2,17,100,100,100.00%,6%,10,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+???,358,None,2,17,80,84,67.20%,6%,10,1,User,Forbidden,99,No,No,No,Yes,Yes,19,75
+-,359,None,2,17,80,84,67.20%,6%,10,1,User,Forbidden,99,No,No,No,Yes,Yes,19,75
+Wide Slash,360,None,20,10,125,88,88.00%,12%,20,1,Facing tile and 2 flanking tiles,Enemy in front,99,No,No,No,Yes,Yes,1,75
+Excavate,361,None,2,99,125,100,100.00%,0%,8,1,User,Forbidden,99,No,No,No,Yes,Yes,19,75
+Spin Slash,362,None,15,10,125,100,100.00%,12%,20,1,All enemies within a 1-tile range,Enemy in front,99,No,No,No,Yes,Yes,9,75
+See-Trap,363,None,2,22,125,100,Sure Hit,0%,8,1,User,Enemies in the room,0,No,No,No,Yes,No,19,75
+Takeaway,364,None,2,12,100,100,100.00%,0%,20,1,Enemy within a 10 tile range,Enemy within a 10 tile range,0,No,No,No,Yes,Yes,11,75
+Rebound,365,None,2,22,125,100,Sure Hit,0%,8,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+Bloop Slash,366,None,10,22,125,100,100.00%,12%,20,1,Enemy within 2 tiles,Enemy within 2 tiles,99,No,No,No,Yes,Yes,13,75
+Switcher,367,None,2,17,100,100,100.00%,0%,20,1,Pokémon within a 10 tile range,Pokémon within a 10 tile range,0,No,No,No,Yes,No,14,75
+Blowback,368,None,2,17,100,100,100.00%,0%,20,1,Pokémon within a 10 tile range,Enemy within a 10 tile range,0,No,No,No,Yes,No,14,75
+Warp,369,None,2,14,100,100,100.00%,0%,8,1,Enemies in the room,Enemies in the room,0,No,No,No,Yes,No,15,75
+Transfer,370,None,2,22,100,100,100.00%,0%,8,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,No,No,No,Yes,No,3,75
+Slow Down,371,None,2,37,100,100,100.00%,0%,8,1,Enemies in the room,Enemies in the room,0,No,No,No,Yes,No,15,75
+Speed Boost,372,None,2,22,125,100,Sure Hit,0%,8,1,Allies in the room,Enemies in the room,0,No,No,No,Yes,No,16,75
+Searchlight,373,None,2,22,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,19,75
+Petrify,374,None,2,22,100,100,100.00%,0%,8,1,Enemies in the room,Enemies in the room,0,No,No,No,Yes,No,15,75
+Stay Away,375,None,2,22,100,100,100.00%,0%,8,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,No,No,No,Yes,No,3,75
+Pounce,376,None,2,22,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,10,75
+Trawl,377,None,2,22,125,100,Sure Hit,0%,20,1,User,Forbidden,0,No,No,No,Yes,No,19,75
+Cleanse,378,None,2,17,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,10,20
+Observer,379,None,2,22,100,100,100.00%,0%,8,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,No,No,No,Yes,No,3,75
+Decoy Maker,380,None,2,22,100,100,100.00%,0%,8,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,No,No,No,Yes,No,3,75
+Siesta,381,None,2,12,100,100,100.00%,0%,15,1,Enemies in the room,Enemies in the room,0,No,No,No,Yes,No,15,75
+Totter,382,None,2,12,100,100,100.00%,0%,15,1,Enemies in the room,Enemies in the room,0,No,No,No,Yes,No,15,75
+Two-Edge,383,None,2,22,45,100,45.00%,0%,20,1,Enemies in the room,Enemies in the room,0,No,No,No,Yes,No,15,75
+No-Move,384,None,2,22,100,100,100.00%,0%,8,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Escape,385,None,2,1,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,10,75
+Scan,386,None,2,27,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,19,75
+Power-Ears,387,None,2,27,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,19,75
+Drought,388,None,2,22,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,29,75
+Trap Buster,389,None,2,57,125,100,Sure Hit,0%,8,1,User,Enemies in the room,0,No,No,No,Yes,No,29,75
+Wild Call,390,None,2,22,125,100,Sure Hit,0%,8,1,User,Enemy in front,0,No,No,No,Yes,No,4,75
+Invisify,391,None,2,12,125,100,Sure Hit,0%,8,1,User,Enemy in front,0,No,No,No,Yes,No,19,75
+One-Shot,392,None,200,3,35,100,35.00%,0%,8,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+HP Gauge,393,None,2,32,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,6,75
+Vacuum-Cut,394,None,10,7,100,100,100.00%,0%,20,1,Enemies in the room,Enemies in the room,0,No,No,No,Yes,No,15,75
+Reviver,395,None,2,4,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,19,75
+Shocker,396,None,2,22,125,45,45.00%,0%,8,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Echo,397,None,10,27,125,45,45.00%,0%,20,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Famish,398,None,2,22,100,100,100.00%,0%,8,1,Enemies in the room,Enemies in the room,0,No,No,No,Yes,No,15,75
+One-Room,399,None,2,22,125,100,Sure Hit,0%,8,1,User,Enemies in the room,0,No,No,No,Yes,No,29,75
+Fill-In,400,None,2,99,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,29,75
+Trapper,401,None,2,17,125,100,Sure Hit,0%,10,1,User,Enemies in the room,0,No,No,No,Yes,No,10,75
+Possess,402,None,2,12,100,100,100.00%,0%,8,1,Enemy in front,Enemy in front,0,No,No,No,Yes,No,11,75
+Itemize,403,None,2,17,125,45,Sure Hit,0%,8,1,"Enemy in front, cuts corners","Enemy in front, cuts corners",0,No,No,No,Yes,No,3,75
+[M:D1],404,None,2,22,100,100,100.00%,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,19,75
+projectile,405,None,2,57,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,10,75
+Hurl,406,None,2,22,100,100,100.00%,0%,15,1,Enemy in front,Enemy in front,99,No,No,No,Yes,Yes,11,75
+Mobile,407,None,2,17,125,100,Sure Hit,0%,8,1,User,Enemies in the room,0,No,No,No,Yes,No,19,75
+Item-Toss,408,None,2,96,100,100,100.00%,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,10,75
+See Stairs,409,None,2,22,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,19,75
+Long Toss,410,None,2,22,125,100,Sure Hit,0%,8,1,User,Enemies in the room,0,No,No,No,Yes,No,19,75
+[M:D1],411,None,2,22,125,100,Sure Hit,0%,8,1,User,Forbidden,0,No,No,No,Yes,No,19,75
+Pierce,412,None,2,22,125,100,Sure Hit,0%,8,1,User,Enemies in the room,0,No,No,No,Yes,No,19,75

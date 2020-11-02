@@ -1,0 +1,344 @@
+Attack Name,Description
+Tackle,Charges the foe with a full- body tackle.
+Growl,Growls cutely to reduce the foe's ATTACK.
+Leech Seed,Plants a seed on the foe to steal HP on every turn.
+Vine Whip,"Strikes the foe with slender, whiplike vines."
+Poisonpowder,Scatters a toxic powder that may poison the foe.
+Sleep Powder,Scatters a powder that may cause the foe to sleep.
+Razor Leaf,Cuts the enemy with leaves. High critical-hit ratio.
+Sweet Scent,Allures the foe to reduce evasiveness.
+Growth,Forces the body to grow and heightens SP. ATK.
+Synthesis,Restores HP. The amount varies with the weather.
+Solarbeam,"Absorbs light in one turn, then attacks next turn."
+Toxic,Poisons the foe with an intensifying toxin.
+Bullet Seed,Shoots 2 to 5 seeds in a row to strike the foe.
+Hidden Power,The effectiveness varies with the user.
+Sunny Day,Boosts the power of FIRE- type moves for 5 turns.
+Protect,"Evades attack, but may fail if used in succession."
+Giga Drain,An attack that steals half the damage inflicted.
+Frustration,An attack that is stronger if the TRAINER is disliked.
+Return,An attack that increases in power with friendship.
+Double Team,Creates illusory copies to raise evasiveness.
+Sludge Bomb,Sludge is hurled to inflict damage. May also poison.
+Facade,"Boosts ATTACK when burned, paralyzed, or poisoned."
+Secret Power,An attack with effects that vary by location.
+Attract,Makes the opposite gender less likely to attack.
+Strength,"Builds enormous power, then slams the foe."
+Flash,Looses a powerful blast of light that cuts accuracy.
+Rock Smash,A rock-crushing attack that may lower DEFENSE.
+Horizontal Cut,Inflicts Damage in 3 Directions
+Vacuum Cut,Inflicts 30 Damage to any PokÈmon in the same room
+Roar,Makes the foe flee to end the battle.
+Hyper Beam,"Powerful, but leaves the user immobile the next turn."
+Earthquake,"A powerful quake, but has no effect on flying foes."
+Focus Punch,A powerful loyalty attack. The user flinches if hit.
+Dragon Claw,Slashes the foe with sharp claws.
+Iron Tail,Attacks with a rock-hard tail. May lower DEFENSE.
+Dig,Digs underground the first turn and strikes next turn.
+Brick Break,Destroys barriers such as REFLECT and causes damage.
+Flamethrower,A powerful fire attack that may inflict a burn.
+Fire Blast,A fiery blast that scorches all. May cause a burn.
+Aerial Ace,An extremely speedy and unavoidable attack.
+Overheat,"Allows a full-power attack, but sharply lowers SP. ATK."
+Steel Wing,Strikes the foe with hard wings spread wide.
+Fly,"Flies up on the first turn, then strikes the next turn."
+Water Pulse,Attacks with ultrasonic waves. May confuse the foe
+Hail,Summons a hailstorm that strikes every turn.
+Ice Beam,Blasts the foe with an icy beam that may freeze it.
+Blizzard,Hits the foe with an icy storm that may freeze it.
+Rain Dance,Boosts the power of WATER- type moves for 5 turns.
+Surf,"Creates a huge wave, then crashes it down on the foe."
+Waterfall,Charges the foe with speed to climb waterfalls.
+Dive,Dives underwater the first turn and strikes next turn.
+Frenzy Plant,"Powerful, but leaves the user immobile the next turn."
+Scratch,Scratches the foe with sharp claws.
+Ember,A weak fire attack that may inflict a burn.
+Metal Claw,A claw attack that may raise the user's ATTACK.
+Smokescreen,"Lowers the foe's accuracy using smoke, ink, etc."
+Scary Face,Frightens with a scary face to sharply reduce SPEED.
+Dragon Rage,Launches shock waves that always inflict 40 HP damage.
+Fire Spin,Traps the foe in a ring of fire for 2 to 5 turns.
+Heat Wave,Exhales a hot breath on the foe. May inflict a burn.
+Wing Attack,Strikes the foe with wings spread wide.
+Blast Burn,"Powerful, but leaves the user immobile the next turn."
+Tail Whip,Wags the tail to lower the foe's DEFENSE.
+Bubble,An attack using bubbles. May lower the foe's SPEED.
+Withdraw,Withdraws the body into its hard shell to raise DEFENSE.
+Water Gun,Squirts water to attack the foe.
+Bite,Bites with vicious fangs. May cause flinching.
+Rapid Spin,Spins the body at high speed to strike the foe.
+Skull Bash,"Tucks in the head, then attacks on the next turn."
+Hydro Pump,Blasts water at high power to strike the foe.
+Hydro Cannon,"Powerful, but leaves the user immobile the next turn."
+String Shot,Binds the foe with string to reduce its SPEED.
+Harden,Stiffens the body's muscles to raise DEFENSE.
+Confusion,A psychic attack that may cause confusion.
+Stun Spore,Scatters a powder that may paralyze the foe.
+Supersonic,Emits bizarre sound waves that may confuse the foe.
+Whirlwind,Blows away the foe with wind and ends the battle.
+Gust,Strikes the foe with a gust of wind whipped up by wings.
+Psybeam,Fires a peculiar ray that may confuse the foe.
+Safeguard,A mystical force prevents all status problems.
+Silver Wind,A powdery attack that may raise abilities.
+Psychic,A powerful psychic attack that may lower SP. DEF.
+Shadow Ball,Hurls a black blob that may lower the foe's SP. DEF.
+Thief,"While attacking, it may steal the foe's held item."
+Skill Swap,The user swaps special abilities with the target.
+Poison Sting,"A toxic attack with barbs, etc., that may poison."
+Fury Attack,"Jabs the foe 2 to 5 times with sharp horns, etc."
+Focus Energy,Focuses power to raise the critical-hit ratio.
+Twineedle,Stingers on the forelegs jab the foe twice.
+Pursuit,Inflicts bad damage if used on a foe switching out.
+Pin Missile,Sharp pins are fired to strike 2 to 5 times.
+Agility,Relaxes the body to sharply boost SPEED.
+Endeavor,Gains power if the user's HP is lower than the foe's HP.
+Sand-attack,Reduces the foe's accuracy by hurling sand in its face.
+Quick Attack,An extremely fast attack that always strikes first.
+Featherdance,Envelops the foe with down to sharply reduce ATTACK.
+Mirror Move,Counters the foe's attack with the same move.
+Hyper Fang,Attacks with sharp fangs. May cause flinching.
+Super Fang,Attacks with sharp fangs and cuts half the foe's HP.
+Taunt,Taunts the foe into only using attack moves.
+Thunderbolt,A strong electrical attack that may paralyze the foe.
+Shock Wave,A fast and unavoidable electric attack.
+Peck,"Attacks the foe with a jabbing beak, etc."
+Leer,Frightens the foe with a leer to lower DEFENSE.
+Drill Peck,A corkscrewing attack with the beak acting as a drill.
+Wrap,"Wraps and squeezes the foe 2 to 5 times with vines, etc."
+Glare,Intimidates and frightens the foe into paralysis.
+Screech,Emits a screech to sharply reduce the foe's DEFENSE.
+Acid,Sprays a hide-melting acid. May lower DEFENSE.
+Stockpile,Charges up power for up to 3 turns.
+Swallow,Absorbs stockpiled power and restores HP.
+Spit Up,Releases stockpiled power (the more the better).
+Haze,Creates a black haze that eliminates all stat changes.
+Torment,Torments the foe and stops successive use of a move.
+Snatch,Steals the effects of the move the foe uses next.
+Thundershock,An electrical attack that may paralyze the foe.
+Thunder Wave,A weak jolt of electricity that paralyzes the foe.
+Slam,"Slams the foe with a long tail, vine, etc."
+Light Screen,Creates a wall of light that lowers SP. ATK damage.
+Defense Curl,Curls up to conceal weak spots and raise DEFENSE.
+Swift,Sprays star-shaped rays that never miss.
+Fury Swipes,"Rakes the foe with sharp claws, etc., 2 to 5 times."
+Sand Tomb,Traps and hurts the foe in quicksand for 2 to 5 turns.
+Sandstorm,Causes a sandstorm that rages for several turns.
+Rock Tomb,Stops the foe from moving with rocks and cuts SPEED.
+Double Kick,A double-kicking attack that strikes the foe twice.
+Helping Hand,Boosts the power of the recipient's moves.
+Flatter,"Confuses the foe, but raises its SP. ATK."
+Crunch,Crunches with sharp fangs. May lower SP. DEF.
+Body Slam,A full-body slam that may cause paralysis.
+Superpower,"Boosts strength sharply, but lowers abilities."
+Horn Attack,Jabs the foe with sharp horns.
+Horn Drill,A one-hit KO attack that uses a horn like a drill.
+Thrash,A rampage of 2 to 3 turns that confuses the user.
+Megahorn,A brutal ramming attack using out-thrust horns.
+Pound,Pounds the foe with forelegs or tail.
+Encore,Makes the foe repeat its last move over 2 to 6 turns.
+Sing,A soothing song lulls the foe into a deep slumber.
+Doubleslap,Repeatedly slaps the foe 2 to 5 times.
+Follow Me,Draws attention to make foes attack only the user.
+Minimize,Minimizes the user's size to raise evasiveness.
+Metronome,Waggles a finger to use any POKÈMON move at random.
+Cosmic Power,Raises DEFENSE and SP. DEF with a mystic power.
+Moonlight,Restores HP. The amount varies with the weather.
+Meteor Mash,Fires a meteor-like punch. May raise ATTACK.
+Calm Mind,Raises SP. ATK and SP. DEF by focusing the mind.
+Reflect,Creates a wall of light that weakens physical attacks.
+Will-o-wisp,Inflicts a burn on the foe with intense fire.
+Confuse Ray,A sinister ray that confuses the foe.
+Imprison,Prevents foes from using moves known by the user.
+Grudge,"If the user faints, deletes the PP of the final move."
+Disable,Psychically disables one of the foe's moves.
+Rollout,An attack lasting 5 turns with rising intensity.
+Mimic,Copies a move used by the foe during one battle.
+Hyper Voice,A loud attack that uses sound waves to injure.
+Double-edge,A life-risking tackle that also hurts the user.
+Leech Life,An attack that steals half the damage inflicted.
+Astonish,An attack that may shock the foe into flinching.
+Air Cutter,Hacks with razorlike wind. High critical-hit ratio.
+Mean Look,Fixes the foe with a mean look that prevents escape.
+Poison Fang,A sharp-fanged attack. May badly poison the foe.
+Petal Dance,A rampage of 2 to 3 turns that confuses the user.
+Aromatherapy,Heals all status problems with a soothing scent.
+Mega Drain,An attack that absorbs half the damage inflicted.
+Foresight,Negates the foe's efforts to heighten evasiveness.
+Magnitude,A ground-shaking attack of random intensity.
+Mud-slap,Hurls mud in the foe's face to reduce its accuracy.
+Fissure,A one-hit KO move that drops the foe in a fissure.
+Tri Attack,Fires three types of beams at the same time.
+Pay Day,Throws coins at the foe. Money is recovered after.
+Faint Attack,"Draws the foe close, then strikes without fail."
+Fake Out,"A 1st-turn, 1st-strike move that causes flinching."
+Swagger,"Confuses the foe, but also sharply raises ATTACK."
+Water Sport,The user becomes soaked to raise resistance to fire.
+Psych Up,Copies the foe's effect(s) and gives to the user.
+Low Kick,A kick that inflicts more damage on heavier foes.
+Karate Chop,A chopping attack with a high critical-hit ratio.
+Seismic Toss,Inflicts damage identical to the user's level.
+Cross Chop,A double-chopping attack. High critical-hit ratio.
+Bulk Up,Bulks up the body to boost both ATTACK and DEFENSE.
+Odor Sleuth,Negates the foe's efforts to heighten evasiveness.
+Take Down,A reckless charge attack that also hurts the user.
+Flame Wheel,A fiery charge attack that may inflict a burn.
+Extremespeed,An extremely fast and powerful attack.
+Hypnosis,A hypnotizing move that may induce sleep.
+Belly Drum,Maximizes ATTACK while sacrificing HP.
+Submission,A reckless body slam that also hurts the user.
+Mind Reader,Senses the foe's action to ensure the next move's hit.
+Teleport,A psychic move for fleeing from battle instantly.
+Kinesis,Distracts the foe. May lower accuracy.
+Recover,Recovers up to half the user's maximum HP.
+Future Sight,Heightens inner power to strike 2 turns later.
+Role Play,Mimics the target and copies its special ability.
+Trick,Tricks the foe into trading held items.
+Revenge,An attack that gains power if injured by the foe.
+Vital Throw,"Makes the user's move last, but it never misses."
+Dynamicpunch,"Powerful and sure to cause confusion, but inaccurate."
+Constrict,Constricts to inflict pain. May lower SPEED.
+Bubblebeam,Forcefully sprays bubbles that may lower SPEED.
+Barrier,Creates a barrier that sharply raises DEFENSE.
+Mud Sport,Covers the user in mud to raise electrical resistance.
+Rock Throw,Throws small rocks to strike the foe.
+Selfdestruct,Inflicts severe damage but makes the user faint.
+Rock Blast,Hurls boulders at the foe 2 to 5 times in a row.
+Explosion,Inflicts severe damage but makes the user faint.
+Stomp,Stomps the enemy with a big foot. May cause flinching.
+Bounce,"Bounces up, then down the next turn. May paralyze."
+Curse,A move that functions differently for GHOSTS.
+Yawn,"Lulls the foe into yawning, then sleeping next turn."
+Headbutt,A ramming attack that may cause flinching.
+Amnesia,Forgets about something and sharply raises SP. DEF.
+Metal Sound,Emits a horrible screech that sharply lowers SP. DEF.
+Sonicboom,Launches shock waves that always inflict 20 HP damage.
+Spark,An electrified tackle that may paralyze the foe.
+Lock-on,Locks on to the foe to ensure the next move hits.
+Zap Cannon,"Powerful and sure to cause paralysis, but inaccurate."
+Knock Off,Knocks down the foe's held item to prevent its use.
+Fury Cutter,An attack that intensifies on each successive hit.
+Swords Dance,A fighting dance that sharply raises ATTACK.
+False Swipe,An attack that leaves the foe with at least 1 HP.
+Uproar,Causes an uproar for 2 to 5 turns and prevents sleep.
+Icy Wind,A chilling attack that lowers the foe's SPEED.
+Aurora Beam,Fires a rainbow-colored beam that may lower ATTACK.
+Signal Beam,A strange beam attack that may confuse the foe.
+Sheer Cold,A chilling attack that causes fainting if it hits.
+Poison Gas,Envelops the foe in a toxic gas that may poison.
+Acid Armor,Liquifies the user's body to sharply raise DEFENSE.
+Memento,The user faints and lowers the foe's abilities.
+Icicle Spear,Attacks the foe by firing 2 to 5 icicles in a row.
+Clamp,Traps and squeezes the foe for 2 to 5 turns.
+Spikes,Sets spikes that hurt a foe switching out.
+Spike Cannon,Launches sharp spikes that strike 2 to 5 times.
+Lick,Licks with a long tongue to injure. May also paralyze.
+Spite,Spitefully cuts the PP of the foe's last move.
+Night Shade,Inflicts damage identical to the user's level.
+Dream Eater,Takes one half the damage inflicted on a sleeping foe.
+Destiny Bond,"If the user faints, the foe is also made to faint."
+Nightmare,Inflicts 1/4 damage on a sleeping foe every turn.
+Shadow Punch,An unavoidable punch that is thrown from shadows.
+Dragonbreath,Strikes the foe with an incredible blast of breath.
+Meditate,Meditates in a peaceful fashion to raise ATTACK.
+Vicegrip,Grips the foe with large and powerful pincers.
+Mud Shot,Hurls mud at the foe and reduces SPEED.
+Guillotine,A powerful pincer attack that may cause fainting.
+Crabhammer,Hammers with a pincer. Has a high critical-hit ratio.
+Flail,Inflicts more damage when the user's HP is down.
+Mirror Coat,Counters the foe's special attack at double the power.
+Barrage,Hurls round objects at the foe 2 to 5 times.
+Egg Bomb,An egg is forcibly hurled at the foe.
+Bone Club,Clubs the foe with a bone. May cause flinching.
+Bonemerang,Throws a bone boomerang that strikes twice.
+Bone Rush,Strikes the foe with a bone in hand 2 to 5 times.
+Rolling Kick,A fast kick delivered from a rapid spin.
+Jump Kick,A strong jumping kick. May miss and hurt the kicker.
+Hi Jump Kick,"A jumping knee kick. If it misses, the user is hurt."
+Endure,"Endures any attack for 1 turn, leaving at least 1HP."
+Mega Kick,An extremely powerful kick with intense force.
+Reversal,Inflicts more damage when the user's HP is down.
+Comet Punch,Repeatedly punches the foe 2 to 5 times.
+Mach Punch,A punch is thrown at wicked speed to strike first.
+Thunderpunch,An electrified punch that may paralyze the foe.
+Ice Punch,An icy punch that may freeze the foe.
+Fire Punch,A fiery punch that may burn the foe.
+Sky Uppercut,An uppercut thrown as if leaping into the sky.
+Mega Punch,A strong punch thrown with incredible power.
+Detect,"Evades attack, but may fail if used in succession."
+Refresh,"Heals poisoning, paralysis, or a burn."
+Smog,An exhaust-gas attack that may also poison.
+Softboiled,Recovers up to half the user's maximum HP.
+Ingrain,Lays roots that restore HP. The user can't switch out.
+Tickle,Makes the foe laugh to lower ATTACK and DEFENSE.
+Dizzy Punch,A rhythmic punch that may confuse the foe.
+Twister,Whips up a vicious twister to tear at the foe.
+Dragon Dance,A mystical dance that ups ATTACK and SPEED.
+Camouflage,Alters the POKÈMON's type depending on the location.
+Substitute,Creates a decoy using 1/4 of the user's maximum HP.
+Magical Leaf,Attacks with a strange leaf that cannot be evaded.
+Recycle,Recycles a used item for one more use.
+Baton Pass,Switches out the user while keeping effects in play.
+Lovely Kiss,Demands a kiss with a scary face that induces sleep.
+Powder Snow,Blasts the foe with a snowy gust. May cause freezing.
+Fake Tears,Feigns crying to sharply lower the foe's SP. DEF.
+Perish Song,Any POKÈMON hearing this song faints in 3 turns.
+Splash,It's just a splash... Has no effect whatsoever.
+Mist,Creates a mist that stops reduction of abilities.
+Transform,Alters the user's cells to become a copy of the foe.
+Conversion 2,Makes the user resistant to the last attack's type.
+Sharpen,Reduces the polygon count and raises ATTACK.
+Ancientpower,An attack that may raise all stats.
+Snore,A loud attack that can be used only while asleep.
+Sleep Talk,Uses an own move randomly while asleep.
+Block,Blocks the foe's way to prevent escape.
+Covet,Cutely begs to obtain an item held by the foe.
+Sky Attack,"Searches out weak spots, then strikes the next turn."
+Outrage,A rampage of 2 to 3 turns that confuses the user.
+Spider Web,Ensnares the foe to stop it from fleeing or switching.
+Charm,Charms the foe and sharply reduces its ATTACK.
+Sweet Kiss,Demands a kiss with a cute look. May cause confusion.
+Volt Tackle,A life-risking tackle that slightly hurts the user.
+Wish,A wish that restores HP. It takes time to work.
+Cotton Spore,"Spores cling to the foe, sharply reducing SPEED."
+Rock Slide,Large boulders are hurled. May cause flinching.
+Morning Sun,Restores HP. The amount varies with the weather.
+Psywave,Attacks with a psychic wave of varying intensity.
+Pain Split,"Adds the user and foe's HP, then shares them equally."
+Bide,Endures attack for 2 turns to retaliate double.
+Iron Defense,Hardens the body's surface to sharply raise DEFENSE.
+Beat Up,Summons party POKÈMON to join in the attack.
+Octazooka,Fires a lump of ink to damage and cut accuracy.
+Present,A gift in the form of a bomb. May restore HP.
+Howl,Howls to raise the spirit and boosts ATTACK.
+Sketch,Copies the foe's last move permanently.
+Triple Kick,Kicks the foe 3 times in a row with rising intensity.
+Milk Drink,Recovers up to half the user's maximum HP.
+Heal Bell,Chimes soothingly to heal all status abnormalities.
+Aeroblast,Launches a vacuumed blast. High critical-hit ratio.
+Sacred Fire,A mystical fire attack that may inflict a burn.
+Leaf Blade,Slashes with a sharp leaf. High critical-hit ratio.
+Blaze Kick,A kick with a high critical- hit ratio. May cause a burn.
+Whirlpool,Traps and hurts the foe in a whirlpool for 2 to 5 turns.
+Muddy Water,Attacks with muddy water. May lower accuracy.
+Nature Power,The type of attack varies depending on the location.
+Razor Wind,A 2-turn move that strikes the foe on the 2nd turn.
+Extrasensory,Attacks with a peculiar power. May cause flinching.
+Slack Off,Slacks off and restores half the maximum HP.
+Arm Thrust,Straight-arm punches that strike the foe 2 to 5 times.
+Smellingsalt,"Powerful against paralyzed foes, but also heals them."
+Assist,Attacks randomly with one of the partner's moves.
+Tail Glow,Flashes a light that sharply raises SP. ATK.
+Grasswhistle,Lulls the foe into sleep with a pleasant melody.
+Water Spout,Inflicts more damage if the user's HP is high.
+Eruption,"The higher the user's HP, the more damage caused."
+Magic Coat,Reflects special effects back to the attacker.
+Teeter Dance,Confuses all POKÈMON on the scene.
+Needle Arm,Attacks with thorny arms. May cause flinching.
+Crush Claw,Tears at the foe with sharp claws. May lower DEFENSE.
+Poison Tail,Has a high critical-hit ratio. May also poison.
+Weather Ball,The move's type and power change with the weather.
+Ice Ball,A 5-turn attack that gains power on successive hits.
+Mist Ball,Attacks with a flurry of down. May lower SP. ATK.
+Luster Purge,Attacks with a burst of light. May lower SP. DEF.
+Doom Desire,Summons strong sunlight to attack 2 turns later.
+Psycho Boost,"Allows a full-power attack, but sharply lowers SP. ATK."
