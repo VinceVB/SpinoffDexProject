@@ -4,6 +4,29 @@ from kivy.core.window import Window
 Window.clearcolor = (0.9, 0.9, 0.9, 1)
 Window.size = (288, 640)
 
+# Types color codes
+color_codes = {'normal': (0.659, 0.659, 0.471, 1),
+               'fire': (0.941, 0.502, 0.188, 1),
+               'fighting': (0.753, 0.188, 0.157, 1),
+               'water': (0.408, 0.565, 0.941, 1),
+               'flying': (0.659, 0.565, 0.941, 1),
+               'grass': (0.471, 0.784, 0.314, 1),
+               'poison': (0.627, 0.251, 0.627, 1),
+               'electric': (0.973, 0.816, 0.188, 1),
+               'ground': (0.878, 0.753, 0.408, 1),
+               'psychic': (0.973, 0.345, 0.533, 1),
+               'rock': (0.722, 0.627, 0.22, 1),
+               'ice': (0.596, 0.847, 0.847, 1),
+               'bug': (0.659, 0.722, 0.125, 1),
+               'dragon': (0.439, 0.22, 0.973, 1),
+               'ghost': (0.439, 0.345, 0.596, 1),
+               'dark': (0.439, 0.345, 0.282, 1),
+               'steel': (0.722, 0.722, 0.816, 1),
+               'fairy': (0.933, 0.6, 0.675, 1),
+               '???': (0.408, 0.627, 0.565, 1),
+               '': (0, 0, 0, 0)
+               }
+
 # List of Mystery Dungeon Abilities and their effects
 md_abilities = {
                 'Aftermath': 'When this Pokémon is defeated a small explosion occurs.',
@@ -67,7 +90,7 @@ md_abilities = {
                 'Rough Skin': 'When this Pokémon suffers damage from another Pokémon, the attacker will lose HP equal to half the damage dealt.',
                 'Run Away': 'When this Pokémon has less than 50% HP, provided it is not the team leader, it becomes Terrified.',
                 'Sand Stream': 'When this Pokémon enters the floor and every 36 turns thereafter, the weather becomes Sandstorm.',
-                'Sand Veil': 'During Sandstorming weather, this Pokémon will have an automatic boost in Evasion of two stages.',
+                'Sand Veil': 'During Sandstorms, this Pokémon will have an automatic boost in Evasion of two stages.',
                 'Scrappy': 'Wielders of this Ability can hit Ghost Pokémon with Normal- and Fighting-type moves.',
                 'Serene Grace': 'Moves used by this Pokémon have an extra chance to dole out any of their extra effects.',
                 'Shadow Tag': 'When another Pokémon damages the wielder of this ability, the attacker has a 12% chance to become immobilized.',
@@ -105,6 +128,22 @@ md_abilities = {
                 'White Smoke': 'This Pokémon cannot have its stats lowered by its opponents.',
                 'Wonder Guard': 'Only moves which hit this Pokémon super-effectively may be used against it. Typeless moves also deal damage, which includes thrown items.'
 }
+
+# IQ String
+iq_string = '\n\n'\
+            '•1 star: 0-9\n' \
+            '•2 stars: 10-49\n' \
+            '•3 stars: 50-99\n' \
+            '•4 stars: 100-149\n' \
+            '•5 stars: 150-199\n' \
+            '•6 stars: 200-299\n' \
+            '•7 stars: 300-399\n' \
+            '•8 stars: 400-499\n' \
+            '•9 stars: 500-599\n' \
+            '•10 stars: 600-699\n' \
+            '•11 stars: 700-989\n' \
+            '•MAX: 990 or more (IQ can reach up to 999)\n'
+
 
 # Dictionary of all evolution items and their descriptions / locations
 evo_item_dict = {'Water Stone': '[size=16][color=000011]Location:[/color][/size]\n'

@@ -39,7 +39,7 @@ with open('csv\\spinoffDexDataset.csv', 'r', encoding='utf-8') as read_obj, \
     for row in csv_reader:
         # Append stuff here
         for list_index in range(1, 8):
-            if pokemon_nr < 386:
+            if pokemon_nr < 387:
                 row.append(v.supercheats_data[pokemon_nr][list_index])
         # Add the updated row / list to the output file
         csv_writer.writerow(row)
