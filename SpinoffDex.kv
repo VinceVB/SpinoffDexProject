@@ -24,8 +24,7 @@
     md_location: md_location
     md_layout: md_layout
     md_get_rate: md_get_rate
-    md_gummis_box: md_gummis_box
-    md_evo_box: md_evo_box
+    md_box_evo: md_box_evo
     md_moves_names: md_moves_names
     md_moves_levels: md_moves_levels
     md_tm_nrs: md_tm_nrs
@@ -70,40 +69,37 @@
 
             on_pre_enter:
 
-                #id.text = app.root.read_csv(self.number, 1)
-                #nr.text = app.root.read_csv(self.number, 2)
-                #name.text = app.root.read_csv(self.number, 3)
-                general_nr_name.text = str(app.root.read_csv(self.number, 2)) + ' ' + str(app.root.read_csv(self.number, 3))
+                #id.text = app.root.set_text(self.number, 1)
+                #nr.text = app.root.set_text(self.number, 2)
+                #name.text = app.root.set_text(self.number, 3)
+                general_nr_name.text = str(app.root.set_text(self.number, 2)) + ' ' + str(app.root.set_text(self.number, 3))
                 app.root.check_joined(general_nr_name.text[1:4]) # Set image to joined if pokemon is joined
                 general_image.source = 'img\\portraits\\'+general_nr_name.text[1:4]+'.png'  # General Image
 
-                #japanese_name.text = app.root.read_csv(self.number, 4)
-                general_type1.text = app.root.read_csv(self.number, 5)                      # Type 1
-                general_type2.text = app.root.read_csv(self.number, 6)                      # Type 2
+                #japanese_name.text = app.root.set_text(self.number, 4)
+                general_type1.text = app.root.set_text(self.number, 5)                      # Type 1
+                general_type2.text = app.root.set_text(self.number, 6)                      # Type 2
                 md_joined.source = app.root.check_joined(general_nr_name.text[1:4])         # Joined
-                general_favorite.text = app.root.read_csv(self.number, 8)                   # Favorite?
-                general_class.text = app.root.read_csv(self.number, 9)                      # Classification
-                general_weight_kg.text = str(app.root.read_csv(self.number, 10))            # Weight (Metric)
-                #weight_lbs.text = app.root.read_csv(self.number, 11)
-                general_height_m.text = str(app.root.read_csv(self.number, 12))             # Height (Metric)
-                #height_ft.text = app.root.read_csv(self.number, 13)
-                app.root.set_abilities(app.root.read_csv(self.number, 14))                  # Abilities
+                general_favorite.text = app.root.set_text(self.number, 8)                   # Favorited
+                general_class.text = app.root.set_text(self.number, 9)                      # Classification
+                general_weight_kg.text = str(app.root.set_text(self.number, 10))            # Weight (Metric)
+                #weight_lbs.text = app.root.set_text(self.number, 11)
+                general_height_m.text = str(app.root.set_text(self.number, 12))             # Height (Metric)
+                #height_ft.text = app.root.set_text(self.number, 13)
+                app.root.set_abilities(app.root.set_text(self.number, 14))                  # Abilities
                 app.root.set_evos(general_nr_name.text[1:4])                                # Evolution Chain
                 md_body_size.source = app.root.set_md_body_size(general_nr_name.text[1:4])  # Body size
-                md_friend_area.text = app.root.read_csv(self.number, 17)                    # MD Friend Area
-                md_get_rate.text = app.root.read_csv(self.number, 18)                       # MD Get rate
+                md_friend_area.text = app.root.set_text(self.number, 17)                    # MD Friend Area
+                md_get_rate.text = app.root.set_text(self.number, 18)                       # MD Get rate
                 app.root.unown_check(general_nr_name.text[1:4])                             # Check if Unown (Change font size for get rate, it has 2)
-
-                app.root.set_gummis(general_nr_name.text[1:4])                              # Set favourite gummis
-
                 md_location.text = app.root.set_location(general_nr_name.text[1:4])         # MD Location
-                #rg_browser_no.text = app.root.read_csv(self.number, 20)
-                #rg_location.text = app.root.read_csv(self.number, 21)
-                #rg_pkmn_assist.text = app.root.read_csv(self.number, 22)
-                #rg_type_group.text = app.root.read_csv(self.number, 23)
-                #rg_field_ability.text = app.root.read_csv(self.number, 24)
-                #tz_get_rate.text = app.root.read_csv(self.number, 25)
-                #dex_page_tz_location.text = app.root.read_csv(self.number, 26)
+                #rg_browser_no.text = app.root.set_text(self.number, 20)
+                #rg_location.text = app.root.set_text(self.number, 21)
+                #rg_pkmn_assist.text = app.root.set_text(self.number, 22)
+                #rg_type_group.text = app.root.set_text(self.number, 23)
+                #rg_field_ability.text = app.root.set_text(self.number, 24)
+                #tz_get_rate.text = app.root.set_text(self.number, 25)
+                #dex_page_tz_location.text = app.root.set_text(self.number, 26)
 
                 app.root.set_moves(general_nr_name.text[1:4])
 
@@ -260,28 +256,22 @@
                                 id: md_label_body_size
                                 text:'Body Size'
                                 size_hint: None, None
-                                size: self.parent.width/4, self.parent.height
+                                size: self.parent.width/3, self.parent.height
                                 font_size: '12sp'
                             Label:
                                 id: md_label_get_rate
-                                text:'Recruit\nRate'
+                                text:'Recruit Rate'
                                 size_hint: None, None
-                                size: self.parent.width/4, self.parent.height
+                                size: self.parent.width/3, self.parent.height
                                 font_size: '12sp'
                             Label:
                                 id: md_label_joined
-                                text:'Joined\nTeam'
+                                text:'Joined'
                                 size_hint: None, None
-                                size: self.parent.width/4, self.parent.height
-                                font_size: '12sp'
-                            Label:
-                                id: md_label_gummis
-                                text:'Favourite\nGummis'
-                                size_hint: None, None
-                                size: self.parent.width/4, self.parent.height
+                                size: self.parent.width/3, self.parent.height
                                 font_size: '12sp'
 
-                        # Body Size, Recruit Rate, Joined and Gummis
+                        # Body Size, Recruit Rate, and Joined Labels
                         BoxLayout:
                             id: md_3_box
                             size_hint: None, None
@@ -289,24 +279,18 @@
                             Image:
                                 id: md_body_size
                                 size_hint: None, None
-                                size: self.parent.width/4, self.parent.height
+                                size: self.parent.width/3, self.parent.height
                             Button:
                                 id: md_get_rate
                                 size_hint: None, None
-                                size: self.parent.width/4, self.parent.height
+                                size: self.parent.width/3, self.parent.height
                             ImageButton:
                                 id: md_joined
                                 size_hint: None, None
-                                size: self.parent.width/4, self.parent.height
+                                size: self.parent.width/3, self.parent.height
                                 allow_stretch: True
                                 on_release:
                                     app.root.md_join(general_nr_name.text[1:4])
-                            BoxLayout:
-                                id: md_gummis_box
-                                size_hint: None, None
-                                size: self.parent.width/4, self.parent.height
-                                orientation: 'vertical'
-
                         BoxLayout:
                             id: md_4_box
                             size_hint: None, None
@@ -328,7 +312,7 @@
                                 font_size: '14sp'
                                 background_normal: 'img\\friend areas\\' + md_friend_area.text +'.png'
                                 on_release:
-                                    app.root.popup('image_' + md_friend_area.text, 'img\\friend areas\\' + md_friend_area.text +'.png')
+                                    app.root.Popup('image_' + md_friend_area.text, 'img\\friend areas\\' + md_friend_area.text +'.png')
 
 
                         BoxLayout:
@@ -380,7 +364,7 @@
                             size_hint: None, None
                             size: root.width, self.minimum_height
                             GridLayout:
-                                id: md_evo_box
+                                id: md_box_evo
                                 size_hint: None, None
                                 size: self.parent.width, self.parent.height
                                 canvas.before:
@@ -481,3 +465,5 @@
     on_press:
         app.root.dex_page.number = int(self.id[3:])
         app.root.manager.current = 'dex_page'
+
+        #DELETEself.testo()
