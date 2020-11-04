@@ -27,23 +27,42 @@ def regex_partition(content, separator):
 ################
 
 # Open the input_file in read mode and output_file in write mode
-with open('csv\\spinoffDexDataset.csv', 'r', encoding='utf-8') as read_obj, \
-        open('csv\\spinoffDexDatasetBackup.csv', 'w', newline='', encoding='utf-8') as write_obj:
-    # Create a csv.reader object from the input file object
-    csv_reader = reader(read_obj)
-    # Create a csv.writer object from the output file object
-    csv_writer = writer(write_obj)
-    # Read each row of the input csv file as list
+# with open('csv\\spinoffDexDataset.csv', 'r', encoding='utf-8') as read_obj, \
+#         open('csv\\spinoffDexDatasetBackup.csv', 'w', newline='', encoding='utf-8') as write_obj:
+#     # Create a csv.reader object from the input file object
+#     csv_reader = reader(read_obj)
+#     # Create a csv.writer object from the output file object
+#     csv_writer = writer(write_obj)
+#     # Read each row of the input csv file as list
+#
+#     pokemon_nr = 0
+#     for row in csv_reader:
+#         # Append stuff here
+#         for list_index in range(1, 8):
+#             if pokemon_nr < 387:
+#                 row.append(v.supercheats_data[pokemon_nr][list_index])
+#         # Add the updated row / list to the output file
+#         csv_writer.writerow(row)
+#         pokemon_nr += 1
+#
+###############################
+# ######## TAZOS ############ #
+###############################
 
-    pokemon_nr = 0
-    for row in csv_reader:
-        # Append stuff here
-        for list_index in range(1, 8):
-            if pokemon_nr < 387:
-                row.append(v.supercheats_data[pokemon_nr][list_index])
-        # Add the updated row / list to the output file
-        csv_writer.writerow(row)
-        pokemon_nr += 1
+# new_tazos = 40
+# total_tazos = 40
+# old_chance = 1
+# for i in range(40, 0, -1):
+#     print('new tazos:', new_tazos, '/', total_tazos)
+#     new_chance = new_tazos/total_tazos
+#     print('new_chance:', new_chance, '/// old new_chance:', old_chance)
+#     total_chance = old_chance * new_chance
+#     print(' * total_chance:', old_chance, '*', new_chance, '=', total_chance*100, '%')
+#     old_chance = new_chance
+#     new_tazos -= 1
+#     print('\n')
+
+
 
 ################
 # Supercheats Dex Data

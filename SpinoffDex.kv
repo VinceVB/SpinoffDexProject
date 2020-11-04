@@ -28,6 +28,12 @@
     # Default the background color for this label
     # to r 0, g 0, b 0, a 0
 
+<DexEntry>
+    cols:2
+    on_press:
+        app.root.dex_page.number = int(self.page[3:])
+        app.root.manager.current = 'dex_page'
+
 <SpinoffDex>:
     manager: manager
     dex_page: dex_page
@@ -77,7 +83,7 @@
                         orientation: 'vertical'
                         size_hint_y: None
                         size: root.width, self.minimum_height
-                        row_default_height: '80dp'
+                        row_default_height: '85dp'
                         spacing: 10
                         padding: 10
 
@@ -269,7 +275,7 @@
                                 color: 1, 1, 1, 1
                                 font_size: '16sp'
 
-                        # Body Size, Recruit Rate, and Joined Labels
+                        # Body Size, Recruit Rate, and Gummi Labels
                         BoxLayout:
                             id: md_2_box
                             size_hint: None, None
@@ -492,10 +498,3 @@
             name: 'empty'
             Image:
                 source: 'img\\misc\\pokeball.png'
-
-<DexEntry>
-    cols:4
-    rows:2
-    on_press:
-        app.root.dex_page.number = int(self.id[3:])
-        app.root.manager.current = 'dex_page'

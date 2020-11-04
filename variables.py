@@ -4,6 +4,9 @@ from kivy.core.window import Window
 Window.clearcolor = (0.9, 0.9, 0.9, 1)
 Window.size = (288, 640)
 
+# Limit the amount of entries produced for speed
+max_entries = 386
+
 # Types color codes
 color_codes = {'normal': (0.659, 0.659, 0.471, 1),
                'fire': (0.941, 0.502, 0.188, 1),

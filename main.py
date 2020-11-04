@@ -51,38 +51,41 @@ class SpinoffDex(Screen):
             # Check file as empty
             if header:
                 # Iterate over each row after the header in the csv
-                max_entries = 25  # Limit the amount of entries produced for speed
                 current_entries = 0
                 for row in csv_reader:
-                    if current_entries < max_entries:
+                    if current_entries < v.max_entries:
                         # Entry ID
-                        dex_entry = DexEntry(id=row[1])
+                        dex_entry = DexEntry()
+                        dex_entry.page = row[1]
+
+                        # Remove default grey button background if joined; color becomes brighter
+                        if row[7] == 'True':
+                            dex_entry.background_normal = ''
+                        else:
+                            dex_entry.background_normal = 'atlas://data/images/defaulttheme/button'
+                        dex_entry.background_color = v.color_codes[row[5]]
                         self.ids.theGrid.add_widget(dex_entry)
 
-                        # Entry Dex Number
-                        dex_number = Label(text=row[2])
-                        dex_entry.add_widget(dex_number)
+                        # Entry Image
+                        dex_image = Image(source='img\\portraits\\' + row[2][1:] + '.png', size_hint_x=0.25)
+                        dex_entry.add_widget(dex_image)
 
-                        # Entry Pokemon Name
-                        dex_name = Label(text=row[3])
-                        dex_entry.add_widget(dex_name)
+                        # GridLayout containing the non-portrait widgets
+                        dex_grid = GridLayout(cols=2, size_hint_x=0.75)
+                        dex_entry.add_widget(dex_grid)
+                        # Entry Dex Number / Pokemon Name
+                        dex_number = Label(text=row[2], size_hint_x=0.25)
+                        dex_grid.add_widget(dex_number)
+                        dex_name = Label(text=row[3], size_hint_x=0.75)
+                        dex_grid.add_widget(dex_name)
 
                         # Entry Pokemon Types
-                        dex_type1 = Label(text=row[5])
-                        dex_entry.add_widget(dex_type1)
-                        dex_type2 = Label(text=row[6])
-                        dex_entry.add_widget(dex_type2)
-
-                        # Entry Joined
-                        dex_joined = Label(text=row[7])
-                        dex_entry.add_widget(dex_joined)
-
-                        # Entry Favorite
-                        dex_favorite = Label(text=row[8])
-                        dex_entry.add_widget(dex_favorite)
+                        dex_type1 = Label(text=row[5], size_hint_x=0.25)
+                        dex_grid.add_widget(dex_type1)
+                        dex_type2 = Label(text=row[6], size_hint_x=0.75)
+                        dex_grid.add_widget(dex_type2)
 
                         current_entries += 1
-
 
     @staticmethod
     def read_csv(row, column):
@@ -109,7 +112,6 @@ class SpinoffDex(Screen):
         if not type2:
             self.general_type1.height = self.general_type1.parent.height
             self.general_type2.height = 0
-
 
     @staticmethod
     def set_md_body_size(pokedex_nr):
@@ -161,9 +163,12 @@ class SpinoffDex(Screen):
         df.to_csv("csv/spinoffDexDataset.csv", index=False)
         self.ids.md_joined.text = str(df.loc[int(pokedex_nr)-1, 'joined'])
         if str(df.loc[int(pokedex_nr)-1, 'joined']) == 'True':
-            self.ids.md_joined.source = 'img\\misc\\joined.png'
+            self.ids.md_joined.source = 'img\\misc\\joined.png'  # Set joined image
+            self.ids.theGrid.children[v.max_entries - int(pokedex_nr)].background_normal = ''  # set brighter background color
         else:
-            self.ids.md_joined.source = 'img\\misc\\not_joined.png'
+            self.ids.md_joined.source = 'img\\misc\\not_joined.png'  # set unjoined image
+            self.ids.theGrid.children[v.max_entries - int(pokedex_nr)].background_normal =\
+                'atlas://data/images/defaulttheme/button'  # set darker background color
 
     def unown_check(self, pokedex_nr):
         # Set font size lower for Unown's Location text because it contains a shitload of locations
@@ -438,7 +443,7 @@ class SpinoffDexApp(App):
         return dex
 
 
-class DexEntry(GridLayout, Button):
+class DexEntry(BoxLayout, Button):
     pass
 
 
