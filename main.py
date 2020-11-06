@@ -1,6 +1,9 @@
 import csv
 import random
 from functools import partial
+
+from kivy.uix.dropdown import DropDown
+
 import variables as v
 
 import pandas as pd
@@ -42,6 +45,8 @@ class SpinoffDex(Screen):
     general_type1 = ObjectProperty(None)
     general_type2 = ObjectProperty(None)
     type_box = ObjectProperty(None)
+    dex_list_scroller = ObjectProperty(None)
+    dex_searchbar = ObjectProperty(None)
 
     def add_dex_entries(self):
         # skip first line i.e. read header first and then iterate over each row od csv as a list
@@ -86,6 +91,73 @@ class SpinoffDex(Screen):
                         dex_grid.add_widget(dex_type2)
 
                         current_entries += 1
+
+    def dex_search(self, query):
+        scroller = self.ids.dex_list_scroller
+        dropdown = DropDown()
+        self.ids.dex_searchbar.text = ''  # Reset searchbar
+
+        # If query is numerical (a pokedex nr)
+        if str.isdigit(query):
+            # If nr is not in available pokedex
+            if int(query) > v.max_entries or int(query) <= 0:
+                self.popup('Error: Number not found', '')
+
+            # Valid nrs
+            elif v.max_entries >= int(query) > 0:
+                self.ids.dex_searchbar.text = ''
+                scroller.scroll_to(scroller.children[0].children[v.max_entries-int(query)])  # scroll to searched mon
+            # Probably unnecessary but just in case
+            else:
+                self.ids.dex_searchbar.text = ''
+                self.popup('Unknown Error', '')
+
+        # Non numerical queries / strings
+        else:
+            with open('csv\\spinoffDexDataset.csv', 'r', encoding='utf-8') as read_obj:
+                csv_reader = reader(read_obj)
+                next(csv_reader, None)  # Skip header
+                query_hits = []  # Whatever matches with the query goes in here
+
+                for row in csv_reader:
+                    # A complete match e.g. 'bulbasaur' == 'bulbasaur'
+                    if query.lower() == row[3].lower():
+                        # break out of loop (No further searching required)
+                        self.dex_search(row[2][1:])
+                        break
+                    # A partial match e.g. 'bulb' is in 'bulbasaur'
+                    elif query.lower() in row[3].lower():
+                        # Add whatever was partially matched to the list, continue loop
+                        query_hits.append([row[2], row[3]])
+
+                # If there is at least one match
+                if len(query_hits) != 0:
+                    for hit in query_hits:
+                        '''Should find a less spaghetti way to to style the dropdown widgets (BoxButton), couldn't get
+                           a proper background for them as regular BoxLayouts containing an Image and a Label, so it
+                           now inherits from Button to not make the whole thing transparent for now'''
+
+                        # Height needs to be set manually for dropdown elements, size_hint_y must be None
+                        hit_box = BoxButton(size_hint=(None, None), height=50, width=self.ids.dex_searchbar.width)
+                        hit_img = Image(source='img\\portraits\\' + hit[0][1:] + '.png', size_hint_x=0.25)
+                        hit_btn = Label(text=hit[0] + ' ' + hit[1], text_size=hit_box.size, valign='center', padding_x=5, size_hint_x=0.75)
+                        hit_btn.bind(size=hit_btn.setter('text_size'))
+                        hit_box.add_widget(hit_img)
+                        hit_box.add_widget(hit_btn)
+
+                        # Call the select() method on the dropdown, pass the text of the Label as the selection data
+                        hit_box.bind(on_release=lambda hit_box: dropdown.select(hit_box.children[0].text))
+
+                        # Add the BoxLayout containing the other content as a dropdown element
+                        dropdown.add_widget(hit_box)
+
+                # If nothing is found
+                else:
+                    self.popup('Error: No matches', '')
+
+                dropdown.bind(on_select=lambda instance, x: self.change_page(int(x[1:4])))  # Change to selected mon's page
+                dropdown.open(self.ids.dex_searchbar)  # Open dropdown menu below searchbar
+                query_hits.clear()  # Reset query results
 
     @staticmethod
     def read_csv(row, column):
@@ -238,7 +310,7 @@ class SpinoffDex(Screen):
         if 'Lv' in evo_method:
             if 'IQ' not in evo_method.partition(' -->')[0]:
                 evo_lvl = Label(text=evo_method, font_size=dp(11))  # Label with text of evolution level
-                evo_mon_img = ImageButton(source='img\\portraits\\' + evo_mon + '.png', on_release=self.change_page)  # Stage 1 mon img
+                evo_mon_img = ImageButton(source='img\\portraits\\' + evo_mon + '.png', on_release=self.change_page_image)  # Stage 1 mon img
                 self.ids.md_evo_box.add_widget(evo_lvl)
                 self.ids.md_evo_box.add_widget(evo_mon_img)
             else:
@@ -248,7 +320,7 @@ class SpinoffDex(Screen):
         else:
             evo_box = BoxLayout()  # Widget to contain multiple evo items and '+' Label
             evo1_iq_amount_label = ''  # Empty placeholder string used as boolean to check for IQ based evos
-            evo_mon_img = ImageButton(source='img\\portraits\\' + evo_mon + '.png', on_release=self.change_page)  # Stage 1 mon img
+            evo_mon_img = ImageButton(source='img\\portraits\\' + evo_mon + '.png', on_release=self.change_page_image)  # Stage 1 mon img
 
             # Check if evo method is not IQ / Evo item
             if 'IQ' not in evo_method:
@@ -335,26 +407,10 @@ class SpinoffDex(Screen):
             evo_lv_alt4 = evo_alt3[2].partition(' --> ')  # ...
             evo_alt4 = evo_lv_alt4[2].partition(' --> ')  # ...
 
-            '''Debug print command'''
-            # print('evo1[0]:', evo1[0] + '\n',
-            #       'evo1lv[0]:', evo1lv[0] + '\n',
-            #       'evo2[0]:', evo2[0] + '\n',
-            #       'evo2lv[0]:', evo2lv[0] + '\n',
-            #       'evo3[0]:', evo3[0] + '\n',
-            #       'evo_rows_cols[0]:', evo_rows_cols[0] + '\n',
-            #       'evo_lv_alt1[0]:', evo_lv_alt1[0] + '\n',
-            #       'evo_alt1[0]:', evo_alt1[0] + '\n',
-            #       'evo_lv_alt2[0]:', evo_lv_alt2[0] + '\n',
-            #       'evo_alt2[0]:', evo_alt2[0] + '\n',
-            #       'evo_lv_alt3[0]:', evo_lv_alt3[0] + '\n',
-            #       'evo_alt3[0]:', evo_alt3[0] + '\n',
-            #       'evo_lv_alt4[0]:', evo_lv_alt4[0] + '\n',
-            #       'evo_alt4[0]:', evo_alt4[0] + '\n')
-
             # Check if current mon has any evolutions
             if evo_string != 'No Evolution':
                 # Regular evolutions
-                evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page)  # Base mon portrait, go to mon on select
+                evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page_image)  # Base mon portrait, go to mon on select
                 self.ids.md_evo_box.add_widget(evo1_image)  # Add base mon portrait
                 self.evolve(evo1lv[0], evo2[0])  # Add first evo data
 
@@ -377,27 +433,27 @@ class SpinoffDex(Screen):
                     e.g. 3+ paths with 3 pokémon per path instead of 2
                     also no way to handle forms yet
                     '''
-                    evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page)
+                    evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page_image)
                     self.ids.md_evo_box.add_widget(evo1_image)  # Add base mon portrait again, second row
                     if evo_cols == 5:  # Skip if there is only 1 evo / cols is 3
                         self.evolve(evo1lv[0], evo2[0])  # Add first evo data again, second row
                     self.evolve(evo_lv_alt1[0], evo_alt1[0])  # Add alternate evo path, second row
                     if evo_rows > 2:  # If there are 3 or more evo paths (Tyrogue, Eevee)
-                        evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page)
+                        evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page_image)
                         self.ids.md_evo_box.add_widget(evo1_image)  # Add base mon portrait again, third row
                         self.evolve(evo_lv_alt2[0], evo_alt2[0])  # Add alternate evo path, third row
                         if evo_rows > 3:  # 4 or more evo paths, just Eevee in gen 3, maybe more with forms later?
-                            evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page)
+                            evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page_image)
                             self.ids.md_evo_box.add_widget(evo1_image)  # Add base mon portrait again, third row
                             self.evolve(evo_lv_alt3[0], evo_alt3[0])  # Add alternate evo path, third row
                             if evo_rows > 4:  # 5 or more evo paths, still just Eevee in gen 3
-                                evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page)
+                                evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page_image)
                                 self.ids.md_evo_box.add_widget(evo1_image)  # Add base mon portrait again, third row
                                 self.evolve(evo_lv_alt4[0], evo_alt4[0])  # Add alternate evo path, third row
 
             # Non evolving mons
             else:
-                evo1_image = ImageButton(source='img\\portraits\\' + pokedex_nr + '.png', on_release=self.change_page)
+                evo1_image = ImageButton(source='img\\portraits\\' + pokedex_nr + '.png', on_release=self.change_page_image)
                 self.ids.md_evo_box.add_widget(evo1_image)  # add non evolving mon portrait
 
     def set_moves(self, pokedex_nr):
@@ -424,7 +480,11 @@ class SpinoffDex(Screen):
                 self.ids.md_tm_nrs.add_widget(move_nr)
                 self.ids.md_tm_names.add_widget(move_name)
 
-    def change_page(self, image_button_object):
+    def change_page(self, nr):
+        self.ids.dex_page.number = abs(nr)  # absolute value of pokedex nr; '001' = 1
+        self.ids.manager.current = 'dex_page'
+
+    def change_page_image(self, image_button_object):
         # Only change page if the selected image isn't the page the user is already on
         if not abs(int(image_button_object.source[-7:-4])) == self.ids.dex_page.number:
             self.ids.manager.current = 'empty'
@@ -452,6 +512,10 @@ class DexPage(Screen):
 
 
 class ImageButton(ButtonBehavior, Image):
+    pass
+
+
+class BoxButton(BoxLayout, Button):
     pass
 
 

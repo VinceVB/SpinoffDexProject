@@ -31,6 +31,7 @@
 <DexEntry>
     cols:2
     on_press:
+        app.root.dex_list_scroller.previous_y = app.root.dex_list_scroller.scroll_y  # Remember position in scroller to return to later
         app.root.dex_page.number = int(self.page[3:])
         app.root.manager.current = 'dex_page'
 
@@ -45,6 +46,7 @@
     md_location: md_location
     md_layout: md_layout
     md_get_rate: md_get_rate
+    md_get_rate2: md_get_rate2
     md_gummis_box: md_gummis_box
     md_evo_box: md_evo_box
     md_moves_names: md_moves_names
@@ -54,29 +56,57 @@
     general_type1: general_type1
     general_type2: general_type2
     type_box: type_box
+    dex_list_scroller: dex_list_scroller
+    dex_searchbar: dex_searchbar
 
     ScreenManager:
         id: manager
         transition: NoTransition()
         Screen:
             name: 'dex_list'
+            on_pre_enter:
+                # Go to position in ScrollView where user entered
+                app.root.dex_list_scroller.scroll_y = app.root.dex_list_scroller.previous_y
+
             BoxLayout:
                 orientation: 'vertical'
-                RelativeLayout:
-                    size_hint_y: 0.25
-                    Button:
-                        id: 'general_image'
-                        text: 'Top'
-                        on_press:
-                            manager.current = 'empty'
+                BoxLayout:
+                    size_hint_y: 0.075
+                    orientation: 'vertical'
+
+                    # Top / Bottom Buttons
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        Button:
+                            text: 'Top'
+                            on_press:
+                                app.root.dex_list_scroller.scroll_y = 1
+                        Button:
+                            text: 'Bottom'
+                            on_press:
+                                app.root.dex_list_scroller.scroll_y = 0
+
+                    # Search Bar
+                    BoxLayout:
+                        TextInput:
+                            id: dex_searchbar
+                            hint_text:'Enter Pokedex Nr / Pokemon Name'
+                            multiline: False
+
+                            on_text_validate:
+                                app.root.dex_search(self.text)
+                                #app.root.open
+
 
                 ScrollView:
+                    id: dex_list_scroller
                     size_hint_y: 0.75
-
+                    previous_y: 1
                     scroll_type: ['bars', 'content']
                     bar_width : '10dp'
                     bar_color: 0.4, 0.6, 0.4, 0.8
                     bar_inactive_color: 0.4, 0.6, 0.4, 0.3
+
                     GridLayout:
                         id: theGrid
                         cols: 1
@@ -84,8 +114,8 @@
                         size_hint_y: None
                         size: root.width, self.minimum_height
                         row_default_height: '85dp'
-                        spacing: 10
-                        padding: 10
+                        spacing: 10   # between elements - 1720/0 1910/10 2100/20
+                        padding: 10  # around elements
 
         Screen:
             id: dex_page
@@ -115,6 +145,7 @@
                 md_body_size.source = app.root.set_md_body_size(general_nr_name.text[1:4])  # Body size
                 md_friend_area.text = app.root.read_csv(self.number, 17)                    # MD Friend Area
                 md_get_rate.text = app.root.read_csv(self.number, 18)                       # MD Get rate
+                md_get_rate2.text = app.root.read_csv(self.number, 36) [1:-1]               # MD Get rate min levels
                 app.root.unown_check(general_nr_name.text[1:4])                             # Check if Unown (Change font size for get rate, it has 2)
 
                 app.root.set_gummis(general_nr_name.text[1:4])                              # Set favourite gummis
@@ -131,7 +162,8 @@
                 app.root.set_moves(general_nr_name.text[1:4])
 
             ScrollView:
-                size_hint_y: 1
+                size_hint_y: 0.95
+                pos_hint: {"y":0.05}
                 GridLayout:
                     cols: 1
                     orientation: 'vertical'
@@ -188,7 +220,7 @@
                                 id: general_nr_name
                                 size_hint: None, None
                                 size: root.width*0.5, self.parent.height
-                                font_size: '18sp'
+                                font_size: '16sp'
                             # Type 1 & Type 2
                             BoxLayout:
                                 id: type_box
@@ -314,10 +346,20 @@
                                 id: md_body_size
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
-                            Button:
-                                id: md_get_rate
+                            BoxLayout:
+                                orientation: 'vertical'
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
+                                Button:
+                                    id: md_get_rate
+                                    size_hint: None, None
+                                    size: self.parent.width, self.parent.height/2
+                                Button:
+                                    id: md_get_rate2
+                                    size_hint: None, None
+                                    size: self.parent.width, self.parent.height/2
+                                    on_release:
+                                        app.root.popup('Minimum Recruit Levels', ('Minimum Level to recruit: ' + app.root.read_csv(dex_page.number, 36)[1:].partition('/')[0] + '\nMinimum Level with Friend Bow: ' + app.root.read_csv(dex_page.number, 36)[1:].partition('/')[0]), '12sp')
                             ImageButton:
                                 id: md_joined
                                 size_hint: None, None
@@ -413,6 +455,60 @@
                                         size: self.size
                                         source: 'img\\misc\\bg_gray7.png'
 
+            # Bottom selection
+            BoxLayout:
+                size_hint_y: 0.05
+                Button:
+                    text: 'Moves'
+                    on_release:
+                        app.root.manager.current = 'dex_page_moves'
+                Button:
+                Button:
+                Button:
+
+        Screen:
+            id: dex_page_moves
+            name: 'dex_page_moves'
+            ScrollView:
+                size_hint_y: 0.95
+                pos_hint: {"y":0.05}
+                GridLayout:
+                    cols: 1
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    size: root.width, self.minimum_height
+                    row_default_height: '40dp'
+                    spacing: 10
+                    padding: 0
+                    Button:
+                        id: dex_list_back
+                        text: 'Back'
+                        size_hint_y: 0.05
+                        on_press:
+                            manager.current = 'dex_list'
+
+        Screen:
+            id: dex_page_moves
+            name: 'dex_page_moves'
+            ScrollView:
+                size_hint_y: 0.95
+                pos_hint: {"y":0.05}
+                GridLayout:
+                    cols: 1
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    size: root.width, self.minimum_height
+                    row_default_height: '40dp'
+                    spacing: 10
+                    padding: 0
+                    Button:
+                        id: dex_list_back
+                        text: 'Back'
+                        size_hint_y: 0.05
+                        on_press:
+                            manager.current = 'dex_list'
+
+
                     # ============================= #
                     # MD MOVESET                    #
                     # ============================= #
@@ -492,6 +588,18 @@
                                 size_hint: None, None
                                 size: self.parent.width/2, self.minimum_height
                                 orientation: 'vertical'
+
+            # Bottom selection
+            BoxLayout:
+                size_hint_y: 0.1
+                Button:
+                    text: 'Moves'
+                    on_release:
+                        app.root.manager.current = 'dex_page_moves'
+                Button:
+                Button:
+                Button:
+
 
         Screen:
 
