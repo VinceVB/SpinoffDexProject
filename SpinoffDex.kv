@@ -32,12 +32,12 @@
     cols:2
     on_press:
         app.root.dex_list_scroller.previous_y = app.root.dex_list_scroller.scroll_y  # Remember position in scroller to return to later
-        app.root.dex_page.number = int(self.page[3:])
-        app.root.manager.current = 'dex_page'
+        app.root.dex_page_main.number = int(self.page[3:])
+        app.root.manager.current = 'dex_page_main'
 
 <SpinoffDex>:
     manager: manager
-    dex_page: dex_page
+    dex_page_main: dex_page_main
     theGrid: theGrid
     general_image: general_image
     md_ability: md_ability
@@ -58,6 +58,7 @@
     type_box: type_box
     dex_list_scroller: dex_list_scroller
     dex_searchbar: dex_searchbar
+    dex_base_stats: dex_base_stats
 
     ScreenManager:
         id: manager
@@ -104,8 +105,8 @@
                     previous_y: 1
                     scroll_type: ['bars', 'content']
                     bar_width : '10dp'
-                    bar_color: 0.4, 0.6, 0.4, 0.8
-                    bar_inactive_color: 0.4, 0.6, 0.4, 0.3
+                    bar_color: 0.4, 0.7, 0.4, 1.0
+                    bar_inactive_color: 0.4, 0.7, 0.4, 0.4
 
                     GridLayout:
                         id: theGrid
@@ -118,8 +119,8 @@
                         padding: 10  # around elements
 
         Screen:
-            id: dex_page
-            name: 'dex_page'
+            id: dex_page_main
+            name: 'dex_page_main'
             number:
 
             on_pre_enter:
@@ -140,6 +141,7 @@
                 #weight_lbs.text = app.root.read_csv(self.number, 11)
                 general_height_m.text = str(app.root.read_csv(self.number, 12))             # Height (Metric)
                 #height_ft.text = app.root.read_csv(self.number, 13)
+                app.root.set_stats(general_nr_name.text[1:4])                               # Base Stats
                 app.root.set_abilities(app.root.read_csv(self.number, 14))                  # Abilities
                 app.root.set_evos(general_nr_name.text[1:4])                                # Evolution Chain
                 md_body_size.source = app.root.set_md_body_size(general_nr_name.text[1:4])  # Body size
@@ -268,12 +270,39 @@
                                     print(md_get_rate.size)
                                     print(md_get_rate.pos)
                                     print('self.parent.height', md_get_rate.parent.height, 'self.height', md_get_rate.height, md_get_rate.height/md_get_rate.parent.height)
-
-
-#                    BoxLayout:
-#                        # Spacing
-#                        size_hint: None, None
-#                        size: root.width, '0dp'
+                        BoxLayout:
+                            size_hint: (None, None)
+                            size: root.width, dp(36)
+                            Label:
+                                text: 'Base Stats'
+                                font_size: '12sp'
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint: (None, None)
+                            size: root.width, dp(24)
+                            Label:
+                                text:'HP'
+                                font_size: '12sp'
+                            Label:
+                                text:'Att'
+                                font_size: '12sp'
+                            Label:
+                                text:'Def'
+                                font_size: '12sp'
+                            Label:
+                                text:'SpA'
+                                font_size: '12sp'
+                            Label:
+                                text:'SpD'
+                                font_size: '12sp'
+                            Label:
+                                text:'Exp'
+                                font_size: '12sp'
+                        BoxLayout:
+                            id: dex_base_stats
+                            orientation: 'horizontal'
+                            size_hint: (None, None)
+                            size: root.width, dp(24)
 
                     # ======================================== #
                     # MYSTERY DUNGEON INFO                     #
@@ -285,8 +314,6 @@
                         id: md_layout
                         size_hint: None, None
                         size: root.width, self.minimum_height
-                        # md_1_box.size[1]+md_2_box.size[1]+md_3_box.size[1]+md_4_box.size[1]+md_5_box.size[1]+md_6_box.size[1]+md_7_box.size[1]+md_8_box.size[1]+md_9_box.size[1]+md_10_box.size[1]+md_11_box.size[1]
-
                         canvas:
                             Color:
                                 rgba: 0.4, 0.4, 0.6, 1
@@ -359,7 +386,7 @@
                                     size_hint: None, None
                                     size: self.parent.width, self.parent.height/2
                                     on_release:
-                                        app.root.popup('Minimum Recruit Levels', ('Minimum Level to recruit: ' + app.root.read_csv(dex_page.number, 36)[1:].partition('/')[0] + '\nMinimum Level with Friend Bow: ' + app.root.read_csv(dex_page.number, 36)[1:].partition('/')[0]), '12sp')
+                                        app.root.popup('Minimum Recruit Levels', ('Minimum Level to recruit: ' + app.root.read_csv(dex_page_main.number, 36)[1:].partition('/')[0] + '\nMinimum Level with Friend Bow: ' + app.root.read_csv(dex_page_main.number, 36)[1:].partition('/')[0]), '12sp')
                             ImageButton:
                                 id: md_joined
                                 size_hint: None, None
@@ -459,34 +486,26 @@
             BoxLayout:
                 size_hint_y: 0.05
                 Button:
+                    text: 'General'
+                    on_release:
+                        app.root.manager.current = 'dex_page_main'
+
+                Button:
                     text: 'Moves'
                     on_release:
                         app.root.manager.current = 'dex_page_moves'
                 Button:
+                    text: 'Stats'
+                    on_release:
+                        app.root.manager.current = 'dex_page_stats'
                 Button:
-                Button:
+                    text: 'Quotes'
+                    on_release:
+                        pass#app.root.manager.current = 'dex_page_quotes'
 
-        Screen:
-            id: dex_page_moves
-            name: 'dex_page_moves'
-            ScrollView:
-                size_hint_y: 0.95
-                pos_hint: {"y":0.05}
-                GridLayout:
-                    cols: 1
-                    orientation: 'vertical'
-                    size_hint_y: None
-                    size: root.width, self.minimum_height
-                    row_default_height: '40dp'
-                    spacing: 10
-                    padding: 0
-                    Button:
-                        id: dex_list_back
-                        text: 'Back'
-                        size_hint_y: 0.05
-                        on_press:
-                            manager.current = 'dex_list'
-
+        # ============ #
+        # Moves Screen #
+        # ============ #
         Screen:
             id: dex_page_moves
             name: 'dex_page_moves'
@@ -591,18 +610,64 @@
 
             # Bottom selection
             BoxLayout:
-                size_hint_y: 0.1
+                size_hint_y: 0.05
+                Button:
+                    text: 'General'
+                    on_release:
+                        app.root.manager.current = 'dex_page_main'
+
                 Button:
                     text: 'Moves'
                     on_release:
                         app.root.manager.current = 'dex_page_moves'
                 Button:
+                    text: 'Stats'
+                    on_release:
+                        app.root.manager.current = 'dex_page_stats'
                 Button:
-                Button:
+                    text: 'Quotes'
+                    on_release:
+                        pass#app.root.manager.current = 'dex_page_quotes'
 
 
         Screen:
+            id: dex_page_stats
+            name: 'dex_page_stats'
+            ScrollView:
+                size_hint_y: 0.95
+                pos_hint: {"y":0.05}
+                GridLayout:
+                    cols: 1
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    size: root.width, self.minimum_height
+                    row_default_height: '40dp'
+                    spacing: 10
+                    padding: 0
+                    Button:
+                        id: dex_list_back
+                        text: 'Back'
+                        size_hint_y: 0.05
+                        on_press:
+                            manager.current = 'dex_list'
 
-            name: 'empty'
-            Image:
-                source: 'img\\misc\\pokeball.png'
+            # Bottom selection
+            BoxLayout:
+                size_hint_y: 0.05
+                Button:
+                    text: 'General'
+                    on_release:
+                        app.root.manager.current = 'dex_page_main'
+
+                Button:
+                    text: 'Moves'
+                    on_release:
+                        app.root.manager.current = 'dex_page_moves'
+                Button:
+                    text: 'Stats'
+                    on_release:
+                        app.root.manager.current = 'dex_page_stats'
+                Button:
+                    text: 'Quotes'
+                    on_release:
+                        pass#app.root.manager.current = 'dex_page_quotes'

@@ -27,7 +27,7 @@ from kivy.uix.scrollview import ScrollView
 
 class SpinoffDex(Screen):
     manager = ObjectProperty(None)
-    dex_page = ObjectProperty(None)
+    dex_page_main = ObjectProperty(None)
     theGrid = ObjectProperty(None)
     test = ObjectProperty(None)
     md_ability = ObjectProperty(None)
@@ -47,6 +47,7 @@ class SpinoffDex(Screen):
     type_box = ObjectProperty(None)
     dex_list_scroller = ObjectProperty(None)
     dex_searchbar = ObjectProperty(None)
+    dex_base_stats = ObjectProperty(None)
 
     def add_dex_entries(self):
         # skip first line i.e. read header first and then iterate over each row od csv as a list
@@ -146,7 +147,7 @@ class SpinoffDex(Screen):
                         hit_box.add_widget(hit_btn)
 
                         # Call the select() method on the dropdown, pass the text of the Label as the selection data
-                        hit_box.bind(on_release=lambda hit_box: dropdown.select(hit_box.children[0].text))
+                        hit_box.bind(on_release=lambda hit_box2: dropdown.select(hit_box2.children[0].text))
 
                         # Add the BoxLayout containing the other content as a dropdown element
                         dropdown.add_widget(hit_box)
@@ -165,6 +166,17 @@ class SpinoffDex(Screen):
             csv_reader = reader(read_obj)
             rows = list(csv_reader)
             return rows[row][column]
+
+    def set_stats(self, pokedex_nr):
+        self.ids.dex_base_stats.clear_widgets()
+        prev_stat = self.read_csv(int(pokedex_nr), 35).partition('], [1, ')[2].partition('], [')[0]
+        for stat_lbl in range(5):
+            next_stat = prev_stat.partition(',')
+            stat_label = Label(text=next_stat[0], font_size='14sp', text_size=self.ids.dex_base_stats.size, halign='center', valign='top')
+            prev_stat = next_stat[2]
+            self.ids.dex_base_stats.add_widget(stat_label)
+        stat_label = Label(text=self.read_csv(int(pokedex_nr), 32), font_size='14sp', text_size=self.ids.dex_base_stats.size, halign='center', valign='top')
+        self.ids.dex_base_stats.add_widget(stat_label)
 
     def set_types(self, pokedex_nr):
         # Reset type Label heights
@@ -238,7 +250,7 @@ class SpinoffDex(Screen):
             self.ids.md_joined.source = 'img\\misc\\joined.png'  # Set joined image
             self.ids.theGrid.children[v.max_entries - int(pokedex_nr)].background_normal = ''  # set brighter background color
         else:
-            self.ids.md_joined.source = 'img\\misc\\not_joined.png'  # set unjoined image
+            self.ids.md_joined.source = 'img\\misc\\not_joined.png'  # set not joined image
             self.ids.theGrid.children[v.max_entries - int(pokedex_nr)].background_normal =\
                 'atlas://data/images/defaulttheme/button'  # set darker background color
 
@@ -481,15 +493,15 @@ class SpinoffDex(Screen):
                 self.ids.md_tm_names.add_widget(move_name)
 
     def change_page(self, nr):
-        self.ids.dex_page.number = abs(nr)  # absolute value of pokedex nr; '001' = 1
-        self.ids.manager.current = 'dex_page'
+        self.ids.dex_page_main.number = abs(nr)  # absolute value of pokedex nr; '001' = 1
+        self.ids.manager.current = 'dex_page_main'
 
     def change_page_image(self, image_button_object):
         # Only change page if the selected image isn't the page the user is already on
-        if not abs(int(image_button_object.source[-7:-4])) == self.ids.dex_page.number:
+        if not abs(int(image_button_object.source[-7:-4])) == self.ids.dex_page_main.number:
             self.ids.manager.current = 'empty'
-            self.ids.dex_page.number = abs(int(image_button_object.source[-7:-4]))  # absolute value of pokedex nr; '001' = 1
-            self.ids.manager.current = 'dex_page'
+            self.ids.dex_page_main.number = abs(int(image_button_object.source[-7:-4]))  # absolute value of pokedex nr; '001' = 1
+            self.ids.manager.current = 'dex_page_main'
 
     @staticmethod
     def popup(title, text, text_font_size='14sp', image_button_object=None):
