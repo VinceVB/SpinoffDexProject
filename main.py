@@ -3,6 +3,7 @@ import random
 from functools import partial
 
 from kivy.uix.dropdown import DropDown
+from kivy.uix.widget import Widget
 
 import variables as v
 
@@ -30,7 +31,10 @@ class SpinoffDex(Screen):
     dex_page_main = ObjectProperty(None)
     theGrid = ObjectProperty(None)
     test = ObjectProperty(None)
-    md_ability = ObjectProperty(None)
+    md_abilities = ObjectProperty(None)
+    md_ability1 = ObjectProperty(None)
+    md_ability2 = ObjectProperty(None)
+    md_ability_sep = ObjectProperty(None)
     md_joined = ObjectProperty(None)
     md_body_size = ObjectProperty(None)
     md_location = ObjectProperty(None)
@@ -203,22 +207,28 @@ class SpinoffDex(Screen):
         return 'img\\misc\\size' + (str(len(str(df.loc[int(pokedex_nr)-1, 'md_body_size'])))) + '.png'
 
     def set_abilities(self, abilities):
-        self.ids.md_ability.clear_widgets()  # Reset widget in case a previous page added to it
+        #self.ids.md_ability.clear_widgets()  # Reset widget in case a previous page added to it
 
         ability_1 = abilities.partition(' & ')[0]  # Partition the string to exclude a potential second ability
-        md_ability_1 = Button(text=ability_1, font_size='14sp', background_color=(0, 0, 0, 0))  # Ability name
-        md_ability_1.bind(on_release=partial(self.popup, ability_1, v.md_abilities[ability_1], '14sp'))  # Popup window with description
-        self.ids.md_ability.add_widget(md_ability_1)
+        self.ids.md_ability1.text = ability_1              # Ability name
+        self.ids.md_ability1.bind(on_release=partial(self.popup, ability_1, v.md_abilities[ability_1], '14sp'))  # Popup window with description
 
         # If there are two abilities, add another
         if '&' in abilities:
             ability_2 = abilities.partition(' & ')[2]
-            ability_2_lbl = Label(size_hint=(None, None), size=('20dp', self.ids.md_ability.height), text='&')
+            self.ids.md_ability2.text = ability_2
+            self.ids.md_ability2.bind(on_release=partial(self.popup, ability_2, v.md_abilities[ability_2], '14sp'))
 
-            self.ids.md_ability.add_widget(ability_2_lbl)
-            md_ability_2 = Button(text=ability_2, font_size='14sp', background_color=(0, 0, 0, 0))
-            md_ability_2.bind(on_release=partial(self.popup, ability_2, v.md_abilities[ability_2], '14sp'))
-            self.ids.md_ability.add_widget(md_ability_2)
+            # Reset ability 2 and separator_y in case they were shrunk
+            self.ids.md_ability2.size_hint = (1, 1)
+            self.ids.md_ability_sep.width = '2dp'
+        else:
+            # Make ability 2 and separator_y 0 in size so ability 1 takes up full space
+            self.ids.md_ability2.text = ''
+            self.ids.md_ability2.size_hint = (None, None)
+            self.ids.md_ability2.size = 0, 0
+            self.ids.md_ability_sep.width = '0dp'
+
 
     def set_location(self, pokedex_nr):
         self.ids.md_location.clear_widgets()  # Reset location widget

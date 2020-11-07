@@ -61,7 +61,10 @@
     dex_page_main: dex_page_main
     theGrid: theGrid
     general_image: general_image
-    md_ability: md_ability
+    md_abilities: md_abilities
+    md_ability1: md_ability1
+    md_ability2: md_ability2
+    md_ability_sep: md_ability_sep
     md_joined: md_joined
     md_body_size: md_body_size
     md_location: md_location
@@ -490,7 +493,7 @@
                         BoxLayout:
                             id: md_5_box
                             size_hint: None, None
-                            size: root.width, '45dp'
+                            size: root.width, '30dp'
                             Button:
                                 id: md_friend_area
                                 size_hint: None, None
@@ -524,9 +527,22 @@
                             size_hint: None, None
                             size: root.width, '24dp'
                             BoxLayout:
-                                id: md_ability
+                                id: md_abilities
+                                orientation: 'horizontal'
                                 size_hint: None, None
                                 size: self.parent.width, self.parent.height
+                                Button:
+                                    id: md_ability1
+                                    font_size: '14sp'
+                                    background_color: 0, 0, 0, 0
+
+                                Separator_y:
+                                    id: md_ability_sep
+                                Button:
+                                    id: md_ability2
+                                    font_size: '14sp'
+                                    background_color: 0, 0, 0, 0
+
                         Separator_x:
                         BoxLayout:
                             id: md_8_box
