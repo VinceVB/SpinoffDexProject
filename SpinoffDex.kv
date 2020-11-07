@@ -12,6 +12,27 @@
         Rectangle:
             size: self.size
             pos: self.pos
+
+<Separator_x@Widget>
+    size_hint: None, None
+    size: self.parent.width, dp(2)
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 0.2
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<Separator_y@Widget>
+    size_hint: None, None
+    size: dp(2), self.parent.height
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 0.2
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
 # Define your background color Template
 <BackgroundColor@Widget>
     background_color: 1, 1, 1, 1
@@ -135,12 +156,12 @@
                 #japanese_name.text = app.root.read_csv(self.number, 4)
                 app.root.set_types(general_nr_name.text[1:4])                               # Type 1 (/ Type 2)
                 md_joined.source = app.root.check_joined(general_nr_name.text[1:4])         # Joined
-                general_favorite.text = app.root.read_csv(self.number, 8)                   # Favorite?
+                #general_favorite.text = app.root.read_csv(self.number, 8)                  # Favorite?
                 general_class.text = app.root.read_csv(self.number, 9)                      # Classification
-                general_weight_kg.text = str(app.root.read_csv(self.number, 10))            # Weight (Metric)
-                #weight_lbs.text = app.root.read_csv(self.number, 11)
-                general_height_m.text = str(app.root.read_csv(self.number, 12))             # Height (Metric)
-                #height_ft.text = app.root.read_csv(self.number, 13)
+                general_weight.text = str(app.root.read_csv(self.number, 10) + ' - ' + app.root.read_csv(self.number, 11))            # Weight (Metric)
+                #general_weight_lbs.text = app.root.read_csv(self.number, 11)
+                general_height.text = str(app.root.read_csv(self.number, 12) + ' - ' + app.root.read_csv(self.number, 13))             # Height (Metric)
+                #general_height_ft.text = app.root.read_csv(self.number, 13)
                 app.root.set_stats(general_nr_name.text[1:4])                               # Base Stats
                 app.root.set_abilities(app.root.read_csv(self.number, 14))                  # Abilities
                 app.root.set_evos(general_nr_name.text[1:4])                                # Evolution Chain
@@ -197,11 +218,17 @@
                             Rectangle:
                                 size: self.size
                                 pos: self.pos
-
+                        Separator_x:
                         BoxLayout:
-                            # 55dp
                             size_hint: None, None
                             size: root.width, dp(55)
+
+                            canvas:
+                                Color:
+                                    rgba: 1, 1, 1, 0.1
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
                             Label:
                                 id: general_label
                                 size_hint: None, None
@@ -209,73 +236,101 @@
                                 text: 'General Info'
                                 color: 1, 1, 1, 1
                                 font_size: '16sp'
+                        Separator_x:
+
                         BoxLayout:
-                            #60dp
                             size_hint: None, None
                             size: root.width, dp(60)
                             orientation: 'horizontal'
                             Image:
                                 id: general_image
                                 size: root.width*0.25, self.parent.height
-                                allow_stretch: 'True'
-                            Button:
-                                id: general_nr_name
+                                #allow_stretch: 'True'
+                            BoxLayout:
+                                orientation: 'vertical'
                                 size_hint: None, None
                                 size: root.width*0.5, self.parent.height
-                                font_size: '16sp'
+                                Label:
+                                    id: general_nr_name
+                                    size_hint: None, None
+                                    size: self.parent.width, self.parent.height*0.5
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'bottom'
+                                    font_size: '16sp'
+                                Label:
+                                    id: general_class
+                                    size_hint: None, None
+                                    size: self.parent.width, self.parent.height*0.5
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'center'
+                                    font_size: '12sp'
                             # Type 1 & Type 2
+                            # Double BoxLayout to enable 'center_y' in the inner Box, as the outer is horizontally oriented
                             BoxLayout:
-                                id: type_box
-                                size_hint: None, None
-                                size: root.width*0.25, self.parent.height
-                                orientation: 'vertical'
-                                BackgroundLabel:
-                                    id: general_type1
+                                orientation: 'horizontal'
+                                BoxLayout:
+                                    id: type_box
                                     size_hint: None, None
-                                    size: self.parent.width-2, self.parent.height/2
-                                BackgroundLabel:
-                                    id: general_type2
-                                    size_hint: None, None
-                                    size: self.parent.width-2, self.parent.height/2
+                                    size: root.width*0.25, self.parent.height*0.65
+                                    orientation: 'vertical'
+                                    pos_hint: {'center_y': 0.5}
+
+                                    BackgroundLabel:
+                                        id: general_type1
+                                        size_hint: None, None
+                                        size: self.parent.width-5, self.parent.height/2
+                                    BackgroundLabel:
+                                        id: general_type2
+                                        size_hint: None, None
+                                        size: self.parent.width-5, self.parent.height/2
+
+                        Separator_x:
                         BoxLayout:
-                            # 50dp
                             size_hint: None, None
-                            size: root.width, dp(50)
-                            # Height & Weight
-                            BoxLayout:
-                                size_hint: None, None
-                                size: root.width*0.25, self.parent.height
-                                orientation: 'vertical'
-                                Button:
-                                    id: general_height_m
-                                    size_hint: None, None
-                                    size: self.parent.width, self.parent.height/2
-                                    font_size: '12sp'
-                                Button:
-                                    id: general_weight_kg
-                                    size_hint: None, None
-                                    size: self.parent.width, self.parent.height/2
-                                    font_size: '12sp'
-                            Button:
-                                id: general_class
-                                size_hint: None, None
-                                size: root.width*0.5, self.parent.height
+                            size: root.width, dp(24)
+                            Label:
+                                text: 'Height'
                                 font_size: '12sp'
-                            Button:
-                                id: general_favorite
-                                size_hint: None, None
-                                size: root.width*0.25, self.parent.height
-                                font_size: '10sp'
-                                on_release:
-                                    print(md_get_rate.size)
-                                    print(md_get_rate.pos)
-                                    print('self.parent.height', md_get_rate.parent.height, 'self.height', md_get_rate.height, md_get_rate.height/md_get_rate.parent.height)
+                            Separator_y:
+                            Label:
+                                text: 'Weight'
+                                font_size: '12sp'
+
+                        # Height & Weight
+                        BoxLayout:
+                            size_hint: None, None
+                            size: root.width, dp(18)
+                            Label:
+                                id: general_height
+                                font_size: '12sp'
+                                text_size: self.size
+                                halign: 'center'
+                                valign: 'top'
+                            Separator_y:
+                            Label:
+                                id: general_weight
+                                font_size: '12sp'
+                                text_size: self.size
+                                halign: 'center'
+                                valign: 'top'
+
+                        Separator_x:
                         BoxLayout:
                             size_hint: (None, None)
                             size: root.width, dp(36)
+
+                            canvas:
+                                Color:
+                                    rgba: 1, 1, 1, 0.1
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
                             Label:
                                 text: 'Base Stats'
                                 font_size: '12sp'
+                        Separator_x:
                         BoxLayout:
                             orientation: 'horizontal'
                             size_hint: (None, None)
@@ -303,13 +358,12 @@
                             orientation: 'horizontal'
                             size_hint: (None, None)
                             size: root.width, dp(24)
+                        Separator_x:
 
                     # ======================================== #
                     # MYSTERY DUNGEON INFO                     #
                     # ======================================== #
                     GridLayout:
-
-
                         cols: 1
                         id: md_layout
                         size_hint: None, None
@@ -321,11 +375,19 @@
                                 size: self.size
                                 pos: self.pos
 
+                        Separator_x:
                         # Top Label
                         BoxLayout:
                             id: md_1_box
                             size_hint: None, None
                             size: root.width, '55dp'
+
+                            canvas:
+                                Color:
+                                    rgba: 1, 1, 1, 0.1
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
                             Label:
                                 id: md_label_top
                                 size_hint: None, None
@@ -333,6 +395,7 @@
                                 text: 'Mystery Dungeon Info'
                                 color: 1, 1, 1, 1
                                 font_size: '16sp'
+                        Separator_x:
 
                         # Body Size, Recruit Rate, and Gummi Labels
                         BoxLayout:
@@ -345,25 +408,28 @@
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
                                 font_size: '12sp'
+                            Separator_y:
                             Label:
                                 id: md_label_get_rate
                                 text:'Recruit\nRate'
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
                                 font_size: '12sp'
+                            Separator_y:
                             Label:
                                 id: md_label_joined
                                 text:'Joined\nTeam'
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
                                 font_size: '12sp'
+                            Separator_y:
                             Label:
                                 id: md_label_gummis
                                 text:'Favourite\nGummis'
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
                                 font_size: '12sp'
-
+                        Separator_x:
                         # Body Size, Recruit Rate, Joined and Gummis
                         BoxLayout:
                             id: md_3_box
@@ -373,47 +439,58 @@
                                 id: md_body_size
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
+                            Separator_y:
                             BoxLayout:
                                 orientation: 'vertical'
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
-                                Button:
+                                Label:
                                     id: md_get_rate
-                                    size_hint: None, None
-                                    size: self.parent.width, self.parent.height/2
+                                Separator_x:
                                 Button:
                                     id: md_get_rate2
-                                    size_hint: None, None
-                                    size: self.parent.width, self.parent.height/2
+                                    font_size: '12sp'
+                                    background_color: 0, 0, 0, 0
                                     on_release:
-                                        app.root.popup('Minimum Recruit Levels', ('Minimum Level to recruit: ' + app.root.read_csv(dex_page_main.number, 36)[1:].partition('/')[0] + '\nMinimum Level with Friend Bow: ' + app.root.read_csv(dex_page_main.number, 36)[1:].partition('/')[0]), '12sp')
+                                        app.root.popup('Minimum Recruit Levels', ('Minimum Level without Friend Bow: ' + app.root.read_csv(dex_page_main.number, 36)[1:].partition('/')[0] + '\nMinimum Level with Friend Bow: ' + app.root.read_csv(dex_page_main.number, 36)[1:].partition('/')[2][:-1]), '12sp')
+                            Separator_y:
                             ImageButton:
                                 id: md_joined
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
-                                allow_stretch: True
+                                #allow_stretch: True
                                 on_release:
                                     app.root.md_join(general_nr_name.text[1:4])
+                            Separator_y:
                             BoxLayout:
                                 id: md_gummis_box
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
                                 orientation: 'vertical'
 
+                        Separator_x:
                         BoxLayout:
                             id: md_4_box
                             size_hint: None, None
                             size: root.width, '36dp'
+
+                            canvas:
+                                Color:
+                                    rgba: (1, 1, 1, 0.1)
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
                             Label:
                                 id: md_label_friend_area
                                 text: 'Friend Area'
                                 size_hint: None, None
                                 size: self.parent.width, self.parent.height
                                 font_size: '12sp'
+                        Separator_x:
                         BoxLayout:
                             id: md_5_box
                             size_hint: None, None
-                            size: root.width, '35dp'
+                            size: root.width, '45dp'
                             Button:
                                 id: md_friend_area
                                 size_hint: None, None
@@ -422,30 +499,46 @@
                                 background_normal: 'img\\friend areas\\' + md_friend_area.text +'.png'
                                 on_release:
                                     app.root.popup('image_' + md_friend_area.text, 'img\\friend areas\\' + md_friend_area.text +'.png')
-
+                        Separator_x:
 
                         BoxLayout:
                             id: md_6_box
                             size_hint: None, None
                             size: root.width, '36dp'
+
+                            canvas:
+                                Color:
+                                    rgba: (1, 1, 1, 0.1)
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
                             Label:
                                 id: md_label_md_ability
                                 text: 'Ability'
                                 size_hint: None, None
                                 size: self.parent.width, self.parent.height
                                 font_size: '12sp'
+                        Separator_x:
                         BoxLayout:
                             id: md_7_box
                             size_hint: None, None
-                            size: root.width, '45dp'
+                            size: root.width, '24dp'
                             BoxLayout:
                                 id: md_ability
                                 size_hint: None, None
                                 size: self.parent.width, self.parent.height
+                        Separator_x:
                         BoxLayout:
                             id: md_8_box
                             size_hint: None, None
                             size: root.width, '36dp'
+
+                            canvas:
+                                Color:
+                                    rgba: (1, 1, 1, 0.1)
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
                             Label:
                                 id: md_label_location
                                 text: 'Location'
@@ -544,12 +637,14 @@
                                 size: self.size
                                 pos: self.pos
 
+                        Separator_x:
                         BoxLayout:
                             size_hint: None, None
                             size: self.parent.width, '55dp'
                             Label:
                                 text: 'Moves Learned'
                                 color: 1, 1, 1, 1
+                        Separator_x:
                         BoxLayout:
                             size_hint: None, None
                             size: self.parent.width, self.minimum_height
@@ -584,12 +679,14 @@
                                 size: self.size
                                 pos: self.pos
 
+                        Separator_x:
                         BoxLayout:
                             size_hint: None, None
                             size: self.parent.width, '55dp'
                             Label:
                                 text: 'TMs/HMs'
                                 color: 1, 1, 1, 1
+                        Separator_x:
                         BoxLayout:
                             size_hint: None, None
                             size: self.parent.width, self.minimum_height

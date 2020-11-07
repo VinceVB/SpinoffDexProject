@@ -206,14 +206,17 @@ class SpinoffDex(Screen):
         self.ids.md_ability.clear_widgets()  # Reset widget in case a previous page added to it
 
         ability_1 = abilities.partition(' & ')[0]  # Partition the string to exclude a potential second ability
-        md_ability_1 = Button(text=ability_1, background_normal='img\\misc\\bg_gray7.png')  # Ability name
+        md_ability_1 = Button(text=ability_1, font_size='14sp', background_color=(0, 0, 0, 0))  # Ability name
         md_ability_1.bind(on_release=partial(self.popup, ability_1, v.md_abilities[ability_1], '14sp'))  # Popup window with description
         self.ids.md_ability.add_widget(md_ability_1)
 
         # If there are two abilities, add another
         if '&' in abilities:
             ability_2 = abilities.partition(' & ')[2]
-            md_ability_2 = Button(text=ability_2, background_normal='img\\misc\\bg_gray7.png')
+            ability_2_lbl = Label(size_hint=(None, None), size=('20dp', self.ids.md_ability.height), text='&')
+
+            self.ids.md_ability.add_widget(ability_2_lbl)
+            md_ability_2 = Button(text=ability_2, font_size='14sp', background_color=(0, 0, 0, 0))
             md_ability_2.bind(on_release=partial(self.popup, ability_2, v.md_abilities[ability_2], '14sp'))
             self.ids.md_ability.add_widget(md_ability_2)
 
@@ -266,7 +269,7 @@ class SpinoffDex(Screen):
             else:
                 self.ids.md_friend_area.background_normal = 'img\\friend areas\\Aged Chamber O.png'
         else:
-            self.ids.md_get_rate.font_size = '14dp'
+            self.ids.md_get_rate.font_size = '12dp'
 
     def set_gummis(self, pokedex_nr):
         self.md_gummis_box.clear_widgets()  # Reset Widget
@@ -282,7 +285,7 @@ class SpinoffDex(Screen):
 
         # Gummi Image and IQ amount Buttons
         md_gummi_1_color = ImageButton(source='img\\gummis\\' + gummi_1_color + '_gummi.png', size_hint=(0.25, 1))
-        md_gummi_1_amount = Button(text=gummi_1_amount, background_color=(0, 0, 0, 0), size_hint=(0.25, 1))
+        md_gummi_1_amount = Button(text=gummi_1_amount, background_color=(0, 0, 0, 0), size_hint=(0.25, 1), font_size='14sp')
 
         # Binding for Popup with IQ information
         md_gummi_1_color.bind(on_release=partial(self.popup, gummi_1_color + ' Gummi', 'IQ Gained: ' + gummi_1_amount + v.iq_string, '12sp'))
@@ -667,34 +670,6 @@ class Pop(ModalView):
 
 if __name__ == '__main__':
     SpinoffDexApp().run()
-'''
-0 id
-1 number
-2 name
-3 japanese_name
-4 type1
-5 type2
-6 joined
-7 favorite
-8 classification
-9 weight_kg
-10 weight_lbs
-11 height_m
-12 height_ft
-13 md_ability
-14 md_evolution_chain
-15 md_body_size
-16 md_friend_area
-17 md_get_rate
-18 md_location
-19 rg_browser_no
-20 rg_location
-21 rg_pkmn_assist
-22 rg_type_group
-23 rg_field_ability
-24 tz_get_rate
-25 tz_location
-'''
 
 # SQL Query
 # SELECT 'id_' || id as id,
