@@ -39,6 +39,7 @@ class SpinoffDex(Screen):
     md_body_size = ObjectProperty(None)
     md_location = ObjectProperty(None)
     md_layout = ObjectProperty(None)
+    md_friend_area = ObjectProperty(None)
     md_get_rate = ObjectProperty(None)
     md_evo_box = ObjectProperty(None)
     md_moves_names = ObjectProperty(None)
@@ -229,21 +230,26 @@ class SpinoffDex(Screen):
             self.ids.md_ability2.size = 0, 0
             self.ids.md_ability_sep.width = '0dp'
 
-
     def set_location(self, pokedex_nr):
         self.ids.md_location.clear_widgets()  # Reset location widget
         df = pd.read_csv("csv/spinoffDexDataset.csv")
         parts = df.loc[int(pokedex_nr)-1, 'md_location'].partition(', ')
         if parts[1]:
-            loc_1 = Button(text=parts[0], size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14))
+            loc_1 = Button(text=parts[0], size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
+            sep = Separator_xx()
             self.ids.md_location.add_widget(loc_1)
+            self.ids.md_location.add_widget(sep)
             location_string = parts[2].partition(', ')
             for i in range(df.loc[int(pokedex_nr)-1, 'md_location'].count(', ')):
-                loc_x = Button(text=location_string[0], size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14))
+                loc_x = Button(text=location_string[0], size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
                 self.ids.md_location.add_widget(loc_x)
+                sep = Separator_xx()
+
+                self.ids.md_location.add_widget(sep)
+
                 location_string = location_string[2].partition(', ')
         else:
-            loc_else = Button(text=(parts[0] + parts[1] + parts[2]), size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14))
+            loc_else = Button(text=(parts[0] + parts[1] + parts[2]), size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
             self.ids.md_location.add_widget(loc_else)
 
     @staticmethod
@@ -271,13 +277,15 @@ class SpinoffDex(Screen):
         # Set font size lower for Unown's Location text because it contains a shitload of locations
         # Also makes the app choose a random friend area as the collective Unown species has 2 (Aged Chamber AN / O?)
         if pokedex_nr == '201':
-            self.ids.md_get_rate.font_size = '10dp'
-
+            self.ids.md_get_rate.font_size = '11dp'
             flip = random.randint(0, 1)  # Flip a 'coin' to pick a friend area
+            print(self.ids.md_friend_area.background_normal)
             if flip:
                 self.ids.md_friend_area.background_normal = 'img\\friend areas\\Aged Chamber AN.png'
             else:
                 self.ids.md_friend_area.background_normal = 'img\\friend areas\\Aged Chamber O.png'
+
+
         else:
             self.ids.md_get_rate.font_size = '12dp'
 
@@ -311,7 +319,6 @@ class SpinoffDex(Screen):
         md_gummi_1_box.add_widget(md_gummi_1_padding_right)  # Empty label to center other 2 widgets, and make them smaller
 
         self.md_gummis_box.add_widget(md_gummi_1_box)        # Add all the stuff to the box to contain it all
-
         # If applicable, do the same for second gummi
         if gummi_2:
             md_gummi_2_color = ImageButton(source='img\\gummis\\' + gummi_2_color + '_gummi.png', size_hint=(0.25, 1))
@@ -597,10 +604,6 @@ class Pop(ModalView):
             self.title.text = title.partition('image_')[2]
             self.content = Image(source=txt)  # txt should be path to image
 
-            # print(self.size)
-            # print(self.content.texture_size)
-            # print(self.size[0], self.content.texture_size[1]*(self.size[0]/self.content.texture_size[0]))
-
             '''
             Probably should find a less spaghetti code way to make the popup window be the correct size
             in case of Images instead of Labels, but at least I got it to work now.
@@ -612,6 +615,7 @@ class Pop(ModalView):
             I sure hope I don't forget to remove this if I ever make this publicly available, but otherwise hi stranger.
             '''
             # Popup window width, original image height * (Popup window width / original image width; ie. ratio)
+
             self.content.texture_size = (self.size[0], self.content.texture_size[1]*(self.size[0]/self.content.texture_size[0]))
 
         self.pbutton = Button(text='Close',
@@ -676,6 +680,23 @@ class Pop(ModalView):
 
     def close(self, instance):
         self.dismiss(force=True)
+
+
+class Separator_xx(Widget):
+    def __init__(self, **kwargs):
+        super(Separator_xx, self).__init__(**kwargs)
+
+        with self.canvas:
+            Color(1, 1, 1, 0.2)  # set the colour to red
+            self.rect = Rectangle(pos=self.pos,
+                                  size=(self.width, dp(2)))
+
+        self.bind(pos=self.update_rect,
+                  size=self.update_rect)
+
+    def update_rect(self, *args):
+        self.rect.pos = self.pos
+        self.rect.size = self.width, dp(2)
 
 
 if __name__ == '__main__':

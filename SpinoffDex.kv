@@ -69,6 +69,7 @@
     md_body_size: md_body_size
     md_location: md_location
     md_layout: md_layout
+    md_friend_area: md_friend_area
     md_get_rate: md_get_rate
     md_get_rate2: md_get_rate2
     md_gummis_box: md_gummis_box
@@ -172,10 +173,7 @@
                 md_friend_area.text = app.root.read_csv(self.number, 17)                    # MD Friend Area
                 md_get_rate.text = app.root.read_csv(self.number, 18)                       # MD Get rate
                 md_get_rate2.text = app.root.read_csv(self.number, 36) [1:-1]               # MD Get rate min levels
-                app.root.unown_check(general_nr_name.text[1:4])                             # Check if Unown (Change font size for get rate, it has 2)
-
                 app.root.set_gummis(general_nr_name.text[1:4])                              # Set favourite gummis
-
                 md_location.text = app.root.set_location(general_nr_name.text[1:4])         # MD Location
                 #rg_browser_no.text = app.root.read_csv(self.number, 20)
                 #rg_location.text = app.root.read_csv(self.number, 21)
@@ -186,6 +184,9 @@
                 #dex_page_tz_location.text = app.root.read_csv(self.number, 26)
 
                 app.root.set_moves(general_nr_name.text[1:4])
+
+            on_enter:
+                app.root.unown_check(general_nr_name.text[1:4])                             # Check if Unown (Change font size for get rate, it has 2)
 
             ScrollView:
                 size_hint_y: 0.95
@@ -501,7 +502,7 @@
                                 font_size: '14sp'
                                 background_normal: 'img\\friend areas\\' + md_friend_area.text +'.png'
                                 on_release:
-                                    app.root.popup('image_' + md_friend_area.text, 'img\\friend areas\\' + md_friend_area.text +'.png')
+                                    app.root.popup('image_' + self.background_normal.partition('areas\\')[2].partition('.png')[0], self.background_normal)
                         Separator_x:
 
                         BoxLayout:
@@ -555,12 +556,14 @@
                                 Rectangle:
                                     size: self.size
                                     pos: self.pos
+
                             Label:
                                 id: md_label_location
                                 text: 'Location'
                                 size_hint: None, None
                                 size: self.parent.width, self.parent.height
                                 font_size: '12sp'
+                        Separator_x:
                         BoxLayout:
                             id: md_location
                             orientation: 'vertical'
@@ -571,12 +574,19 @@
                             id: md_10_box
                             size_hint: None, None
                             size: root.width, '36dp'
+                            canvas:
+                                Color:
+                                    rgba: 1, 1, 1, 0.1
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
                             Label:
                                 id: md_label_evolution_chain
                                 text: 'Evolution Chain'
                                 size_hint: None, None
                                 size: self.parent.width, self.parent.height
                                 font_size: '12sp'
+                        Separator_x:
                         BoxLayout:
                             id: md_11_box
                             size_hint: None, None
@@ -585,11 +595,7 @@
                                 id: md_evo_box
                                 size_hint: None, None
                                 size: self.parent.width, self.parent.height
-                                canvas.before:
-                                    Rectangle:
-                                        pos: self.pos
-                                        size: self.size
-                                        source: 'img\\misc\\bg_gray7.png'
+
 
             # Bottom selection
             BoxLayout:
