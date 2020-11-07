@@ -76,8 +76,10 @@
     md_evo_box: md_evo_box
     md_moves_names: md_moves_names
     md_moves_levels: md_moves_levels
+    md_moves_separators: md_moves_separators
     md_tm_nrs: md_tm_nrs
     md_tm_names: md_tm_names
+    md_tm_separators: md_tm_separators
     general_type1: general_type1
     general_type2: general_type2
     type_box: type_box
@@ -663,6 +665,13 @@
                         BoxLayout:
                             size_hint: None, None
                             size: self.parent.width, '55dp'
+
+                            canvas:
+                                Color:
+                                    rgba: 1, 1, 1, 0.1
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
                             Label:
                                 text: 'Moves Learned'
                                 color: 1, 1, 1, 1
@@ -675,14 +684,16 @@
                             BoxLayout:
                                 id: md_moves_levels
                                 size_hint: None, None
-                                size: self.parent.width/2, self.minimum_height
+                                size: self.parent.width/2-dp(1), self.minimum_height
                                 orientation: 'vertical'
-
+                            BoxLayout:
+                                id: md_moves_separators
+                                orientation: 'vertical'
                             # Levels
                             BoxLayout:
                                 id: md_moves_names
                                 size_hint: None, None
-                                size: self.parent.width/2, self.minimum_height
+                                size: self.parent.width/2-dp(1), self.minimum_height
                                 orientation: 'vertical'
 
                     # ============================= #
@@ -705,6 +716,13 @@
                         BoxLayout:
                             size_hint: None, None
                             size: self.parent.width, '55dp'
+
+                            canvas:
+                                Color:
+                                    rgba: 1, 1, 1, 0.1
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
                             Label:
                                 text: 'TMs/HMs'
                                 color: 1, 1, 1, 1
@@ -719,7 +737,9 @@
                                 size_hint: None, None
                                 size: self.parent.width/2, self.minimum_height
                                 orientation: 'vertical'
-
+                            BoxLayout:
+                                id: md_tm_separators
+                                orientation: 'vertical'
                             # Levels
                             BoxLayout:
                                 id: md_tm_names

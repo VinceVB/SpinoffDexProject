@@ -44,8 +44,10 @@ class SpinoffDex(Screen):
     md_evo_box = ObjectProperty(None)
     md_moves_names = ObjectProperty(None)
     md_moves_levels = ObjectProperty(None)
+    md_moves_separators = ObjectProperty(None)
     md_tm_nrs = ObjectProperty(None)
     md_tm_names = ObjectProperty(None)
+    md_tm_separators = ObjectProperty(None)
     md_gummis_box = ObjectProperty(None)
     general_type1 = ObjectProperty(None)
     general_type2 = ObjectProperty(None)
@@ -236,14 +238,14 @@ class SpinoffDex(Screen):
         parts = df.loc[int(pokedex_nr)-1, 'md_location'].partition(', ')
         if parts[1]:
             loc_1 = Button(text=parts[0], size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
-            sep = Separator_xx()
+            sep = SeparatorX()
             self.ids.md_location.add_widget(loc_1)
             self.ids.md_location.add_widget(sep)
             location_string = parts[2].partition(', ')
             for i in range(df.loc[int(pokedex_nr)-1, 'md_location'].count(', ')):
                 loc_x = Button(text=location_string[0], size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
                 self.ids.md_location.add_widget(loc_x)
-                sep = Separator_xx()
+                sep = SeparatorX()
 
                 self.ids.md_location.add_widget(sep)
 
@@ -498,19 +500,33 @@ class SpinoffDex(Screen):
         with open('PokemonMovesets\\#' + pokedex_nr + '_levelup_moves.csv', 'r') as file:  # Use file to refer to the file object
             lvlup_reader = csv.reader(file)
             for row in lvlup_reader:
-                move_level = Button(text=row[0], size_hint=(None, None), size=(self.ids.md_moves_levels.width, '20dp'))
-                move_name = Button(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'))
+                move_level = Label(text=row[0], size_hint=(None, None), size=(self.ids.md_moves_levels.width, '20dp'))
+                move_name = Label(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'))
                 self.ids.md_moves_levels.add_widget(move_level)
                 self.ids.md_moves_names.add_widget(move_name)
+
+                sep = SeparatorX()
+                self.ids.md_moves_levels.add_widget(sep)
+                sep = SeparatorX()
+                self.ids.md_moves_names.add_widget(sep)
+                sep = SeparatorY()
+                self.ids.md_moves_separators.add_widget(sep)
 
         # TMs
         with open('PokemonMovesets\\#' + pokedex_nr + '_tm_moves.csv', 'r') as file:  # Use file to refer to the file object
             tm_reader = csv.reader(file)
             for row in tm_reader:
-                move_nr = Button(text=row[0], size_hint=(None, None), size=(self.ids.md_moves_levels.width, '20dp'))
-                move_name = Button(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'))
+                move_nr = Label(text=row[0], size_hint=(None, None), size=(self.ids.md_moves_levels.width, '20dp'))
+                move_name = Label(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'))
                 self.ids.md_tm_nrs.add_widget(move_nr)
                 self.ids.md_tm_names.add_widget(move_name)
+
+                sep = SeparatorX()
+                self.ids.md_tm_nrs.add_widget(sep)
+                sep = SeparatorX()
+                self.ids.md_tm_names.add_widget(sep)
+                sep = SeparatorY()
+                self.ids.md_tm_separators.add_widget(sep)
 
     def change_page(self, nr):
         self.ids.dex_page_main.number = abs(nr)  # absolute value of pokedex nr; '001' = 1
@@ -682,12 +698,12 @@ class Pop(ModalView):
         self.dismiss(force=True)
 
 
-class Separator_xx(Widget):
+class SeparatorX(Widget):
     def __init__(self, **kwargs):
-        super(Separator_xx, self).__init__(**kwargs)
+        super(SeparatorX, self).__init__(**kwargs)
 
         with self.canvas:
-            Color(1, 1, 1, 0.2)  # set the colour to red
+            Color(1, 1, 1, 0.2)
             self.rect = Rectangle(pos=self.pos,
                                   size=(self.width, dp(2)))
 
@@ -697,6 +713,23 @@ class Separator_xx(Widget):
     def update_rect(self, *args):
         self.rect.pos = self.pos
         self.rect.size = self.width, dp(2)
+
+
+class SeparatorY(Widget):
+    def __init__(self, **kwargs):
+        super(SeparatorY, self).__init__(**kwargs)
+
+        with self.canvas:
+            Color(1, 1, 1, 0.2)
+            self.rect = Rectangle(pos=self.pos,
+                                  size=(dp(2), self.height))
+
+        self.bind(pos=self.update_rect,
+                  size=self.update_rect)
+
+    def update_rect(self, *args):
+        self.rect.pos = self.pos
+        self.rect.size = dp(2), self.height
 
 
 if __name__ == '__main__':
