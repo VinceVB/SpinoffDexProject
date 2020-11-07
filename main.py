@@ -1,5 +1,6 @@
 import csv
 import random
+import re
 from functools import partial
 
 from kivy.uix.dropdown import DropDown
@@ -236,22 +237,42 @@ class SpinoffDex(Screen):
         self.ids.md_location.clear_widgets()  # Reset location widget
         df = pd.read_csv("csv/spinoffDexDataset.csv")
         parts = df.loc[int(pokedex_nr)-1, 'md_location'].partition(', ')
+        # If more than 1 location
         if parts[1]:
-            loc_1 = Button(text=parts[0], size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
+            if 'Evolve' not in parts[0] and 'Starter' not in parts[0]:
+                lv1 = (self.read_csv(int(pokedex_nr), 37).partition(re.split('\s.*-', parts[0])[0])[0][-7:-4])
+                loc_1 = Button(text=parts[0] + '    (' + lv1 + ')', size_hint=(None, None),
+                               size=(self.ids.md_location.width, '25dp'), font_size=dp(14),
+                               background_color=(0, 0, 0, 0))
+            else:
+                loc_1 = Button(text=parts[0], size_hint=(None, None), size=(self.ids.md_location.width, '25dp'),
+                               font_size=dp(14), background_color=(0, 0, 0, 0))
             sep = SeparatorX()
             self.ids.md_location.add_widget(loc_1)
             self.ids.md_location.add_widget(sep)
             location_string = parts[2].partition(', ')
             for i in range(df.loc[int(pokedex_nr)-1, 'md_location'].count(', ')):
-                loc_x = Button(text=location_string[0], size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
+                lvx = (self.read_csv(int(pokedex_nr), 37).partition(re.split('\s.*-', parts[0])[0])[0][-7:-4])
+                loc_x = Button(text=location_string[0] + '    (' + lvx + ')', size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
                 self.ids.md_location.add_widget(loc_x)
                 sep = SeparatorX()
 
                 self.ids.md_location.add_widget(sep)
 
                 location_string = location_string[2].partition(', ')
+
+        # If only 1 location
         else:
-            loc_else = Button(text=(parts[0] + parts[1] + parts[2]), size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
+            if 'Evolve' not in parts[0] and 'Starter' not in parts[0]:
+                lv1 = (self.read_csv(int(pokedex_nr), 37).partition(re.split('\s.*-', parts[0])[0])[0][-7:-4])
+                loc_else = Button(text=(parts[0] + parts[1] + parts[2] + '    (' + lv1 + ')'), size_hint=(None, None),
+                                  size=(self.ids.md_location.width, '25dp'), font_size=dp(14),
+                                  background_color=(0, 0, 0, 0))
+
+            else:
+                loc_else = Button(text=(parts[0] + parts[1] + parts[2]), size_hint=(None, None),
+                                  size=(self.ids.md_location.width, '25dp'), font_size=dp(14),
+                                  background_color=(0, 0, 0, 0))
             self.ids.md_location.add_widget(loc_else)
 
     @staticmethod
