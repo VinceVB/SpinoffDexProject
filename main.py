@@ -1,6 +1,5 @@
 import csv
 import random
-import re
 from functools import partial
 
 from kivy.uix.dropdown import DropDown
@@ -236,92 +235,67 @@ class SpinoffDex(Screen):
         lvl_string = self.read_csv(int(pokedex_nr), 37)
         current_string = lvl_string
         for loc in range(max(1, current_string.count('/_/'))):
-            loc_1 = Button(text=current_string.partition('/_/')[0], size_hint=(None, None),
-                           size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
-            # Reduce font_size for larger strings
-            if len(loc_1.text) > 40:
-                loc_1.font_size = dp(12)
-            sep = SeparatorX()
-            if loc_1.text[:6] == 'Evolve':
-                if lvl_string.count('/_/') == 0:
+            if 'Floor' in current_string.partition('/_/')[0]:
+                loc_1 = BoxLayout(size_hint=(None, None), size=(self.ids.md_location.width, '25dp'))
+                loc_1_zone = Label(text=current_string.partition(' - ')[2].partition(' (')[0], size_hint=(None, None), size=(self.ids.md_location.width*0.45, '25dp'))
+                loc_1_lv = Label(text=current_string.partition(' - ')[0], size_hint=(None, None), size=(self.ids.md_location.width*0.175, '25dp'))
+                loc_1_floors = Button(text=current_string.partition(' (')[2].partition(')')[0], size_hint=(None, None), size=(self.ids.md_location.width*0.375, '25dp'), background_color=(0, 0, 0, 0))
+                loc_1_floors.bind(on_release=partial(self.popup, loc_1_zone.text, ('Found ' + loc_1_floors.text + ' at ' + loc_1_lv.text), '12sp'))
+
+                floor_copy = loc_1_floors.text
+
+                if len(loc_1_floors.text) > 15:
+                    loc_1_floors.font_size = '12sp'
+                    if len(loc_1_floors.text) > 17:
+                        loc_1_floors.text = floor_copy[:17] + '...'
+
+                if 'Unown' in loc_1_zone.text:
+                    unown_letter = loc_1_lv.text.partition(' Lv')[0]
+                    loc_1_lv.text = loc_1_lv.text.partition(') ')[2]
+                    loc_1_zone.width = self.ids.md_location.width*0.30
+                    loc_1_zone.font_size = '12sp'
+                    loc_1_letter = Label(text=unown_letter, size_hint=(None, None),
+                                         size=(self.ids.md_location.width * 0.15, '25dp'), font_size='12sp')
+                    loc_1.add_widget(loc_1_letter)
+                    sep = SeparatorY()
+                    loc_1.add_widget(sep)
+                    loc_1_floors.bind(on_release=partial(self.popup, loc_1_zone.text,
+                                                         ('Found ' + floor_copy + ' at ' + loc_1_lv.text.partition('(')[0] + loc_1_lv.text.partition(')')[2]),
+                                                         '12sp'))
+
+                loc_1.add_widget(loc_1_zone)
+                sep = SeparatorY()
+                loc_1.add_widget(sep)
+                loc_1.add_widget(loc_1_lv)
+                sep = SeparatorY()
+                loc_1.add_widget(sep)
+                loc_1.add_widget(loc_1_floors)
+
+                is_box = True
+
+            else:
+                loc_1 = Button(text=current_string.partition('/_/')[0], size_hint=(None, None),
+                               size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
+                is_box = False
+
+            if not is_box:
+                # Reduce font_size for larger strings
+                if len(loc_1.text) > 40:
+                    loc_1.font_size = dp(12)
+                sep = SeparatorX()
+                if loc_1.text[:6] == 'Evolve':
+                    if lvl_string.count('/_/') == 0:
+                        self.ids.md_location.add_widget(loc_1)
+                        self.ids.md_location.add_widget(sep)
+                else:
                     self.ids.md_location.add_widget(loc_1)
                     self.ids.md_location.add_widget(sep)
             else:
                 self.ids.md_location.add_widget(loc_1)
+                sep = SeparatorX()
                 self.ids.md_location.add_widget(sep)
 
             current_string = current_string.partition('/_/')[2]
-
-
-        #location_string = parts[2].partition(', ')
-
-        # self.ids.md_location.clear_widgets()  # Reset location widget
-        # df = pd.read_csv("csv/spinoffDexDataset.csv")
-        # parts = df.loc[int(pokedex_nr)-1, 'md_location'].partition(', ')
-        # lvl_string = self.read_csv(int(pokedex_nr), 37)
-        #
-        # # If more than 1 location
-        # if parts[1]:
-        #     if 'Evolve' not in parts[0] and 'Starter' not in parts[0]:
-        #         if 'Unown' in parts[0]:
-        #             area = 'Unown Relic'
-        #             lv1 = (lvl_string.partition(area)[0][-7:-4])
-        #             loc_1 = Button(text=parts[0] + '    (' + lv1 + ')', size_hint=(None, None),
-        #                            size=(self.ids.md_location.width, '25dp'), font_size=dp(14),
-        #                            background_color=(0, 0, 0, 0))
-        #         # No B123 areas first
-        #         else:
-        #             area = lvl_string.partition(re.split(" [0-9]+F-[0-9]+F", parts[0])[0])[1]
-        #             lv1 = (lvl_string.partition(area)[0][-7:-4])
-        #             print(lv1)
-        #             loc_1 = Button(text=parts[0] + '    (' + lv1 + ')', size_hint=(None, None),
-        #                            size=(self.ids.md_location.width, '25dp'), font_size=dp(14),
-        #                            background_color=(0, 0, 0, 0))
-        #
-        #     # Starter or Evolve only entry
-        #     else:
-        #         loc_1 = Button(text=parts[0], size_hint=(None, None), size=(self.ids.md_location.width, '25dp'),
-        #                        font_size=dp(14), background_color=(0, 0, 0, 0))
-        #     sep = SeparatorX()
-        #     self.ids.md_location.add_widget(loc_1)
-        #     self.ids.md_location.add_widget(sep)
-        #     location_string = parts[2].partition(', ')
-        #
-        #     for i in range(df.loc[int(pokedex_nr)-1, 'md_location'].count(', ')):
-        #         # Regex search patterns
-        #         xf = ' [0-9]+F-[0-9]+F'  # 4F-23F
-        #         bx = ' B[0-9]+-B[0-9]+'  # B4-B23
-        #
-        #         #if 'Starter' in re.split('\s.*-', parts[0])[0]:
-        #         #    lvx = (lvl_string.partition(re.split('\s.*-', location_string)[0])[0][-7:-4])
-        #         # elif 'Unown' in re.split('\s.*-', parts[0])[0]:
-        #         #     lvx = (lvl_string.partition(re.split('\s.*-', parts[0])[0])[0][-7:-4])
-        #         #     print('ok')
-        #         # else:
-        #         #     lvx = (lvl_string.partition(re.split('\s.*-', parts[0])[0])[0][-7:-4])
-        #
-        #
-        #         loc_x = Button(text=location_string[0] + '    (' + '' + ')', size_hint=(None, None), size=(self.ids.md_location.width, '25dp'), font_size=dp(14), background_color=(0, 0, 0, 0))
-        #         self.ids.md_location.add_widget(loc_x)
-        #         sep = SeparatorX()
-        #
-        #         self.ids.md_location.add_widget(sep)
-        #
-        #         location_string = location_string[2].partition(', ')
-
-        # If only 1 location
-        # else:
-        #     if 'Evolve' not in parts[0] and 'Starter' not in parts[0]:
-        #         lv1 = (lvl_string.partition(re.split('\s.*-', parts[0])[0])[0][-7:-4])
-        #         loc_else = Button(text=(parts[0] + parts[1] + parts[2] + '    (' + lv1 + ')'), size_hint=(None, None),
-        #                           size=(self.ids.md_location.width, '25dp'), font_size=dp(14),
-        #                           background_color=(0, 0, 0, 0))
-        #
-        #     else:
-        #         loc_else = Button(text=(parts[0] + parts[1] + parts[2]), size_hint=(None, None),
-        #                           size=(self.ids.md_location.width, '25dp'), font_size=dp(14),
-        #                           background_color=(0, 0, 0, 0))
-        #     self.ids.md_location.add_widget(loc_else)
 
     @staticmethod
     def check_joined(pokedex_nr):
@@ -354,7 +328,6 @@ class SpinoffDex(Screen):
                 self.ids.md_friend_area.background_normal = 'img\\friend areas\\Aged Chamber AN.png'
             else:
                 self.ids.md_friend_area.background_normal = 'img\\friend areas\\Aged Chamber O.png'
-
 
         else:
             self.ids.md_get_rate.font_size = '12dp'
@@ -764,6 +737,15 @@ class Pop(ModalView):
 
     def close(self, instance):
         self.dismiss(force=True)
+
+
+class WrappedLabel(Label):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.bind(
+            width=lambda *x:
+            self.setter('text_size')(self, (self.width, None)),
+            texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
 
 
 class SeparatorX(Widget):
