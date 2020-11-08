@@ -5,7 +5,7 @@ Window.clearcolor = (0.9, 0.9, 0.9, 1)
 Window.size = (288, 640)
 
 # Limit the amount of entries produced for speed
-entry_limit = 386  # max pokemon available so far
+entry_limit = 201  # max pokemon available so far
 max_entries = min(386, entry_limit)  # If the number is larger than available, pick max
 
 searchbar_offset = {'20': 0.002,
