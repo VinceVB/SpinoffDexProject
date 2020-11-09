@@ -1,16 +1,45 @@
-import csv
-import os
+import pickle
 import re
-from _csv import reader, writer
 from pprint import pprint
-
+import variables as v
+import requests
 from bs4 import BeautifulSoup
 
-import requests
-import urllib.request
-import shutil
-import variables as v
-import re
+#### SOUP
+
+# headers = {
+#     'Access-Control-Allow-Origin': '*',
+#     'Access-Control-Allow-Methods': 'GET',
+#     'Access-Control-Allow-Headers': 'Content-Type',
+#     'Access-Control-Max-Age': '3600',
+#     'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
+#     }
+#
+# # for linko in (v.soup_moves):
+# move_dicto = {}
+# page_nr = 1
+# page_max = 356
+# for move in v.soup_moves:
+#     print(str((page_nr/page_max)*100)[:4] + '%')
+#     url = move
+#     req = requests.get(url, headers)
+#     soup = BeautifulSoup(req.content, 'html.parser')
+#     count = (str(soup.find_all("div", class_="pi-data-value pi-font")).count('<div class="pi-data-value pi-font">'))
+#
+#     move_name = url.partition('https://pmd-rt.fandom.com/wiki/')[2]
+#
+#     if '_' in move_name:
+#         move_name = (move_name.replace('_', ' '))
+#     descript = (str(soup.find_all("div", class_="pi-data-value pi-font")[count-1]).partition('pi-font">')[2].partition('</div>')[0])
+#
+#     move_dicto[move_name] = descript
+#     page_nr += 1
+# pprint(move_dicto)
+
+#print(resulta.partition('</div>')[2].partition('</div>')[2].partition('</div>')[2].partition('</div>')[2].partition('</div>')[2])
+#print(soup.prettify())
+
+####
 
 def regex_partition(content, separator):
     separator_match = re.search(separator, content)

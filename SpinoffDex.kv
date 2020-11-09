@@ -56,7 +56,43 @@
         app.root.dex_page_main.number = int(self.page[3:])
         app.root.manager.current = 'dex_page_main'
 
-<SpinoffDex>:
+<MD_MainBotNav@Widget>:
+    size_hint: None, None
+    size: self.parent.width, self.parent.height * 0.05
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: None, None
+        size: self.parent.width, self.parent.height
+        Button:
+            text: 'Dex'
+            size_hint: None, None
+            size: self.parent.width/4, self.parent.height
+            on_release:
+                app.root.manager.current = 'md_main_dex'
+        Button:
+            text: 'Locations'
+            font_size: '14sp'
+            size_hint: None, None
+            size: self.parent.width/4, self.parent.height
+            on_release:
+                app.root.dex_list_scroller.previous_y = app.root.dex_list_scroller.scroll_y
+                app.root.manager.current = 'md_main_locations'
+        Button:
+            text: 'Items'
+            size_hint: None, None
+            size: self.parent.width/4, self.parent.height
+            on_release:
+                app.root.dex_list_scroller.previous_y = app.root.dex_list_scroller.scroll_y
+                app.root.manager.current = 'md_main_items'
+        Button:
+            text: 'Moves'
+            size_hint: None, None
+            size: self.parent.width/4, self.parent.height
+            on_release:
+                app.root.dex_list_scroller.previous_y = app.root.dex_list_scroller.scroll_y
+                app.root.manager.current = 'md_main_moves'
+
+<SpinoffDex>
     manager: manager
     dex_page_main: dex_page_main
     theGrid: theGrid
@@ -91,13 +127,16 @@
         id: manager
         transition: NoTransition()
         Screen:
-            name: 'dex_list'
+            name: 'md_main_dex'
             on_pre_enter:
                 # Go to position in ScrollView where user entered
                 app.root.dex_list_scroller.scroll_y = app.root.dex_list_scroller.previous_y
 
+            # Dex_list main container
             BoxLayout:
                 orientation: 'vertical'
+
+                # Top / Button nav buttons and searchbar
                 BoxLayout:
                     size_hint_y: 0.075
                     orientation: 'vertical'
@@ -125,11 +164,11 @@
                                 app.root.dex_search(self.text)
                                 #app.root.open
 
-
+                # The dex list scrolling widget
                 ScrollView:
                     id: dex_list_scroller
-                    size_hint_y: 0.75
-                    previous_y: 1
+                    size_hint_y: 0.73
+                    previous_y: 1  # scrollbar position
                     scroll_type: ['bars', 'content']
                     bar_width : '10dp'
                     bar_color: 0.4, 0.7, 0.4, 1.0
@@ -144,6 +183,9 @@
                         row_default_height: '85dp'
                         spacing: 10   # between elements - 1720/0 1910/10 2100/20
                         padding: 10  # around elements
+
+                MD_MainBotNav:
+
 
         Screen:
             id: dex_page_main
@@ -206,7 +248,7 @@
                         text: 'Back'
                         size_hint_y: 0.1
                         on_press:
-                            manager.current = 'dex_list'
+                            manager.current = 'md_main_dex'
 
                     # ======================================== #
                     # GENERAL INFO                             #
@@ -642,7 +684,7 @@
                         text: 'Back'
                         size_hint_y: 0.05
                         on_press:
-                            manager.current = 'dex_list'
+                            manager.current = 'md_main_dex'
 
 
                     # ============================= #
@@ -783,33 +825,179 @@
                     row_default_height: '40dp'
                     spacing: 10
                     padding: 0
-                    Button:
-                        id: dex_list_back
-                        text: 'Back'
-                        size_hint_y: 0.05
-                        on_press:
-                            manager.current = 'dex_list'
 
-            # Bottom selection
-            BoxLayout:
-                size_hint_y: 0.05
-                Button:
-                    text: 'General'
-                    on_release:
-                        app.root.manager.current = 'dex_page_main'
+            MD_MainBotNav:
 
-                Button:
-                    text: 'Moves'
-                    on_release:
-                        app.root.manager.current = 'dex_page_moves'
-                Button:
-                    text: 'Stats'
-                    on_release:
-                        app.root.manager.current = 'dex_page_stats'
-                Button:
-                    text: 'Quotes'
-                    on_release:
-                        pass#app.root.manager.current = 'dex_page_quotes'
+    # ===================================================================================== #
+    # Main Locations Screen                                                                 #
+    # ===================================================================================== #
+        Screen:
+            name: 'md_main_locations'
+            ScrollView:
+                size_hint_y: 0.95
+                pos_hint: {"y":0.05}
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: None, None
+                    size: self.parent.width, self.minimum_height
+
+                    canvas:
+                        Color:
+                            rgba: 0.7, 0.4, 0.5, 1
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    Separator_x:
+                    BoxLayout:
+                        size_hint: None, None
+                        size: self.parent.width, '55dp'
+
+                        canvas:
+                            Color:
+                                rgba: 1, 1, 1, 0.1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                        Label:
+                            text: 'Locations something'
+                            color: 1, 1, 1, 1
+                    Separator_x:
+                    BoxLayout:
+                        size_hint: None, None
+                        size: self.parent.width, self.minimum_height
+                        orientation: 'horizontal'
+                        # Moves
+                        BoxLayout:
+                            id: md_moves_levelssss
+                            size_hint: None, None
+                            size: self.parent.width/2-dp(1), self.minimum_height
+                            orientation: 'vertical'
+                        BoxLayout:
+                            id: md_moves_separatorssss
+                            orientation: 'vertical'
+                        # Levels
+                        BoxLayout:
+                            id: md_moves_namessss
+                            size_hint: None, None
+                            size: self.parent.width/2-dp(1), self.minimum_height
+
+            MD_MainBotNav:
+
+    # ===================================================================================== #
+    # Main Items Screen                                                                     #
+    # ===================================================================================== #
+        Screen:
+            name: 'md_main_items'
+            ScrollView:
+                size_hint_y: 0.95
+                pos_hint: {"y":0.05}
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: None, None
+                    size: self.parent.width, self.minimum_height
+
+                    canvas:
+                        Color:
+                            rgba: 0.7, 0.4, 0.5, 1
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    Separator_x:
+                    BoxLayout:
+                        size_hint: None, None
+                        size: self.parent.width, '55dp'
+
+                        canvas:
+                            Color:
+                                rgba: 1, 1, 1, 0.1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                        Label:
+                            text: 'Items something'
+                            color: 1, 1, 1, 1
+                    Separator_x:
+                    BoxLayout:
+                        size_hint: None, None
+                        size: self.parent.width, self.minimum_height
+                        orientation: 'horizontal'
+                        # Moves
+                        BoxLayout:
+                            id: md_moves_levelsss
+                            size_hint: None, None
+                            size: self.parent.width/2-dp(1), self.minimum_height
+                            orientation: 'vertical'
+                        BoxLayout:
+                            id: md_moves_separatorsss
+                            orientation: 'vertical'
+                        # Levels
+                        BoxLayout:
+                            id: md_moves_namesss
+                            size_hint: None, None
+                            size: self.parent.width/2-dp(1), self.minimum_height
+
+            MD_MainBotNav:
+
+    # ===================================================================================== #
+    # Main Moves Screen                                                                     #
+    # ===================================================================================== #
+        Screen:
+            name: 'md_main_moves'
+            ScrollView:
+                size_hint_y: 0.95
+                pos_hint: {"y":0.05}
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: None, None
+                    size: self.parent.width, self.minimum_height
+
+                    canvas:
+                        Color:
+                            rgba: 0.7, 0.4, 0.5, 1
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    Separator_x:
+                    BoxLayout:
+                        size_hint: None, None
+                        size: self.parent.width, '55dp'
+
+                        canvas:
+                            Color:
+                                rgba: 1, 1, 1, 0.1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                        Label:
+                            text: 'Moves something'
+                            color: 1, 1, 1, 1
+                    Separator_x:
+                    BoxLayout:
+                        size_hint: None, None
+                        size: self.parent.width, self.minimum_height
+                        orientation: 'horizontal'
+                        # Moves
+                        BoxLayout:
+                            id: md_moves_levelss
+                            size_hint: None, None
+                            size: self.parent.width/2-dp(1), self.minimum_height
+                            orientation: 'vertical'
+                        BoxLayout:
+                            id: md_moves_separatorss
+                            orientation: 'vertical'
+                        # Levels
+                        BoxLayout:
+                            id: md_moves_namess
+                            size_hint: None, None
+                            size: self.parent.width/2-dp(1), self.minimum_height
+
+            MD_MainBotNav:
 
         Screen:
             id: empty

@@ -3,6 +3,7 @@ import random
 from functools import partial
 
 from kivy.uix.dropdown import DropDown
+from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
 
 import variables as v
@@ -542,7 +543,10 @@ class SpinoffDex(Screen):
             lvlup_reader = csv.reader(file)
             for row in lvlup_reader:
                 move_level = Label(text=row[0], size_hint=(None, None), size=(self.ids.md_moves_levels.width, '20dp'))
-                move_name = Label(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'))
+                move_name = Button(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'),
+                                   background_color=(0, 0, 0, 0))
+                if move_name.text != 'Move':
+                    move_name.bind(on_release=partial(self.popup, move_name.text, v.move_description_dict[move_name.text], '12sp'))
                 self.ids.md_moves_levels.add_widget(move_level)
                 self.ids.md_moves_names.add_widget(move_name)
 
@@ -558,9 +562,46 @@ class SpinoffDex(Screen):
             tm_reader = csv.reader(file)
             for row in tm_reader:
                 move_nr = Label(text=row[0], size_hint=(None, None), size=(self.ids.md_moves_levels.width, '20dp'))
-                move_name = Label(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'))
+                move_name = Button(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'),
+                                   background_color=(0, 0, 0, 0))
                 self.ids.md_tm_nrs.add_widget(move_nr)
                 self.ids.md_tm_names.add_widget(move_name)
+
+                if move_name.text != 'Attack Name':
+
+                    # root GridLayout
+                    move_box = GridLayout(size_hint=(None, None), size=(250, 0), cols=1)
+                    move_box.height = 250
+                    with move_box.canvas:
+                            Color(0.4, 0.7, 0.5, 1),
+                            Rectangle(size=move_box.size, pos=move_box.pos)
+
+                    '''
+
+                            canvas:
+                                Color:
+                                    rgba: 1, 1, 1, 0.1
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
+                            Label:
+                                text: 'TMs/HMs'
+                                color: 1, 1, 1, 1
+                    '''
+                    title = BoxLayout()
+                    title.size_hint = (None, None)
+                    title.size = (move_box.width, '55dp')
+
+                    title_label = Label(text=move_name.text, color=(1, 1, 1, 1))
+                    title.add_widget(title_label)
+                    sep = SeparatorX()
+                    descr = Label(text=v.move_description_dict[move_name.text])
+
+                    #move_box.add_widget(title)
+                    #move_box.add_widget(sep)
+                    #move_box.add_widget(descr)
+
+                    move_name.bind(on_release=partial(self.box_popup, move_box))
 
                 sep = SeparatorX()
                 self.ids.md_tm_nrs.add_widget(sep)
@@ -568,6 +609,14 @@ class SpinoffDex(Screen):
                 self.ids.md_tm_names.add_widget(sep)
                 sep = SeparatorY()
                 self.ids.md_tm_separators.add_widget(sep)
+
+    def box_popup(self, cont, gottabehere):
+        #print(gottabehere)
+        content = cont
+        popups = Popup(title='', separator_height=0, content=content, auto_dismiss=False)
+
+
+        popups.open()
 
     def change_page(self, nr):
         self.ids.dex_page_main.number = abs(nr)  # absolute value of pokedex nr; '001' = 1
