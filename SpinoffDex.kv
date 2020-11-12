@@ -49,6 +49,14 @@
     # Default the background color for this label
     # to r 0, g 0, b 0, a 0
 
+<TintedLabel@Label>
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 0.1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
 <DexEntry>
     cols:2
     on_press:
@@ -92,10 +100,45 @@
                 app.root.dex_list_scroller.previous_y = app.root.dex_list_scroller.scroll_y
                 app.root.manager.current = 'md_main_moves'
 
+<MD_DexBotNav@Widget>
+    size_hint: None, None
+    size: self.parent.width, self.parent.height * 0.05
+
+    # Bottom selection
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: None, None
+        size: self.parent.width, self.parent.height
+        Button:
+            text: 'General'
+            size_hint: None, None
+            size: self.parent.width/4, self.parent.height
+            on_release:
+                app.root.manager.current = 'dex_page_main'
+
+        Button:
+            text: 'Moves'
+            size_hint: None, None
+            size: self.parent.width/4, self.parent.height
+            on_release:
+                app.root.manager.current = 'dex_page_moves'
+        Button:
+            text: 'Stats'
+            size_hint: None, None
+            size: self.parent.width/4, self.parent.height
+            on_release:
+                app.root.manager.current = 'dex_page_stats'
+        Button:
+            text: 'Quotes'
+            size_hint: None, None
+            size: self.parent.width/4, self.parent.height
+            on_release:
+                app.root.manager.current = 'dex_page_quotes'
+
 <SpinoffDex>
     manager: manager
     dex_page_main: dex_page_main
-    theGrid: theGrid
+    md_dex_grid: md_dex_grid
     general_image: general_image
     md_abilities: md_abilities
     md_ability1: md_ability1
@@ -104,7 +147,6 @@
     md_joined: md_joined
     md_body_size: md_body_size
     md_location: md_location
-    md_layout: md_layout
     md_friend_area: md_friend_area
     md_get_rate: md_get_rate
     md_get_rate2: md_get_rate2
@@ -122,6 +164,7 @@
     dex_list_scroller: dex_list_scroller
     dex_searchbar: dex_searchbar
     dex_base_stats: dex_base_stats
+    md_dex_stats: md_dex_stats
 
     ScreenManager:
         id: manager
@@ -154,15 +197,14 @@
                                 app.root.dex_list_scroller.scroll_y = 0
 
                     # Search Bar
-                    BoxLayout:
-                        TextInput:
-                            id: dex_searchbar
-                            hint_text:'Enter Pokedex Nr / Pokemon Name'
-                            multiline: False
+                    TextInput:
+                        id: dex_searchbar
+                        hint_text:'Enter Pokedex Nr / Pokemon Name'
+                        multiline: False
 
-                            on_text_validate:
-                                app.root.dex_search(self.text)
-                                #app.root.open
+                        on_text_validate:
+                            app.root.dex_search(self.text)
+                            #app.root.open
 
                 # The dex list scrolling widget
                 ScrollView:
@@ -175,7 +217,7 @@
                     bar_inactive_color: 0.4, 0.7, 0.4, 0.4
 
                     GridLayout:
-                        id: theGrid
+                        id: md_dex_grid
                         cols: 1
                         orientation: 'vertical'
                         size_hint_y: None
@@ -194,22 +236,14 @@
 
             on_pre_enter:
 
-                #id.text = app.root.read_csv(self.number, 1)
-                #nr.text = app.root.read_csv(self.number, 2)
-                #name.text = app.root.read_csv(self.number, 3)
                 general_nr_name.text = str(app.root.read_csv(self.number, 2)) + ' ' + str(app.root.read_csv(self.number, 3))
                 app.root.check_joined(general_nr_name.text[1:4]) # Set image to joined if pokemon is joined
                 general_image.source = 'img\\portraits\\'+general_nr_name.text[1:4]+'.png'  # General Image
-
-                #japanese_name.text = app.root.read_csv(self.number, 4)
                 app.root.set_types(general_nr_name.text[1:4])                               # Type 1 (/ Type 2)
                 md_joined.source = app.root.check_joined(general_nr_name.text[1:4])         # Joined
-                #general_favorite.text = app.root.read_csv(self.number, 8)                  # Favorite?
                 general_class.text = app.root.read_csv(self.number, 9)                      # Classification
-                general_weight.text = str(app.root.read_csv(self.number, 10) + ' - ' + app.root.read_csv(self.number, 11))            # Weight (Metric)
-                #general_weight_lbs.text = app.root.read_csv(self.number, 11)
-                general_height.text = str(app.root.read_csv(self.number, 12) + ' - ' + app.root.read_csv(self.number, 13))             # Height (Metric)
-                #general_height_ft.text = app.root.read_csv(self.number, 13)
+                general_weight.text = str(app.root.read_csv(self.number, 10) + ' - ' + app.root.read_csv(self.number, 11))  # Weight
+                general_height.text = str(app.root.read_csv(self.number, 12) + ' - ' + app.root.read_csv(self.number, 13))  # Height
                 app.root.set_stats(general_nr_name.text[1:4])                               # Base Stats
                 app.root.set_abilities(app.root.read_csv(self.number, 14))                  # Abilities
                 app.root.set_evos(general_nr_name.text[1:4])                                # Evolution Chain
@@ -219,13 +253,6 @@
                 md_get_rate2.text = app.root.read_csv(self.number, 36) [1:-1]               # MD Get rate min levels
                 app.root.set_gummis(general_nr_name.text[1:4])                              # Set favourite gummis
                 md_location.text = app.root.set_location(general_nr_name.text[1:4])         # MD Location
-                #rg_browser_no.text = app.root.read_csv(self.number, 20)
-                #rg_location.text = app.root.read_csv(self.number, 21)
-                #rg_pkmn_assist.text = app.root.read_csv(self.number, 22)
-                #rg_type_group.text = app.root.read_csv(self.number, 23)
-                #rg_field_ability.text = app.root.read_csv(self.number, 24)
-                #tz_get_rate.text = app.root.read_csv(self.number, 25)
-                #dex_page_tz_location.text = app.root.read_csv(self.number, 26)
 
                 app.root.set_moves(general_nr_name.text[1:4])
 
@@ -244,7 +271,6 @@
                     spacing: 10
                     padding: 0
                     Button:
-                        id: dex_list_back
                         text: 'Back'
                         size_hint_y: 0.1
                         on_press:
@@ -257,8 +283,6 @@
                         cols: 1
                         size_hint: None, None
                         size: root.width, self.minimum_height
-                        spacing: 0
-                        padding: 0
 
                         canvas:
                             Color:
@@ -266,25 +290,20 @@
                             Rectangle:
                                 size: self.size
                                 pos: self.pos
+
                         Separator_x:
+
                         BoxLayout:
                             size_hint: None, None
                             size: root.width, dp(55)
 
-                            canvas:
-                                Color:
-                                    rgba: 1, 1, 1, 0.1
-                                Rectangle:
-                                    size: self.size
-                                    pos: self.pos
-                            Label:
+                            TintedLabel:
                                 id: general_label
                                 size_hint: None, None
                                 size: root.width, self.parent.height
                                 text: 'General Info'
                                 color: 1, 1, 1, 1
                                 font_size: '16sp'
-                        Separator_x:
 
                         BoxLayout:
                             size_hint: None, None
@@ -293,7 +312,7 @@
                             Image:
                                 id: general_image
                                 size: root.width*0.25, self.parent.height
-                                #allow_stretch: 'True'
+                                # allow_stretch: 'True'
                             BoxLayout:
                                 orientation: 'vertical'
                                 size_hint: None, None
@@ -335,6 +354,7 @@
                                         size: self.parent.width-5, self.parent.height/2
 
                         Separator_x:
+
                         BoxLayout:
                             size_hint: None, None
                             size: root.width, dp(24)
@@ -365,20 +385,15 @@
                                 valign: 'top'
 
                         Separator_x:
+
                         BoxLayout:
                             size_hint: (None, None)
                             size: root.width, dp(36)
 
-                            canvas:
-                                Color:
-                                    rgba: 1, 1, 1, 0.1
-                                Rectangle:
-                                    size: self.size
-                                    pos: self.pos
-                            Label:
+                            TintedLabel:
                                 text: 'Base Stats'
                                 font_size: '12sp'
-                        Separator_x:
+
                         BoxLayout:
                             orientation: 'horizontal'
                             size_hint: (None, None)
@@ -401,11 +416,13 @@
                             Label:
                                 text:'Exp'
                                 font_size: '12sp'
+
                         BoxLayout:
                             id: dex_base_stats
                             orientation: 'horizontal'
                             size_hint: (None, None)
                             size: root.width, dp(24)
+
                         Separator_x:
 
                     # ======================================== #
@@ -413,7 +430,6 @@
                     # ======================================== #
                     GridLayout:
                         cols: 1
-                        id: md_layout
                         size_hint: None, None
                         size: root.width, self.minimum_height
                         canvas:
@@ -424,63 +440,47 @@
                                 pos: self.pos
 
                         Separator_x:
+
                         # Top Label
-                        BoxLayout:
-                            id: md_1_box
+                        TintedLabel:
                             size_hint: None, None
                             size: root.width, '55dp'
-
-                            canvas:
-                                Color:
-                                    rgba: 1, 1, 1, 0.1
-                                Rectangle:
-                                    size: self.size
-                                    pos: self.pos
-                            Label:
-                                id: md_label_top
-                                size_hint: None, None
-                                size: self.parent.width, self.parent.height
-                                text: 'Mystery Dungeon Info'
-                                color: 1, 1, 1, 1
-                                font_size: '16sp'
-                        Separator_x:
+                            text: 'Mystery Dungeon Info'
+                            color: 1, 1, 1, 1
+                            font_size: '16sp'
 
                         # Body Size, Recruit Rate, and Gummi Labels
                         BoxLayout:
-                            id: md_2_box
                             size_hint: None, None
                             size: root.width, '36dp'
                             Label:
-                                id: md_label_body_size
                                 text:'Body Size'
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
                                 font_size: '12sp'
                             Separator_y:
                             Label:
-                                id: md_label_get_rate
                                 text:'Recruit\nRate'
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
                                 font_size: '12sp'
                             Separator_y:
                             Label:
-                                id: md_label_joined
                                 text:'Joined\nTeam'
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
                                 font_size: '12sp'
                             Separator_y:
                             Label:
-                                id: md_label_gummis
                                 text:'Favourite\nGummis'
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
                                 font_size: '12sp'
+
                         Separator_x:
+
                         # Body Size, Recruit Rate, Joined and Gummis
                         BoxLayout:
-                            id: md_3_box
                             size_hint: None, None
                             size: root.width, '45dp'
                             Image:
@@ -517,170 +517,93 @@
                                 orientation: 'vertical'
 
                         Separator_x:
-                        BoxLayout:
-                            id: md_4_box
+
+                        TintedLabel:
+                            text: 'Friend Area'
                             size_hint: None, None
                             size: root.width, '36dp'
+                            font_size: '12sp'
 
-                            canvas:
-                                Color:
-                                    rgba: (1, 1, 1, 0.1)
-                                Rectangle:
-                                    size: self.size
-                                    pos: self.pos
-                            Label:
-                                id: md_label_friend_area
-                                text: 'Friend Area'
-                                size_hint: None, None
-                                size: self.parent.width, self.parent.height
-                                font_size: '12sp'
                         Separator_x:
-                        BoxLayout:
-                            id: md_5_box
+
+                        Button:
+                            id: md_friend_area
                             size_hint: None, None
                             size: root.width, '30dp'
-                            Button:
-                                id: md_friend_area
-                                size_hint: None, None
-                                size: self.parent.width, self.parent.height
-                                font_size: '14sp'
-                                background_normal: 'img\\friend areas\\' + md_friend_area.text +'.png'
-                                on_release:
-                                    app.root.popup('image_' + self.background_normal.partition('areas\\')[2].partition('.png')[0], self.background_normal)
+                            font_size: '14sp'
+                            background_normal: 'img\\friend areas\\' + md_friend_area.text +'.png'
+                            on_release:
+                                app.root.popup('image_' + self.background_normal.partition('areas\\')[2].partition('.png')[0], self.background_normal)
+
                         Separator_x:
 
-                        BoxLayout:
-                            id: md_6_box
+                        TintedLabel:
+                            text: 'Ability'
                             size_hint: None, None
                             size: root.width, '36dp'
+                            font_size: '12sp'
 
-                            canvas:
-                                Color:
-                                    rgba: (1, 1, 1, 0.1)
-                                Rectangle:
-                                    size: self.size
-                                    pos: self.pos
-                            Label:
-                                id: md_label_md_ability
-                                text: 'Ability'
-                                size_hint: None, None
-                                size: self.parent.width, self.parent.height
-                                font_size: '12sp'
-                        Separator_x:
                         BoxLayout:
-                            id: md_7_box
+                            id: md_abilities
+                            orientation: 'horizontal'
                             size_hint: None, None
                             size: root.width, '24dp'
-                            BoxLayout:
-                                id: md_abilities
-                                orientation: 'horizontal'
-                                size_hint: None, None
-                                size: self.parent.width, self.parent.height
-                                Button:
-                                    id: md_ability1
-                                    font_size: '14sp'
-                                    background_color: 0, 0, 0, 0
+                            Button:
+                                id: md_ability1
+                                font_size: '14sp'
+                                background_color: 0, 0, 0, 0
 
-                                Separator_y:
-                                    id: md_ability_sep
-                                Button:
-                                    id: md_ability2
-                                    font_size: '14sp'
-                                    background_color: 0, 0, 0, 0
+                            Separator_y:
+                                id: md_ability_sep
+                            Button:
+                                id: md_ability2
+                                font_size: '14sp'
+                                background_color: 0, 0, 0, 0
 
                         Separator_x:
-                        BoxLayout:
-                            id: md_8_box
+
+                        TintedLabel:
+                            text: 'Location'
                             size_hint: None, None
                             size: root.width, '36dp'
+                            font_size: '12sp'
 
-                            canvas:
-                                Color:
-                                    rgba: (1, 1, 1, 0.1)
-                                Rectangle:
-                                    size: self.size
-                                    pos: self.pos
-
-                            Label:
-                                id: md_label_location
-                                text: 'Location'
-                                size_hint: None, None
-                                size: self.parent.width, self.parent.height
-                                font_size: '12sp'
-                        Separator_x:
                         BoxLayout:
                             id: md_location
                             orientation: 'vertical'
                             size_hint: None, None
                             size: root.width, self.minimum_height
 
-                        BoxLayout:
-                            id: md_10_box
+                        TintedLabel:
+                            text: 'Evolution Chain'
                             size_hint: None, None
                             size: root.width, '36dp'
-                            canvas:
-                                Color:
-                                    rgba: 1, 1, 1, 0.1
-                                Rectangle:
-                                    size: self.size
-                                    pos: self.pos
-                            Label:
-                                id: md_label_evolution_chain
-                                text: 'Evolution Chain'
-                                size_hint: None, None
-                                size: self.parent.width, self.parent.height
-                                font_size: '12sp'
-                        Separator_x:
-                        BoxLayout:
-                            id: md_11_box
+                            font_size: '12sp'
+
+                        GridLayout:
+                            id: md_evo_box
                             size_hint: None, None
                             size: root.width, self.minimum_height
-                            GridLayout:
-                                id: md_evo_box
-                                size_hint: None, None
-                                size: self.parent.width, self.parent.height
 
 
-            # Bottom selection
-            BoxLayout:
-                size_hint_y: 0.05
-                Button:
-                    text: 'General'
-                    on_release:
-                        app.root.manager.current = 'dex_page_main'
-
-                Button:
-                    text: 'Moves'
-                    on_release:
-                        app.root.manager.current = 'dex_page_moves'
-                Button:
-                    text: 'Stats'
-                    on_release:
-                        app.root.manager.current = 'dex_page_stats'
-                Button:
-                    text: 'Quotes'
-                    on_release:
-                        pass#app.root.manager.current = 'dex_page_quotes'
+            MD_DexBotNav:
 
         # ============ #
         # Moves Screen #
         # ============ #
         Screen:
-            id: dex_page_moves
             name: 'dex_page_moves'
             ScrollView:
                 size_hint_y: 0.95
                 pos_hint: {"y":0.05}
                 GridLayout:
                     cols: 1
-                    orientation: 'vertical'
                     size_hint_y: None
                     size: root.width, self.minimum_height
                     row_default_height: '40dp'
                     spacing: 10
                     padding: 0
                     Button:
-                        id: dex_list_back
                         text: 'Back'
                         size_hint_y: 0.05
                         on_press:
@@ -690,11 +613,10 @@
                     # ============================= #
                     # MD MOVESET                    #
                     # ============================= #
-                    GridLayout:
-                        id: md_moves_layout
+                    BoxLayout:
+                        orientation: 'vertical'
                         size_hint: None, None
                         size: root.width, self.minimum_height
-                        cols: 1
 
                         canvas:
                             Color:
@@ -704,20 +626,13 @@
                                 pos: self.pos
 
                         Separator_x:
-                        BoxLayout:
+
+                        TintedLabel:
                             size_hint: None, None
                             size: self.parent.width, '55dp'
+                            text: 'Moves Learned'
+                            color: 1, 1, 1, 1
 
-                            canvas:
-                                Color:
-                                    rgba: 1, 1, 1, 0.1
-                                Rectangle:
-                                    size: self.size
-                                    pos: self.pos
-                            Label:
-                                text: 'Moves Learned'
-                                color: 1, 1, 1, 1
-                        Separator_x:
                         BoxLayout:
                             size_hint: None, None
                             size: self.parent.width, self.minimum_height
@@ -741,11 +656,10 @@
                     # ============================= #
                     # MD TM/HM/DM                   #
                     # ============================= #
-                    GridLayout:
-                        id: md_tms_layout
+                    BoxLayout:
+                        orientation: 'vertical'
                         size_hint: None, None
                         size: root.width, self.minimum_height
-                        cols: 1
 
                         canvas:
                             Color:
@@ -755,20 +669,13 @@
                                 pos: self.pos
 
                         Separator_x:
-                        BoxLayout:
+
+                        TintedLabel:
                             size_hint: None, None
                             size: self.parent.width, '55dp'
+                            text: 'TMs/HMs'
+                            color: 1, 1, 1, 1
 
-                            canvas:
-                                Color:
-                                    rgba: 1, 1, 1, 0.1
-                                Rectangle:
-                                    size: self.size
-                                    pos: self.pos
-                            Label:
-                                text: 'TMs/HMs'
-                                color: 1, 1, 1, 1
-                        Separator_x:
                         BoxLayout:
                             size_hint: None, None
                             size: self.parent.width, self.minimum_height
@@ -789,44 +696,303 @@
                                 size: self.parent.width/2, self.minimum_height
                                 orientation: 'vertical'
 
-            # Bottom selection
-            BoxLayout:
-                size_hint_y: 0.05
-                Button:
-                    text: 'General'
-                    on_release:
-                        app.root.manager.current = 'dex_page_main'
+            MD_DexBotNav:
 
-                Button:
-                    text: 'Moves'
-                    on_release:
-                        app.root.manager.current = 'dex_page_moves'
-                Button:
-                    text: 'Stats'
-                    on_release:
-                        app.root.manager.current = 'dex_page_stats'
-                Button:
-                    text: 'Quotes'
-                    on_release:
-                        pass#app.root.manager.current = 'dex_page_quotes'
-
-
+        # Dex Stats
         Screen:
-            id: dex_page_stats
             name: 'dex_page_stats'
+            on_pre_enter:
+                app.root.create_box(general_nr_name.text[1:4], 35, ',  ', md_dex_stats, 7, 12, '14sp', [self.parent.width/8, self.parent.width/8, self.parent.width/8, self.parent.width/8, self.parent.width/8 ,self.parent.width/8, self.parent.width/4])
+
             ScrollView:
                 size_hint_y: 0.95
                 pos_hint: {"y":0.05}
                 GridLayout:
                     cols: 1
-                    orientation: 'vertical'
                     size_hint_y: None
                     size: root.width, self.minimum_height
                     row_default_height: '40dp'
                     spacing: 10
                     padding: 0
+                    Button:
+                        text: 'Back'
+                        size_hint_y: 0.1
+                        on_press:
+                            manager.current = 'md_main_dex'
 
-            MD_MainBotNav:
+                    # ======================================== #
+                    # STAT GROWTH                              #
+                    # ======================================== #
+                    GridLayout:
+                        cols: 1
+                        size_hint: None, None
+                        size: root.width, self.minimum_height
+
+                        canvas:
+                            Color:
+                                rgba: 0.4, 0.6, 0.4, 1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+
+                        Separator_x:
+
+                        BoxLayout:
+                            size_hint: None, None
+                            size: root.width, dp(55)
+
+                            TintedLabel:
+                                text: 'Stat Growth'
+                                size_hint: None, None
+                                size: root.width, self.parent.height
+                                text: 'Stat Growth'
+                                color: 1, 1, 1, 1
+                                font_size: '16sp'
+
+                        GridLayout:
+                            id: md_dex_stats
+                            cols: 1
+                            size_hint: None, None
+                            size: root.width, self.minimum_height
+
+                            canvas:
+                                Color:
+                                    rgba: 0.4, 0.6, 0.4, 1
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
+
+
+
+            MD_DexBotNav:
+
+        # ================================================================================================== #
+        # This entire section is a clanky hardcoded mess, but I cba to implement it more elegantly right now #
+        #                                                                                                    #
+        # ======================================== # ======================================================= #
+        # QUOTES                                   #
+        # ======================================== #
+        Screen:
+            name: 'dex_page_quotes'
+            on_pre_enter:
+                lbl_100.text = app.root.read_csv(dex_page_main.number, 38).partition('Normal: ')[2].partition('/_/')[0]
+                lbl_50.text = app.root.read_csv(dex_page_main.number, 38).partition('50% HP: ')[2].partition('/_/')[0]
+                lbl_25.text = app.root.read_csv(dex_page_main.number, 38).partition('25% HP: ')[2].partition('/_/')[0]
+                lbl_lvl.text = app.root.read_csv(dex_page_main.number, 38).partition('Lvl Up: ')[2].partition('/_/')[0]
+
+                lbl_p100.text = app.root.read_csv(dex_page_main.number, 38).partition('/_p/Normal: ')[2].partition('/_p/')[0]
+                lbl_p50.text = app.root.read_csv(dex_page_main.number, 38).partition('/_p/50% HP: ')[2].partition('/_p/')[0]
+                lbl_p25.text = app.root.read_csv(dex_page_main.number, 38).partition('/_p/25% HP: ')[2].partition('/_p/')[0]
+                lbl_plvl.text = app.root.read_csv(dex_page_main.number, 38).partition('/_p/Lvl Up: ')[2].partition('/_p/')[0]
+
+            ScrollView:
+                size_hint_y: 0.95
+                pos_hint: {"y":0.05}
+                GridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    size: root.width, self.minimum_height
+                    row_default_height: '40dp'
+                    spacing: 10
+                    padding: 0
+                    Button:
+                        text: 'Back'
+                        size_hint_y: 0.1
+                        on_press:
+                            manager.current = 'md_main_dex'
+
+                    GridLayout:
+                        cols: 1
+                        size_hint: None, None
+                        size: root.width, self.minimum_height
+
+                        canvas:
+                            Color:
+                                rgba: 0.4, 0.6, 0.4, 1
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+
+                        Separator_x:
+
+                        TintedLabel:
+                            text: 'Quotes'
+                            size_hint: None, None
+                            size: root.width, dp(55)
+                            color: 1, 1, 1, 1
+                            font_size: '16sp'
+
+                        GridLayout:
+                            id: md_dex_quotes
+                            cols: 1
+                            size_hint: None, None
+                            size: root.width, self.minimum_height
+
+                            canvas:
+                                Color:
+                                    rgba: 0.4, 0.6, 0.4, 1
+                                Rectangle:
+                                    size: self.size
+                                    pos: self.pos
+
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size_hint: None, None
+                                size: root.width, self.minimum_height
+                                Label:
+                                    text: 'Normal'
+                                    size_hint: 0.225, 1
+                                Separator_y:
+                                Label:
+                                    id: lbl_100
+                                    text_size: self.width, None
+                                    size_hint: 0.775, None
+                                    height: self.texture_size[1]
+                                    valign: 'center'
+                                    padding_x: 5
+                                    padding_y: 5
+                            Separator_x:
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size_hint: None, None
+                                size: root.width, self.minimum_height
+                                Label:
+                                    text: '50% HP'
+                                    size_hint: 0.225, 1
+                                Separator_y:
+                                Label:
+                                    id: lbl_50
+                                    text_size: self.width, None
+                                    size_hint: 0.775, None
+                                    height: self.texture_size[1]
+                                    valign: 'center'
+                                    padding_x: 5
+                                    padding_y: 5
+                            Separator_x:
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size_hint: None, None
+                                size: root.width, self.minimum_height
+                                Label:
+                                    text: '25% HP'
+                                    size_hint: 0.225, 1
+                                Separator_y:
+                                Label:
+                                    id: lbl_25
+                                    text_size: self.width, None
+                                    size_hint: 0.775, None
+                                    height: self.texture_size[1]
+                                    valign: 'center'
+                                    padding_x: 5
+                                    padding_y: 5
+                            Separator_x:
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size_hint: None, None
+                                size: root.width, self.minimum_height
+                                Label:
+                                    text: 'Lvl Up'
+                                    size_hint: 0.225, 1
+                                Separator_y:
+                                Label:
+                                    id: lbl_lvl
+                                    text_size: self.width, None
+                                    size_hint: 0.775, None
+                                    height: self.texture_size[1]
+                                    valign: 'center'
+                                    padding_x: 5
+                                    padding_y: 5
+                            Separator_x:
+                            TintedLabel:
+                                text: 'Partner Quotes'
+                                size_hint: None, None
+                                size: root.width, dp(36)
+                                color: 1, 1, 1, 1
+                                font_size: '14sp'
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size_hint: None, None
+                                size: root.width, self.minimum_height
+                                Label:
+                                    text: 'Normal'
+                                    size_hint: 0.225, 1
+                                Separator_y:
+                                Label:
+                                    id: lbl_p100
+                                    text: 'Not Available as Partner'
+                                    text_size: self.width, None
+                                    size_hint: 0.775, None
+                                    height: self.texture_size[1]
+                                    valign: 'center'
+                                    padding_x: 5
+                                    padding_y: 5
+                            Separator_x:
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size_hint: None, None
+                                size: root.width, self.minimum_height
+                                Label:
+                                    text: '50% HP'
+                                    size_hint: 0.225, 1
+                                Separator_y:
+                                Label:
+                                    id: lbl_p50
+                                    text_size: self.width, None
+                                    text: '-'
+                                    size_hint: 0.775, None
+                                    height: self.texture_size[1]
+                                    valign: 'center'
+                                    padding_x: 5
+                                    padding_y: 5
+                            Separator_x:
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size_hint: None, None
+                                size: root.width, self.minimum_height
+                                Label:
+                                    text: '25% HP'
+                                    size_hint: 0.225, 1
+                                Separator_y:
+                                Label:
+                                    id: lbl_p25
+                                    text_size: self.width, None
+                                    text: '-'
+                                    size_hint: 0.775, None
+                                    height: self.texture_size[1]
+                                    valign: 'center'
+                                    padding_x: 5
+                                    padding_y: 5
+                            Separator_x:
+                            BoxLayout:
+                                orientation: 'horizontal'
+                                size_hint: None, None
+                                size: root.width, self.minimum_height
+                                Label:
+                                    text: 'Lvl Up'
+                                    size_hint: 0.225, 1
+                                Separator_y:
+                                Label:
+                                    id: lbl_plvl
+                                    text_size: self.width, None
+                                    text: '-'
+                                    size_hint: 0.775, None
+                                    height: self.texture_size[1]
+                                    valign: 'center'
+                                    padding_x: 5
+                                    padding_y: 5
+
+
+#                            TintedLabel:
+#                                text: 'Partner Quotes'
+#                                size_hint: None, None
+#                                size: root.width, dp(55)
+#                                color: 1, 1, 1, 1
+#                                font_size: '16sp'
+#
+#                            Separator_x:
+
+
+            MD_DexBotNav:
 
     # ===================================================================================== #
     # Main Locations Screen                                                                 #
@@ -854,13 +1020,7 @@
                         size_hint: None, None
                         size: self.parent.width, '55dp'
 
-                        canvas:
-                            Color:
-                                rgba: 1, 1, 1, 0.1
-                            Rectangle:
-                                size: self.size
-                                pos: self.pos
-                        Label:
+                        TintedLabel:
                             text: 'Locations something'
                             color: 1, 1, 1, 1
                     Separator_x:
@@ -911,13 +1071,7 @@
                         size_hint: None, None
                         size: self.parent.width, '55dp'
 
-                        canvas:
-                            Color:
-                                rgba: 1, 1, 1, 0.1
-                            Rectangle:
-                                size: self.size
-                                pos: self.pos
-                        Label:
+                        TintedLabel:
                             text: 'Items something'
                             color: 1, 1, 1, 1
                     Separator_x:
@@ -965,17 +1119,24 @@
 
                     Separator_x:
                     BoxLayout:
+                        orientation: 'vertical'
                         size_hint: None, None
                         size: self.parent.width, '55dp'
 
-                        canvas:
-                            Color:
-                                rgba: 1, 1, 1, 0.1
-                            Rectangle:
-                                size: self.size
-                                pos: self.pos
-                        Label:
-                            text: 'Moves something'
+                        TintedLabel:
+                            text: 'Evolution Items'
+                            color: 1, 1, 1, 1
+
+                        TintedLabel:
+                            text: 'Food Items'
+                            color: 1, 1, 1, 1
+
+                        TintedLabel:
+                            text: 'Thrown Items'
+                            color: 1, 1, 1, 1
+
+                        TintedLabel:
+                            text: 'Evolution Items'
                             color: 1, 1, 1, 1
                     Separator_x:
                     BoxLayout:

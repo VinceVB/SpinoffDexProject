@@ -431,7 +431,7 @@ move_description_dict = {
                 'damage inflicted by the user will remain constant.',
  'Double Kick': 'Attacks the target twice in succession.',
  'Double Team': "Boosts the user's Evasion by one level.",
- 'Double-Edge': 'Inflicts damage on the target. However, it also damages the '
+ 'Double-edge': 'Inflicts damage on the target. However, it also damages the '
                 'user.',
  'Doubleslap': 'Inflicts damage on the target. It hits two to five times in '
                'succession.',
@@ -591,7 +591,7 @@ move_description_dict = {
          'prevent any attacks or moves.',
  'Light Screen': 'The user gains the Light Screen status. It halves the damage '
                  'from Special Attack moves.',
- 'Lock-On': 'Gives the user the Sure Shot status, making all its moves and '
+ 'Lock-on': 'Gives the user the Sure Shot status, making all its moves and '
             'attacks completely accurate.',
  'Lovely Kiss': 'Makes all foes around the user go to sleep, causing them to '
                 'be incapable of action.',
@@ -751,7 +751,7 @@ move_description_dict = {
               'status, which prevents status problems.',
  'Sand Tomb': 'Inflicts damage on the target. It may also cause constriction, '
               'making the foe incapable of movement.',
- 'Sand-Attack': "Lowers the target's Accuracy by one level.",
+ 'Sand-attack': "Lowers the target's Accuracy by one level.",
  'Sandstorm': "Changes the dungeon floor's weather to Sandstorm for several "
               'turns.',
  'Scary Face': "Lowers the target's Movement Speed by one level.",
@@ -932,7 +932,7 @@ move_description_dict = {
               'Pokémon, it sustains damage.',
  'Wide Slash': 'Inflicts damage on foes on the three tiles diagonally and '
                'directly in front.',
- 'Will-O-Wisp': 'Inflicts a burn on the target. A burn inflicts damage every '
+ 'Will-o-wisp': 'Inflicts a burn on the target. A burn inflicts damage every '
                 'few turns.',
  'Wing Attack': 'Inflicts damage on the target.',
  'Wish': "The user gains the Wish status. It boosts the user's HP recovery "

@@ -3,7 +3,6 @@ import random
 from functools import partial
 
 from kivy.uix.dropdown import DropDown
-from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
 
 import variables as v
@@ -30,8 +29,7 @@ from kivy.uix.scrollview import ScrollView
 class SpinoffDex(Screen):
     manager = ObjectProperty(None)
     dex_page_main = ObjectProperty(None)
-    theGrid = ObjectProperty(None)
-    test = ObjectProperty(None)
+    md_dex_grid = ObjectProperty(None)
     md_abilities = ObjectProperty(None)
     md_ability1 = ObjectProperty(None)
     md_ability2 = ObjectProperty(None)
@@ -39,7 +37,6 @@ class SpinoffDex(Screen):
     md_joined = ObjectProperty(None)
     md_body_size = ObjectProperty(None)
     md_location = ObjectProperty(None)
-    md_layout = ObjectProperty(None)
     md_friend_area = ObjectProperty(None)
     md_get_rate = ObjectProperty(None)
     md_evo_box = ObjectProperty(None)
@@ -52,10 +49,10 @@ class SpinoffDex(Screen):
     md_gummis_box = ObjectProperty(None)
     general_type1 = ObjectProperty(None)
     general_type2 = ObjectProperty(None)
-    type_box = ObjectProperty(None)
     dex_list_scroller = ObjectProperty(None)
     dex_searchbar = ObjectProperty(None)
     dex_base_stats = ObjectProperty(None)
+    md_dex_stats = ObjectProperty(None)
 
     def add_dex_entries(self):
         # skip first line i.e. read header first and then iterate over each row od csv as a list
@@ -78,7 +75,7 @@ class SpinoffDex(Screen):
                         else:
                             dex_entry.background_normal = 'atlas://data/images/defaulttheme/button'
                         dex_entry.background_color = v.color_codes[row[5]]
-                        self.ids.theGrid.add_widget(dex_entry)
+                        self.ids.md_dex_grid.add_widget(dex_entry)
 
                         # Entry Image
                         dex_image = Image(source='img\\portraits\\' + row[2][1:] + '.png', size_hint_x=0.25)
@@ -177,7 +174,7 @@ class SpinoffDex(Screen):
 
     def set_stats(self, pokedex_nr):
         self.ids.dex_base_stats.clear_widgets()
-        prev_stat = self.read_csv(int(pokedex_nr), 35).partition('], [1, ')[2].partition('], [')[0]
+        prev_stat = self.read_csv(int(pokedex_nr), 35).partition('],  [1, ')[2].partition('],  [')[0]
         for stat_lbl in range(5):
             next_stat = prev_stat.partition(',')
             stat_label = Label(text=next_stat[0], font_size='14sp', text_size=self.ids.dex_base_stats.size, halign='center', valign='top')
@@ -313,10 +310,10 @@ class SpinoffDex(Screen):
         self.ids.md_joined.text = str(df.loc[int(pokedex_nr)-1, 'joined'])
         if str(df.loc[int(pokedex_nr)-1, 'joined']) == 'True':
             self.ids.md_joined.source = 'img\\misc\\joined.png'  # Set joined image
-            self.ids.theGrid.children[v.max_entries - int(pokedex_nr)].background_normal = ''  # set brighter background color
+            self.ids.md_dex_grid.children[v.max_entries - int(pokedex_nr)].background_normal = ''  # set brighter background color
         else:
             self.ids.md_joined.source = 'img\\misc\\not_joined.png'  # set not joined image
-            self.ids.theGrid.children[v.max_entries - int(pokedex_nr)].background_normal =\
+            self.ids.md_dex_grid.children[v.max_entries - int(pokedex_nr)].background_normal =\
                 'atlas://data/images/defaulttheme/button'  # set darker background color
 
     def unown_check(self, pokedex_nr):
@@ -567,56 +564,12 @@ class SpinoffDex(Screen):
                 self.ids.md_tm_nrs.add_widget(move_nr)
                 self.ids.md_tm_names.add_widget(move_name)
 
-                if move_name.text != 'Attack Name':
-
-                    # root GridLayout
-                    move_box = GridLayout(size_hint=(None, None), size=(250, 0), cols=1)
-                    move_box.height = 250
-                    with move_box.canvas:
-                            Color(0.4, 0.7, 0.5, 1),
-                            Rectangle(size=move_box.size, pos=move_box.pos)
-
-                    '''
-
-                            canvas:
-                                Color:
-                                    rgba: 1, 1, 1, 0.1
-                                Rectangle:
-                                    size: self.size
-                                    pos: self.pos
-                            Label:
-                                text: 'TMs/HMs'
-                                color: 1, 1, 1, 1
-                    '''
-                    title = BoxLayout()
-                    title.size_hint = (None, None)
-                    title.size = (move_box.width, '55dp')
-
-                    title_label = Label(text=move_name.text, color=(1, 1, 1, 1))
-                    title.add_widget(title_label)
-                    sep = SeparatorX()
-                    descr = Label(text=v.move_description_dict[move_name.text])
-
-                    #move_box.add_widget(title)
-                    #move_box.add_widget(sep)
-                    #move_box.add_widget(descr)
-
-                    move_name.bind(on_release=partial(self.box_popup, move_box))
-
                 sep = SeparatorX()
                 self.ids.md_tm_nrs.add_widget(sep)
                 sep = SeparatorX()
                 self.ids.md_tm_names.add_widget(sep)
                 sep = SeparatorY()
                 self.ids.md_tm_separators.add_widget(sep)
-
-    def box_popup(self, cont, gottabehere):
-        #print(gottabehere)
-        content = cont
-        popups = Popup(title='', separator_height=0, content=content, auto_dismiss=False)
-
-
-        popups.open()
 
     def change_page(self, nr):
         self.ids.dex_page_main.number = abs(nr)  # absolute value of pokedex nr; '001' = 1
@@ -632,6 +585,32 @@ class SpinoffDex(Screen):
     @staticmethod
     def popup(title, text, text_font_size='14sp', image_button_object=None):
         return Pop(title, text, text_font_size, alpha=0.5, width=None, height=None)
+
+    def create_box(self, pokedex_nr, index, delimiter, where, cols, rows, font_size='14sp', irregular_col_width=None):
+        where.clear_widgets()  # Reset stat widget
+        stat_list = self.read_csv(int(pokedex_nr), index).split(delimiter)  # Turn string of list into list
+        for row in range(rows):
+            big_box = BoxLayout(size_hint=(None, None), size=(self.parent.width, dp(30)), orientation='horizontal')
+            for col in range(cols):
+                row_list = stat_list[row].split(', ')  # turn string of list into list again (nested list)
+                col_string = row_list[col]
+                if not irregular_col_width:
+                    label = Label(size_hint=(None, None), size=((self.parent.width/cols) - dp(2), big_box.height),
+                                  text=col_string.replace('[', '').replace(']', ''),  # remove '[' and ']' from relevant strings
+                                  font_size=font_size)
+
+                # If the width of all cols can't be uniform, they can be individually supplied here
+                else:
+                    label = Label(size_hint=(None, None), size=((irregular_col_width[col]) - dp(2), big_box.height),
+                                  text=col_string.replace('[', '').replace(']', ''),  # remove '[' and ']' from relevant strings
+                                  font_size=font_size)
+
+                sep = SeparatorY()
+                big_box.add_widget(label)
+                big_box.add_widget(sep)
+            where.add_widget(big_box)
+            sep = SeparatorX()
+            where.add_widget(sep)
 
 
 class SpinoffDexApp(App):
