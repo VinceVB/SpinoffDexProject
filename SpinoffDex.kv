@@ -1066,33 +1066,24 @@
                             size: self.size
                             pos: self.pos
 
-                    Separator_x:
-                    BoxLayout:
+                    TintedLabel:
                         size_hint: None, None
                         size: self.parent.width, '55dp'
+                        text: 'Items something'
+                        color: 1, 1, 1, 1
 
-                        TintedLabel:
-                            text: 'Items something'
-                            color: 1, 1, 1, 1
-                    Separator_x:
                     BoxLayout:
-                        size_hint: None, None
-                        size: self.parent.width, self.minimum_height
                         orientation: 'horizontal'
-                        # Moves
-                        BoxLayout:
-                            id: md_moves_levelsss
-                            size_hint: None, None
-                            size: self.parent.width/2-dp(1), self.minimum_height
-                            orientation: 'vertical'
-                        BoxLayout:
-                            id: md_moves_separatorsss
-                            orientation: 'vertical'
-                        # Levels
-                        BoxLayout:
-                            id: md_moves_namesss
-                            size_hint: None, None
-                            size: self.parent.width/2-dp(1), self.minimum_height
+                        size_hint: None, None
+                        size: self.parent.width, '55dp'
+                        Image:
+                            size_hint: 0.2, 1
+                            source: 'img\\items\\scarf_big.png'
+                            allow_stretch: 'True'
+                        Button:
+                            size_hint: 0.8, 1
+                            text:'Accessories'
+
 
             MD_MainBotNav:
 
