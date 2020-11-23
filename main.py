@@ -34,6 +34,7 @@ class SpinoffDex(Screen):
     md_ability1 = ObjectProperty(None)
     md_ability2 = ObjectProperty(None)
     md_ability_sep = ObjectProperty(None)
+    md_accessories = ObjectProperty(None)
     md_joined = ObjectProperty(None)
     md_body_size = ObjectProperty(None)
     md_location = ObjectProperty(None)
@@ -330,6 +331,46 @@ class SpinoffDex(Screen):
         else:
             self.ids.md_get_rate.font_size = '12dp'
 
+    def set_accessories(self):
+        self.md_accessories.clear_widgets()  # Reset Widget
+
+        for acc in v.md_accessories:
+            box = BoxLayout(orientation='vertical', size_hint=(1, None), height=dp(40))
+            row1 = BoxLayout(orientation='horizontal', size_hint=(1, 0.25))
+
+            icon = Image(source='img\\items\\scarf.png', size_hint=(None, None), size=(self.width*0.1-dp(2), dp(40)))
+            name = Label(text=acc[0][0][0], size_hint=(None, None), size=(self.width*0.45-dp(2), dp(40)))
+            #jname = Button(text=acc[0][1][0], size_hint=(0.45, 1), font_size='12sp')
+
+            buy_lbl = Label(text=('Buy: ' + acc[0][2][0]), size_hint=(None, None), size=(self.width*0.45, dp(19)), font_size='12sp')
+            sell_lbl = Label(text=('Sell: ' + acc[0][3][0]), size_hint=(None, None), size=(self.width*0.45, dp(19)), font_size='12sp')
+            buy_box = BoxLayout(orientation='vertical', size_hint=(None, None), size=(self.width*0.45, dp(40)))
+            buy_box.add_widget(buy_lbl)
+            sep = SeparatorX()
+            buy_box.add_widget(sep)
+            buy_box.add_widget(sell_lbl)
+
+            row1.add_widget(icon)
+            sep = SeparatorY()
+            row1.add_widget(sep)
+            row1.add_widget(name)
+            sep = SeparatorY()
+            row1.add_widget(sep)
+            # row1.add_widget(jname)
+            row1.add_widget(buy_box)
+
+            box.add_widget(row1)
+            self.md_accessories.add_widget(box)
+
+            sep = SeparatorX()
+            self.md_accessories.add_widget(sep)
+
+            row2 = Label(text=acc[0][4][0], size_hint=(None, None), size=(self.width*1, dp(40)), font_size='12sp')
+            self.md_accessories.add_widget(row2)
+
+            sep = SeparatorX()
+            self.md_accessories.add_widget(sep)
+
     def set_gummis(self, pokedex_nr):
         self.md_gummis_box.clear_widgets()  # Reset Widget
 
@@ -536,40 +577,36 @@ class SpinoffDex(Screen):
         self.ids.md_tm_names.clear_widgets()
 
         # Levelup moves
-        with open('PokemonMovesets\\#' + pokedex_nr + '_levelup_moves.csv', 'r') as file:  # Use file to refer to the file object
-            lvlup_reader = csv.reader(file)
-            for row in lvlup_reader:
-                move_level = Label(text=row[0], size_hint=(None, None), size=(self.ids.md_moves_levels.width, '20dp'))
-                move_name = Button(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'),
-                                   background_color=(0, 0, 0, 0))
-                if move_name.text != 'Move':
-                    move_name.bind(on_release=partial(self.popup, move_name.text, v.move_description_dict[move_name.text], '12sp'))
-                self.ids.md_moves_levels.add_widget(move_level)
-                self.ids.md_moves_names.add_widget(move_name)
+        for row in v.md_movesets[int(pokedex_nr)-1][0]:
+            move_level = Label(text=row[0], size_hint=(None, None), size=(self.ids.md_moves_levels.width, '20dp'))
+            move_name = Button(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'),
+                               background_color=(0, 0, 0, 0))
+            if move_name.text != 'Move':
+                move_name.bind(on_release=partial(self.popup, move_name.text, v.move_description_dict[move_name.text], '12sp'))
+            self.ids.md_moves_levels.add_widget(move_level)
+            self.ids.md_moves_names.add_widget(move_name)
 
-                sep = SeparatorX()
-                self.ids.md_moves_levels.add_widget(sep)
-                sep = SeparatorX()
-                self.ids.md_moves_names.add_widget(sep)
-                sep = SeparatorY()
-                self.ids.md_moves_separators.add_widget(sep)
+            sep = SeparatorX()
+            self.ids.md_moves_levels.add_widget(sep)
+            sep = SeparatorX()
+            self.ids.md_moves_names.add_widget(sep)
+            sep = SeparatorY()
+            self.ids.md_moves_separators.add_widget(sep)
 
         # TMs
-        with open('PokemonMovesets\\#' + pokedex_nr + '_tm_moves.csv', 'r') as file:  # Use file to refer to the file object
-            tm_reader = csv.reader(file)
-            for row in tm_reader:
-                move_nr = Label(text=row[0], size_hint=(None, None), size=(self.ids.md_moves_levels.width, '20dp'))
-                move_name = Button(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'),
-                                   background_color=(0, 0, 0, 0))
-                self.ids.md_tm_nrs.add_widget(move_nr)
-                self.ids.md_tm_names.add_widget(move_name)
+        for row in v.md_movesets[int(pokedex_nr)-1][1]:
+            move_nr = Label(text=row[0], size_hint=(None, None), size=(self.ids.md_moves_levels.width, '20dp'))
+            move_name = Button(text=row[1], size_hint=(None, None), size=(self.ids.md_moves_names.width, '20dp'),
+                               background_color=(0, 0, 0, 0))
+            self.ids.md_tm_nrs.add_widget(move_nr)
+            self.ids.md_tm_names.add_widget(move_name)
 
-                sep = SeparatorX()
-                self.ids.md_tm_nrs.add_widget(sep)
-                sep = SeparatorX()
-                self.ids.md_tm_names.add_widget(sep)
-                sep = SeparatorY()
-                self.ids.md_tm_separators.add_widget(sep)
+            sep = SeparatorX()
+            self.ids.md_tm_nrs.add_widget(sep)
+            sep = SeparatorX()
+            self.ids.md_tm_names.add_widget(sep)
+            sep = SeparatorY()
+            self.ids.md_tm_separators.add_widget(sep)
 
     def change_page(self, nr):
         self.ids.dex_page_main.number = abs(nr)  # absolute value of pokedex nr; '001' = 1

@@ -144,6 +144,7 @@
     md_ability1: md_ability1
     md_ability2: md_ability2
     md_ability_sep: md_ability_sep
+    md_accessories: md_accessories
     md_joined: md_joined
     md_body_size: md_body_size
     md_location: md_location
@@ -1072,6 +1073,7 @@
                         text: 'Items something'
                         color: 1, 1, 1, 1
 
+                    # Accessories
                     BoxLayout:
                         orientation: 'horizontal'
                         size_hint: None, None
@@ -1083,6 +1085,8 @@
                         Button:
                             size_hint: 0.8, 1
                             text:'Accessories'
+                            on_release:
+                                app.root.manager.current = 'md_accessories'
 
 
             MD_MainBotNav:
@@ -1150,6 +1154,32 @@
                             size: self.parent.width/2-dp(1), self.minimum_height
 
             MD_MainBotNav:
+
+        Screen:
+            name: 'md_accessories'
+
+            on_pre_enter:
+                app.root.set_accessories()
+            ScrollView:
+                size_hint_y: 1 #0.95
+                pos_hint: {"y":0} #{"y":0.05}
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    id: md_accessories
+                    size_hint: None, None
+                    size: self.parent.width, self.minimum_height
+
+                    canvas.before:
+                        Color:
+                            rgba: 0.2,0.4,0.6,1
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Button:
+                        text:'as'
+                        size_hint: 1, None
+                        height: '40dp'
 
         Screen:
             id: empty
