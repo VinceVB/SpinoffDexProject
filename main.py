@@ -2,7 +2,6 @@ import os
 import random
 from functools import partial
 from csv import reader
-import pandas as pd
 
 import variables as v
 
