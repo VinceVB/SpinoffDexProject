@@ -1,13 +1,11 @@
-import csv
+import os
 import random
 from functools import partial
-
-from kivy.uix.dropdown import DropDown
-from kivy.uix.widget import Widget
+from csv import reader
+import pandas as pd
 
 import variables as v
 
-import pandas as pd
 from kivy.app import App
 from kivy.graphics.context_instructions import Color
 from kivy.graphics.vertex_instructions import Rectangle
@@ -19,8 +17,8 @@ from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import Image
 from kivy.uix.label import Label
-from csv import reader
-
+from kivy.uix.dropdown import DropDown
+from kivy.uix.widget import Widget
 from kivy.uix.modalview import ModalView
 from kivy.uix.screenmanager import Screen
 from kivy.uix.scrollview import ScrollView
@@ -57,7 +55,7 @@ class SpinoffDex(Screen):
 
     def add_dex_entries(self):
         # skip first line i.e. read header first and then iterate over each row od csv as a list
-        with open('csv/spinoffDexDataset.csv', 'r', encoding='utf-8') as read_obj:
+        with open('csv/SpinoffDexDataset.csv', 'r', encoding='utf-8') as read_obj:
             csv_reader = reader(read_obj)
             header = next(csv_reader)
             # Check file as empty
@@ -121,7 +119,7 @@ class SpinoffDex(Screen):
 
         # Non numerical queries / strings
         else:
-            with open('csv\\spinoffDexDataset.csv', 'r', encoding='utf-8') as read_obj:
+            with open('csv/SpinoffDexDataset.csv', 'r', encoding='utf-8') as read_obj:
                 csv_reader = reader(read_obj)
                 next(csv_reader, None)  # Skip header
                 query_hits = []  # Whatever matches with the query goes in here
@@ -168,7 +166,7 @@ class SpinoffDex(Screen):
 
     @staticmethod
     def read_csv(row, column):
-        with open('csv/spinoffDexDataset.csv', encoding='utf-8') as read_obj:
+        with open('csv/SpinoffDexDataset.csv', encoding='utf-8') as read_obj:
             csv_reader = reader(read_obj)
             rows = list(csv_reader)
             return rows[row][column]
@@ -203,10 +201,10 @@ class SpinoffDex(Screen):
             self.general_type1.height = self.general_type1.parent.height
             self.general_type2.height = 0
 
-    @staticmethod
-    def set_md_body_size(pokedex_nr):
-        df = pd.read_csv("csv/spinoffDexDataset.csv")
-        return 'img\\misc\\size' + (str(len(str(df.loc[int(pokedex_nr)-1, 'md_body_size'])))) + '.png'
+    def set_md_body_size(self, pokedex_nr):
+        body_size = self.read_csv(int(pokedex_nr), 16)
+
+        return 'img\\misc\\size' + (str(len(body_size))) + '.png'
 
     def set_abilities(self, abilities):
         ability_1 = abilities.partition(' & ')[0]  # Partition the string to exclude a potential second ability
@@ -296,26 +294,50 @@ class SpinoffDex(Screen):
 
             current_string = current_string.partition('/_/')[2]
 
-    @staticmethod
-    def check_joined(pokedex_nr):
-        df = pd.read_csv("csv/spinoffDexDataset.csv")
-        if str(df.loc[int(pokedex_nr)-1, 'joined']) == 'True':
+    def check_joined(self, pokedex_nr):
+        joined = self.read_csv(int(pokedex_nr), 7)
+
+        if joined == 'True':
             return 'img\\misc\\joined.png'
         else:
             return 'img\\misc\\not_joined.png'
 
     def md_join(self, pokedex_nr):
-        df = pd.read_csv("csv/spinoffDexDataset.csv")
-        df.loc[int(pokedex_nr)-1, 'joined'] = not(df.loc[int(pokedex_nr)-1, 'joined'])
-        df.to_csv("csv/spinoffDexDataset.csv", index=False)
-        self.ids.md_joined.text = str(df.loc[int(pokedex_nr)-1, 'joined'])
-        if str(df.loc[int(pokedex_nr)-1, 'joined']) == 'True':
+        with open('csv\\SpinoffDexDataset.csv', 'r', encoding='utf-8') as readFile, open(
+                'csv\\temp_SpinoffDexDataset.csv', 'w', encoding='utf-8') as writeFile:
+            cnt = 0
+            for row in readFile:
+                if cnt == int(pokedex_nr):
+                    str1 = row.partition(',')
+                    str2 = str1[2].partition(',')
+                    str3 = str2[2].partition(',')
+                    str4 = str3[2].partition(',')
+                    str5 = str4[2].partition(',')
+                    str6 = str5[2].partition(',')
+                    str7 = str6[2].partition(',')
+                    str_joined = str7[2].partition(',')
+                    if str_joined[0] == 'True':
+                        joined = 'False'
+                    else:
+                        joined = 'True'
+
+                    str_all = str1[0] + ',' + str2[0] + ',' + str3[0] + ',' + str4[0] + ',' + str5[0] + ',' + str6[
+                        0] + ',' + str7[0] + ',' + joined + ',' + str_joined[2]
+                    writeFile.write(str_all)
+                else:
+                    writeFile.write(row)
+                cnt += 1
+        os.remove('csv\\SpinoffDexDataset.csv')
+        os.rename('csv\\temp_SpinoffDexDataset.csv', 'csv\\SpinoffDexDataset.csv')
+
+        if self.read_csv(int(pokedex_nr), 7) == 'True':
             self.ids.md_joined.source = 'img\\misc\\joined.png'  # Set joined image
             self.ids.md_dex_grid.children[v.max_entries - int(pokedex_nr)].background_normal = ''  # set brighter background color
         else:
             self.ids.md_joined.source = 'img\\misc\\not_joined.png'  # set not joined image
             self.ids.md_dex_grid.children[v.max_entries - int(pokedex_nr)].background_normal =\
                 'atlas://data/images/defaulttheme/button'  # set darker background color
+
 
     def unown_check(self, pokedex_nr):
         # Set font size lower for Unown's Location text because it contains a shitload of locations
@@ -501,7 +523,7 @@ class SpinoffDex(Screen):
         self.ids.md_evo_box.cols = 5         # Reset
         self.ids.md_evo_box.rows = 2         # Reset
 
-        with open('csv/spinoffDexDataset.csv', 'r', encoding='utf-8') as read_obj:
+        with open('csv/SpinoffDexDataset.csv', 'r', encoding='utf-8') as read_obj:
             csv_reader = reader(read_obj)
             rows = list(csv_reader)
             evo_string = rows[int(pokedex_nr)][15]  # Full evolution data string from csv file
