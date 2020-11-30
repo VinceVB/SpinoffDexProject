@@ -3,13 +3,15 @@ import random
 from functools import partial
 from csv import reader
 
+from kivy.core.window import Window
+from kivy.uix.anchorlayout import AnchorLayout
+
 import variables as v
 
 from kivy.app import App
 from kivy.graphics.context_instructions import Color
 from kivy.graphics.vertex_instructions import Rectangle
 from kivy.metrics import dp
-from kivy.properties import ObjectProperty
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
@@ -24,33 +26,20 @@ from kivy.uix.scrollview import ScrollView
 
 
 class SpinoffDex(Screen):
-    manager = ObjectProperty(None)
-    dex_page_main = ObjectProperty(None)
-    md_dex_grid = ObjectProperty(None)
-    md_abilities = ObjectProperty(None)
-    md_ability1 = ObjectProperty(None)
-    md_ability2 = ObjectProperty(None)
-    md_ability_sep = ObjectProperty(None)
-    md_accessories = ObjectProperty(None)
-    md_joined = ObjectProperty(None)
-    md_body_size = ObjectProperty(None)
-    md_location = ObjectProperty(None)
-    md_friend_area = ObjectProperty(None)
-    md_get_rate = ObjectProperty(None)
-    md_evo_box = ObjectProperty(None)
-    md_moves_names = ObjectProperty(None)
-    md_moves_levels = ObjectProperty(None)
-    md_moves_separators = ObjectProperty(None)
-    md_tm_nrs = ObjectProperty(None)
-    md_tm_names = ObjectProperty(None)
-    md_tm_separators = ObjectProperty(None)
-    md_gummis_box = ObjectProperty(None)
-    general_type1 = ObjectProperty(None)
-    general_type2 = ObjectProperty(None)
-    dex_list_scroller = ObjectProperty(None)
-    dex_searchbar = ObjectProperty(None)
-    dex_base_stats = ObjectProperty(None)
-    md_dex_stats = ObjectProperty(None)
+    def __init__(self, **kwargs):
+        super(SpinoffDex, self).__init__(**kwargs)
+        Window.bind(on_keyboard=self.on_back_btn)
+
+    def on_back_btn(self, window, key, *args):
+        # If user presses Back/Esc Key
+        if key == 27:
+            # Check if any previous screens are in the list
+            if self.ids.manager.list_of_prev_screens:
+                # If there are, go to the previous and remove it from the list
+                self.ids.manager.current = self.ids.manager.list_of_prev_screens.pop()
+                return True
+            return False
+        return False
 
     def add_dex_entries(self):
         # skip first line i.e. read header first and then iterate over each row od csv as a list
@@ -75,9 +64,11 @@ class SpinoffDex(Screen):
                         dex_entry.background_color = v.color_codes[row[5]]
                         self.ids.md_dex_grid.add_widget(dex_entry)
 
-                        # Entry Image
-                        dex_image = Image(source='img\\portraits\\' + row[2][1:] + '.png', size_hint_x=0.25)
-                        dex_entry.add_widget(dex_image)
+                        # # Entry Image
+                        dex_image_box = AnchorLayout(size_hint_x=0.25, anchor_x='center', anchor_y='center')
+                        dex_image = Image(source='img//portraits//' + row[2][1:] + '.png', size_hint_x=None, width=dp(40), allow_stretch=True)
+                        dex_image_box.add_widget(dex_image)
+                        dex_entry.add_widget(dex_image_box)
 
                         # GridLayout containing the non-portrait widgets
                         dex_grid = GridLayout(cols=2, size_hint_x=0.75)
@@ -97,6 +88,7 @@ class SpinoffDex(Screen):
                         current_entries += 1
 
     def dex_search(self, query):
+        print(self.ids.manager.list_of_prev_screens)
         scroller = self.ids.dex_list_scroller
         dropdown = DropDown()
         self.ids.dex_searchbar.text = ''  # Reset searchbar
@@ -142,11 +134,14 @@ class SpinoffDex(Screen):
                            now inherits from Button to not make the whole thing transparent for now'''
 
                         # Height needs to be set manually for dropdown elements, size_hint_y must be None
-                        hit_box = BoxButton(size_hint=(None, None), height=50, width=self.ids.dex_searchbar.width)
-                        hit_img = Image(source='img\\portraits\\' + hit[0][1:] + '.png', size_hint_x=0.25)
+                        hit_box = BoxButton(size_hint=(None, None), height=dp(50), width=self.ids.dex_searchbar.width)
+                        # # Entry Image
+                        hit_image_box = AnchorLayout(size_hint_x=0.25, anchor_x='center', anchor_y='center')
+                        hit_image = Image(source='img//portraits//' + hit[0][1:] + '.png', size_hint_x=None, width=dp(40), allow_stretch=True)
+                        hit_image_box.add_widget(hit_image)
                         hit_btn = Label(text=hit[0] + ' ' + hit[1], text_size=hit_box.size, valign='center', padding_x=5, size_hint_x=0.75)
                         hit_btn.bind(size=hit_btn.setter('text_size'))
-                        hit_box.add_widget(hit_img)
+                        hit_box.add_widget(hit_image_box)
                         hit_box.add_widget(hit_btn)
 
                         # Call the select() method on the dropdown, pass the text of the Label as the selection data
@@ -202,8 +197,9 @@ class SpinoffDex(Screen):
 
     def set_md_body_size(self, pokedex_nr):
         body_size = self.read_csv(int(pokedex_nr), 16)
-
-        return 'img\\misc\\size' + (str(len(body_size))) + '.png'
+        body_size_str = str(len(body_size))
+        self.ids.md_body_size.source = 'img//misc//size' + body_size_str + '.png'
+        self.ids.md_body_size.width = dp(15 * int(body_size_str))
 
     def set_abilities(self, abilities):
         ability_1 = abilities.partition(' & ')[0]  # Partition the string to exclude a potential second ability
@@ -260,10 +256,10 @@ class SpinoffDex(Screen):
                                                          '12sp'))
 
                 loc_1.add_widget(loc_1_zone)
-                sep = SeparatorY()
+                sep = SeparatorY(size_hint_y=None, height=loc_1.height-dp(2), pos_hint={'top': 1})
                 loc_1.add_widget(sep)
                 loc_1.add_widget(loc_1_lv)
-                sep = SeparatorY()
+                sep = SeparatorY(size_hint_y=None, height=loc_1.height-dp(2), pos_hint={'top': 1})
                 loc_1.add_widget(sep)
                 loc_1.add_widget(loc_1_floors)
 
@@ -297,13 +293,13 @@ class SpinoffDex(Screen):
         joined = self.read_csv(int(pokedex_nr), 7)
 
         if joined == 'True':
-            return 'img\\misc\\joined.png'
+            return 'img//misc//joined.png'
         else:
-            return 'img\\misc\\not_joined.png'
+            return 'img//misc//not_joined.png'
 
     def md_join(self, pokedex_nr):
-        with open('csv\\SpinoffDexDataset.csv', 'r', encoding='utf-8') as readFile, open(
-                'csv\\temp_SpinoffDexDataset.csv', 'w', encoding='utf-8') as writeFile:
+        with open('csv//SpinoffDexDataset.csv', 'r', encoding='utf-8') as readFile, open(
+                'csv//temp_SpinoffDexDataset.csv', 'w', encoding='utf-8') as writeFile:
             cnt = 0
             for row in readFile:
                 if cnt == int(pokedex_nr):
@@ -326,17 +322,16 @@ class SpinoffDex(Screen):
                 else:
                     writeFile.write(row)
                 cnt += 1
-        os.remove('csv\\SpinoffDexDataset.csv')
-        os.rename('csv\\temp_SpinoffDexDataset.csv', 'csv\\SpinoffDexDataset.csv')
+        os.remove('csv//SpinoffDexDataset.csv')
+        os.rename('csv//temp_SpinoffDexDataset.csv', 'csv//SpinoffDexDataset.csv')
 
         if self.read_csv(int(pokedex_nr), 7) == 'True':
-            self.ids.md_joined.source = 'img\\misc\\joined.png'  # Set joined image
+            self.ids.md_joined.source = 'img//misc//joined.png'  # Set joined image
             self.ids.md_dex_grid.children[v.max_entries - int(pokedex_nr)].background_normal = ''  # set brighter background color
         else:
-            self.ids.md_joined.source = 'img\\misc\\not_joined.png'  # set not joined image
+            self.ids.md_joined.source = 'img//misc//not_joined.png'  # set not joined image
             self.ids.md_dex_grid.children[v.max_entries - int(pokedex_nr)].background_normal =\
                 'atlas://data/images/defaulttheme/button'  # set darker background color
-
 
     def unown_check(self, pokedex_nr):
         # Set font size lower for Unown's Location text because it contains a shitload of locations
@@ -345,9 +340,9 @@ class SpinoffDex(Screen):
             self.ids.md_get_rate.font_size = '11dp'
             flip = random.randint(0, 1)  # Flip a 'coin' to pick a friend area
             if flip:
-                self.ids.md_friend_area.background_normal = 'img\\friend areas\\Aged Chamber AN.png'
+                self.ids.md_friend_area.background_normal = 'img//friend areas//Aged Chamber AN.png'
             else:
-                self.ids.md_friend_area.background_normal = 'img\\friend areas\\Aged Chamber O.png'
+                self.ids.md_friend_area.background_normal = 'img//friend areas//Aged Chamber O.png'
 
         else:
             self.ids.md_get_rate.font_size = '12dp'
@@ -356,29 +351,32 @@ class SpinoffDex(Screen):
         self.md_accessories.clear_widgets()  # Reset Widget
 
         for acc in v.md_accessories:
+            row_top = TintedLabel(size_hint=(1, None), height=dp(50), text=acc[0][0][0])
+            self.md_accessories.add_widget(row_top)
+
             box = BoxLayout(orientation='vertical', size_hint=(1, None), height=dp(40))
             row1 = BoxLayout(orientation='horizontal', size_hint=(1, 0.25))
 
-            icon = Image(source='img\\items\\scarf.png', size_hint=(None, None), size=(self.width*0.1-dp(2), dp(40)))
-            name = Label(text=acc[0][0][0], size_hint=(None, None), size=(self.width*0.45-dp(2), dp(40)))
-            #jname = Button(text=acc[0][1][0], size_hint=(0.45, 1), font_size='12sp')
+            icon_anch = AnchorLayout(anchor_x='center', anchor_y='center', size_hint=(None, None), size=(self.width*0.15-dp(2), dp(40)))
+            icon = Image(source='img//items//scarf.png', size_hint_x=None, width=dp(20), allow_stretch=True)
+            icon_anch.add_widget(icon)
+            buy = Label(text='Buy: ' + acc[0][2][0], size_hint=(None, None), size=(self.width*0.45-dp(2), dp(40)))
+            sell = Label(text='Sell: ' + acc[0][3][0], size_hint=(None, None), size=(self.width*0.45-dp(2), dp(40)))
+            # jname = Button(text=acc[0][1][0], size_hint=(0.45, 1), font_size='12sp')
 
-            buy_lbl = Label(text=('Buy: ' + acc[0][2][0]), size_hint=(None, None), size=(self.width*0.45, dp(19)), font_size='12sp')
-            sell_lbl = Label(text=('Sell: ' + acc[0][3][0]), size_hint=(None, None), size=(self.width*0.45, dp(19)), font_size='12sp')
-            buy_box = BoxLayout(orientation='vertical', size_hint=(None, None), size=(self.width*0.45, dp(40)))
-            buy_box.add_widget(buy_lbl)
-            sep = SeparatorX()
-            buy_box.add_widget(sep)
-            buy_box.add_widget(sell_lbl)
-
-            row1.add_widget(icon)
-            sep = SeparatorY()
+            row1.add_widget(icon_anch)
+            sep = SeparatorY(size_hint_y=None, height=icon_anch.height-dp(2), pos_hint={'top': 1})
             row1.add_widget(sep)
-            row1.add_widget(name)
-            sep = SeparatorY()
+            row1.add_widget(buy)
+            sep = SeparatorY(size_hint_y=None, height=icon_anch.height-dp(2), pos_hint={'top': 1})
+            row1.add_widget(sep)
+            row1.add_widget(sell)
+
+            sep = SeparatorY(size_hint_y=None, height=icon_anch.height-dp(2), pos_hint={'top': 1})
+            row1.add_widget(sep)
+            sep = SeparatorY(size_hint_y=None, height=icon_anch.height-dp(2), pos_hint={'top': 1})
             row1.add_widget(sep)
             # row1.add_widget(jname)
-            row1.add_widget(buy_box)
 
             box.add_widget(row1)
             self.md_accessories.add_widget(box)
@@ -386,17 +384,56 @@ class SpinoffDex(Screen):
             sep = SeparatorX()
             self.md_accessories.add_widget(sep)
 
-            row2 = Label(text=acc[0][4][0], size_hint=(None, None), size=(self.width*1, dp(40)), font_size='12sp')
+            # Description
+            row_2_desc = TintedLabel(text='Description', size_hint=(1, None), height=dp(30), font_size='12sp')
+            self.md_accessories.add_widget(row_2_desc)
+            row2 = WrapLabel(text=acc[0][6][0], size_hint=(None, None), size=(self.width*1, dp(40)), font_size='12sp')
             self.md_accessories.add_widget(row2)
+
+            # Effect
+            sep = SeparatorX()
+            self.md_accessories.add_widget(sep)
+            row_3_desc = TintedLabel(text='Effect', size_hint=(1, None), height=dp(30), font_size='12sp')
+            self.md_accessories.add_widget(row_3_desc)
+            row3 = WrapLabel(text=acc[0][4][0], size_hint=(None, None), size=(self.width*1, dp(40)), font_size='12sp')
+            self.md_accessories.add_widget(row3)
+            sep = SeparatorX()
+            self.md_accessories.add_widget(sep)
+
+            row_4_desc = TintedLabel(text='Location', size_hint=(1, None), height=dp(30), font_size='12sp')
+            self.md_accessories.add_widget(row_4_desc)
+            row4 = WrapLabel(text=acc[0][5][0][0][0], size_hint=(None, None), size=(self.width*1, dp(40)), font_size='12sp')
+            self.md_accessories.add_widget(row4)
+
+            if(len(acc[0][5][0])) > 1:
+                row4_1 = WrapLabel(text=acc[0][5][0][1][0], size_hint=(None, None), size=(self.width * 1, dp(40)),
+                                 font_size='12sp')
+                self.md_accessories.add_widget(row4_1)
+                if (len(acc[0][5][0])) > 2:
+                    row4_2 = WrapLabel(text=acc[0][5][0][2][0], size_hint=(None, None), size=(self.width * 1, dp(40)),
+                                       font_size='12sp')
+                    self.md_accessories.add_widget(row4_2)
+                    if (len(acc[0][5][0])) > 3:
+                        row4_3 = WrapLabel(text=acc[0][5][0][3][0], size_hint=(None, None),
+                                           size=(self.width * 1, dp(40)),
+                                           font_size='12sp')
+                        self.md_accessories.add_widget(row4_3)
+                        if (len(acc[0][5][0])) > 4:
+                            row4_4 = WrapLabel(text=acc[0][5][0][4][0], size_hint=(None, None),
+                                               size=(self.width * 1, dp(40)),
+                                               font_size='12sp')
+                            self.md_accessories.add_widget(row4_4)
 
             sep = SeparatorX()
             self.md_accessories.add_widget(sep)
+            whitespace = WhiteLabel(size_hint=(1, None), height=dp(20))
+            self.md_accessories.add_widget(whitespace)
 
     def set_gummis(self, pokedex_nr):
         self.md_gummis_box.clear_widgets()  # Reset Widget
 
         # Strings from the csv file
-        gummi_string = self.read_csv(int(pokedex_nr), 34)                       # Entire Favourite Gummis string from csv file
+        gummi_string = self.read_csv(int(pokedex_nr), 34).lower()               # Entire Favourite Gummis string from csv file
         gummi_1 = (gummi_string.partition(', ')[0])                             # Gummi 1 string
         gummi_2 = (gummi_string.partition(', ')[2])                             # Gummi 2 string (Empty if not applicable)
         gummi_1_color = gummi_1.partition(' (')[0]                              # Gummi 1 string with IQ amount removed
@@ -405,7 +442,9 @@ class SpinoffDex(Screen):
         gummi_2_amount = gummi_1.partition('(')[1] + gummi_2.partition('(')[2]  # Gummi 2 string, only IQ amount
 
         # Gummi Image and IQ amount Buttons
-        md_gummi_1_color = ImageButton(source='img\\gummis\\' + gummi_1_color + '_gummi.png', size_hint=(0.25, 1))
+        md_gummi_1_anc = AnchorLayout(anchor_x='center', anchor_y='center', size_hint=(0.25, 1))
+        md_gummi_1_color = ImageButton(source='img//gummis//' + gummi_1_color + '_gummi.png', size_hint_x=None, width=dp(12), allow_stretch=True)
+        md_gummi_1_anc.add_widget(md_gummi_1_color)
         md_gummi_1_amount = Button(text=gummi_1_amount, background_color=(0, 0, 0, 0), size_hint=(0.25, 1), font_size='14sp')
 
         # Binding for Popup with IQ information
@@ -417,14 +456,16 @@ class SpinoffDex(Screen):
         md_gummi_1_padding_right = Label(size_hint=(0.25, 1))  # the gummi image and the label are too far apart, should find a better way later
 
         md_gummi_1_box.add_widget(md_gummi_1_padding_left)   # Empty label to center other 2 widgets, and make them smaller
-        md_gummi_1_box.add_widget(md_gummi_1_color)          # Add the gummi image
+        md_gummi_1_box.add_widget(md_gummi_1_anc)            # Add the gummi image
         md_gummi_1_box.add_widget(md_gummi_1_amount)         # Add the IQ amount label
         md_gummi_1_box.add_widget(md_gummi_1_padding_right)  # Empty label to center other 2 widgets, and make them smaller
 
         self.md_gummis_box.add_widget(md_gummi_1_box)        # Add all the stuff to the box to contain it all
         # If applicable, do the same for second gummi
         if gummi_2:
-            md_gummi_2_color = ImageButton(source='img\\gummis\\' + gummi_2_color + '_gummi.png', size_hint=(0.25, 1))
+            md_gummi_2_anc = AnchorLayout(anchor_x='center', anchor_y='center', size_hint=(0.25, 1))
+            md_gummi_2_color = ImageButton(source='img//gummis//' + gummi_2_color + '_gummi.png', size_hint_x=None, width=dp(12), allow_stretch=True)
+            md_gummi_2_anc.add_widget(md_gummi_2_color)
             md_gummi_2_amount = Button(text=gummi_2_amount, background_color=(0, 0, 0, 0), size_hint=(0.25, 1))
             md_gummi_2_color.bind(on_release=partial(self.popup, gummi_2_color + ' Gummi', 'IQ Gained: ' + gummi_2_amount + v.iq_string, '12sp'))
             md_gummi_2_amount.bind(on_release=partial(self.popup, gummi_2_color + ' Gummi', 'IQ Gained: ' + gummi_2_amount + v.iq_string, '12sp'))
@@ -432,7 +473,7 @@ class SpinoffDex(Screen):
             md_gummi_2_padding_left = Label(size_hint=(0.25, 1))
             md_gummi_2_padding_right = Label(size_hint=(0.25, 1))
             md_gummi_2_box.add_widget(md_gummi_2_padding_left)
-            md_gummi_2_box.add_widget(md_gummi_2_color)
+            md_gummi_2_box.add_widget(md_gummi_2_anc)
             md_gummi_2_box.add_widget(md_gummi_2_amount)
             md_gummi_2_box.add_widget(md_gummi_2_padding_right)
             self.md_gummis_box.add_widget(md_gummi_2_box)
@@ -445,9 +486,12 @@ class SpinoffDex(Screen):
         if 'Lv' in evo_method:
             if 'IQ' not in evo_method.partition(' -->')[0]:
                 evo_lvl = Label(text=evo_method, font_size=dp(11))  # Label with text of evolution level
-                evo_mon_img = ImageButton(source='img\\portraits\\' + evo_mon + '.png', on_release=self.change_page_image)  # Stage 1 mon img
+                evo_mon_anch = AnchorLayout(anchor_x='center', anchor_y='center')
+                evo_mon_img = ImageButton(source='img//portraits//' + evo_mon + '.png', size_hint_x=None, width=dp(40),
+                                          allow_stretch=True, on_release=self.change_page_image)  # Stage 1 mon img
+                evo_mon_anch.add_widget(evo_mon_img)
                 self.ids.md_evo_box.add_widget(evo_lvl)
-                self.ids.md_evo_box.add_widget(evo_mon_img)
+                self.ids.md_evo_box.add_widget(evo_mon_anch)
             else:
                 print('Probably delete later, just seeing if this ever gets triggered\n'*500)
 
@@ -455,13 +499,20 @@ class SpinoffDex(Screen):
         else:
             evo_box = BoxLayout()  # Widget to contain multiple evo items and '+' Label
             evo1_iq_amount_label = ''  # Empty placeholder string used as boolean to check for IQ based evos
-            evo_mon_img = ImageButton(source='img\\portraits\\' + evo_mon + '.png', on_release=self.change_page_image)  # Stage 1 mon img
+
+            evo_mon_anch = AnchorLayout(anchor_x='center', anchor_y='center')
+            evo_mon_img = ImageButton(source='img//portraits//' + evo_mon + '.png', size_hint_x=None, width=dp(40),
+                                      allow_stretch=True, on_release=self.change_page_image)  # Stage 1 mon img
+            evo_mon_anch.add_widget(evo_mon_img)
 
             # Check if evo method is not IQ / Evo item
             if 'IQ' not in evo_method:
 
                 evo_item = evo_method.partition(' + ')[0]
-                evo_item_img = ImageButton(source='img\\evo\\' + evo_item + '.png')  # First evo item img
+                evo_item_anch = AnchorLayout(anchor_x='center', anchor_y='center')
+                evo_item_img = ImageButton(source='img//evo//' + evo_item + '.png', size_hint_x=None, width=dp(12),
+                                      allow_stretch=True)  # First evo item img
+                evo_item_anch.add_widget(evo_item_img)
                 evo_item_img.bind(on_release=partial(self.popup, evo_item, v.evo_item_dict[evo_item], '12sp'))  # Popup with item name / location
             # If evo method is IQ
             else:
@@ -471,17 +522,20 @@ class SpinoffDex(Screen):
                 For example Azurill gets a blue gummi from Marill though it is Normal type, not a huge deal and this might be the one exception
                 But leaving this here just in case anyway
                 '''
-                evo_item_img = ImageButton(source='img\\gummis\\' + self.read_csv(int(evo_mon), 34).partition(' (')[0] + '_gummi.png')
+                evo_item_anch = AnchorLayout(anchor_x='center', anchor_y='center')
+                evo_item_img = ImageButton(source='img//gummis//' + self.read_csv(int(evo_mon), 34).partition(' (')[0]
+                                           .lower() + '_gummi.png', size_hint_x=None, width=dp(12), allow_stretch=True)
+                evo_item_anch.add_widget(evo_item_img)
                 evo_item_img.bind(on_release=partial(self.popup, 'IQ', 'IQ level required: ' + iq_required[1:2], '14sp'))  # Popup explaining IQ
                 evo1_iq_amount_label = Label(text=iq_required)  # IQ level string; (4)/(5)/(6)
-                evo_box.add_widget(evo_item_img)
+                evo_box.add_widget(evo_item_anch)
                 evo_box.add_widget(evo1_iq_amount_label)
 
             # Check if evo data string contains '+' / if second evo item exists
             if '+' in evo_method:
                 evo1_label = Label(text='+')                    # Label '+' for between evo items
                 if not evo_box.children:                       # If boxlayout is still empty (Espeon and Umbreon edge cases)
-                    evo_box.add_widget(evo_item_img)       # Add first evolution data to boxlayout
+                    evo_box.add_widget(evo_item_anch)       # Add first evolution data to boxlayout
                     if evo1_iq_amount_label:                    # Only add IQ amount required string if it was changed from empty string
                         evo_box.add_widget(evo1_iq_amount_label)
                 evo_box.add_widget(evo1_label)                 # Add '+' string label
@@ -490,14 +544,17 @@ class SpinoffDex(Screen):
                 # or IQ + Item (Espeon / Umbreon; IQ + Ribbon)
                 if 'IQ' not in evo_method or evo1_iq_amount_label:
                     evo_item2 = evo_method.partition(' + ')[2].partition(' --> ')[0]
-                    evo1_image_item2 = ImageButton(source='img\\evo\\' + evo_item2 + '.png')  # Second evo item img
+                    evo_item_anch = AnchorLayout(anchor_x='center', anchor_y='center')
+                    evo1_image_item2 = ImageButton(source='img//evo//' + evo_item2 + '.png', size_hint_x=None,
+                                                   width=dp(12), allow_stretch=True)  # Second evo item img
+                    evo_item_anch.add_widget(evo1_image_item2)
                     evo1_image_item2.bind(on_release=partial(self.popup, evo_item2, v.evo_item_dict[evo_item2], '12sp'))  # Popup with item name / location
-                    evo_box.add_widget(evo1_image_item2)
+                    evo_box.add_widget(evo_item_anch)
                 # If IQ required for evo and it is the first occurrence in current evo line (Azurill, IQ -> Level up evo?)
                 else:
                     print('Don\'t think I need this? Delete later probably\n'*50)
                     # iq_required = evo_method.partition('IQ')[2][:3]
-                    # evo1_image_item2 = ImageButton(source='img\\gummis\\' + self.read_csv(int(evo_mon), 34).partition(' (')[0] + '_gummi.png')  # IQ (Gummi) img
+                    # evo1_image_item2 = ImageButton(source='img//gummis//' + self.read_csv(int(evo_mon), 34).partition(' (')[0] + '_gummi.png')  # IQ (Gummi) img
                     # evo1_image_item2.bind(on_release=partial(self.Popup, 'IQ level required:::::' + iq_required[1:2], 'IQ', '24sp'))  # Popup explaining IQ
                     # evo1_iq_amount_label = Label(text=evo_method.partition('IQ(')[2][:3])  # IQ level string
                     #
@@ -506,15 +563,15 @@ class SpinoffDex(Screen):
 
                 self.ids.md_evo_box.add_widget(evo_box)  # Add box widget containing evo items and label
 
-            # If only 1 item in current evolution (Not necessarily whole line), add only an image not a boxlayout
+            # If only 1 item in current evolution (Not necessarily whole line)
             elif not evo_box.children:
-                self.ids.md_evo_box.add_widget(evo_item_img)
+                self.ids.md_evo_box.add_widget(evo_item_anch)
             # Otherwise add created boxlayout containing several Images and Label
             else:
                 self.ids.md_evo_box.add_widget(evo_box)
 
             # Finally, add last portrait image
-            self.ids.md_evo_box.add_widget(evo_mon_img)
+            self.ids.md_evo_box.add_widget(evo_mon_anch)
 
     def set_evos(self, pokedex_nr):
         self.ids.md_evo_box.clear_widgets()  # Clear widgets from potential previously entered dex page
@@ -545,8 +602,11 @@ class SpinoffDex(Screen):
             # Check if current mon has any evolutions
             if evo_string != 'No Evolution':
                 # Regular evolutions
-                evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page_image)  # Base mon portrait, go to mon on select
-                self.ids.md_evo_box.add_widget(evo1_image)  # Add base mon portrait
+                evo1_anch = AnchorLayout(anchor_x='center', anchor_y='center')
+                evo1_image = ImageButton(source='img//portraits//' + evo1[0] + '.png', size_hint_x=None, width=dp(40),
+                                         allow_stretch=True, on_release=self.change_page_image)  # Base mon portrait, go to mon on select
+                evo1_anch.add_widget(evo1_image)
+                self.ids.md_evo_box.add_widget(evo1_anch)  # Add base mon portrait
                 self.evolve(evo1lv[0], evo2[0])  # Add first evo data
 
                 if evo3[0]:  # If data for a second evo exists / Not a 1 evo mon
@@ -568,28 +628,43 @@ class SpinoffDex(Screen):
                     e.g. 3+ paths with 3 pokémon per path instead of 2
                     also no way to handle forms yet
                     '''
-                    evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page_image)
-                    self.ids.md_evo_box.add_widget(evo1_image)  # Add base mon portrait again, second row
+                    evo1_anch = AnchorLayout(anchor_x='center', anchor_y='center')
+
+                    evo1_image = ImageButton(source='img//portraits//' + evo1[0] + '.png', size_hint_x=None,
+                                             width=dp(40), allow_stretch=True, on_release=self.change_page_image)
+                    evo1_anch.add_widget(evo1_image)
+                    self.ids.md_evo_box.add_widget(evo1_anch)  # Add base mon portrait again, second row
                     if evo_cols == 5:  # Skip if there is only 1 evo / cols is 3
                         self.evolve(evo1lv[0], evo2[0])  # Add first evo data again, second row
                     self.evolve(evo_lv_alt1[0], evo_alt1[0])  # Add alternate evo path, second row
                     if evo_rows > 2:  # If there are 3 or more evo paths (Tyrogue, Eevee)
-                        evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page_image)
-                        self.ids.md_evo_box.add_widget(evo1_image)  # Add base mon portrait again, third row
+                        evo1_anch = AnchorLayout(anchor_x='center', anchor_y='center')
+                        evo1_image = ImageButton(source='img//portraits//' + evo1[0] + '.png', size_hint_x=None,
+                                                 width=dp(40), allow_stretch=True, on_release=self.change_page_image)
+                        evo1_anch.add_widget(evo1_image)
+                        self.ids.md_evo_box.add_widget(evo1_anch)  # Add base mon portrait again, third row
                         self.evolve(evo_lv_alt2[0], evo_alt2[0])  # Add alternate evo path, third row
                         if evo_rows > 3:  # 4 or more evo paths, just Eevee in gen 3, maybe more with forms later?
-                            evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page_image)
-                            self.ids.md_evo_box.add_widget(evo1_image)  # Add base mon portrait again, third row
+                            evo1_anch = AnchorLayout(anchor_x='center', anchor_y='center')
+                            evo1_image = ImageButton(source='img//portraits//' + evo1[0] + '.png', size_hint_x=None,
+                                                     width=dp(40), allow_stretch=True, on_release=self.change_page_image)
+                            evo1_anch.add_widget(evo1_image)
+                            self.ids.md_evo_box.add_widget(evo1_anch)  # Add base mon portrait again, third row
                             self.evolve(evo_lv_alt3[0], evo_alt3[0])  # Add alternate evo path, third row
                             if evo_rows > 4:  # 5 or more evo paths, still just Eevee in gen 3
-                                evo1_image = ImageButton(source='img\\portraits\\' + evo1[0] + '.png', on_release=self.change_page_image)
-                                self.ids.md_evo_box.add_widget(evo1_image)  # Add base mon portrait again, third row
+                                evo1_anch = AnchorLayout(anchor_x='center', anchor_y='center')
+                                evo1_image = ImageButton(source='img//portraits//' + evo1[0] + '.png', size_hint_x=None,
+                                                         width=dp(40), allow_stretch=True, on_release=self.change_page_image)
+                                evo1_anch.add_widget(evo1_image)
+                                self.ids.md_evo_box.add_widget(evo1_anch)  # Add base mon portrait again, third row
                                 self.evolve(evo_lv_alt4[0], evo_alt4[0])  # Add alternate evo path, third row
 
             # Non evolving mons
             else:
-                evo1_image = ImageButton(source='img\\portraits\\' + pokedex_nr + '.png', on_release=self.change_page_image)
-                self.ids.md_evo_box.add_widget(evo1_image)  # add non evolving mon portrait
+                evo1_anch = AnchorLayout(anchor_x='center', anchor_y='center')
+                evo1_image = ImageButton(source='img//portraits//' + pokedex_nr + '.png', size_hint_x=None, width=dp(40), allow_stretch=True)
+                evo1_anch.add_widget(evo1_image)
+                self.ids.md_evo_box.add_widget(evo1_anch)  # add non evolving mon portrait
 
     def set_moves(self, pokedex_nr):
         self.ids.md_moves_levels.clear_widgets()
@@ -631,6 +706,7 @@ class SpinoffDex(Screen):
 
     def change_page(self, nr):
         self.ids.dex_page_main.number = abs(nr)  # absolute value of pokedex nr; '001' = 1
+        self.ids.manager.list_of_prev_screens.append(self.ids.manager.current)
         self.ids.manager.current = 'dex_page_main'
 
     def change_page_image(self, image_button_object):
@@ -642,7 +718,7 @@ class SpinoffDex(Screen):
 
     @staticmethod
     def popup(title, text, text_font_size='14sp', image_button_object=None):
-        return Pop(title, text, text_font_size, alpha=0.5, width=None, height=None)
+        return Pop(title, text, text_font_size, alpha=0.5)
 
     def create_box(self, pokedex_nr, index, delimiter, where, cols, rows, font_size='14sp', irregular_col_width=None):
         where.clear_widgets()  # Reset stat widget
@@ -699,9 +775,7 @@ class Pop(ModalView):
                  width=None, height=None, **kwargs):
         super(Pop, self).__init__(**kwargs)
 
-        self.auto_dismiss = False
-        self.background = "img\\misc\\bg_gray2.png"
-        self.background_color = (0, 0, 0, alpha)
+        self.auto_dismiss = True
         self.size_hint = (0.98, None)
         self.preferred_width = width
         self.preferred_height = height
@@ -724,10 +798,17 @@ class Pop(ModalView):
                            text=title,
                            halign='center',
                            font_size="16sp",
-                           color=(0.1, 0.1, 0.1, 1),
+                           color=(0.9, 0.9, 0.9, 1),
                            markup=True)
 
-        self.separator = BoxLayout(size_hint_y=None, height="1dp")
+        self.separators = BoxLayout(orientation='horizontal', size_hint=(1, None), height="1dp")
+        self.separator1 = BoxLayout(size_hint_x=0.05)
+        self.separator2 = BoxLayout(size_hint_x=0.9)
+        self.separator3 = BoxLayout(size_hint_x=0.05)
+        self.separators.add_widget(self.separator1)
+        self.separators.add_widget(self.separator2)
+        self.separators.add_widget(self.separator3)
+
 
         self.pscroll = ScrollView(do_scroll_x=False)
 
@@ -737,7 +818,7 @@ class Pop(ModalView):
                                  text=txt,
                                  halign='left',
                                  font_size=text_font_size,
-                                 color=(0.1, 0.1, 0.2, 1),
+                                 color=(0.9, 0.9, 0.9, 1),
                                  markup=True,
                                  text_size=(self.width - dp(20), None))
 
@@ -761,14 +842,13 @@ class Pop(ModalView):
 
             self.content.texture_size = (self.size[0], self.content.texture_size[1]*(self.size[0]/self.content.texture_size[0]))
 
-        self.pbutton = Button(text='Close',
-                              size_hint_y=None, height="25dp",
+        self.pbutton = Button(text='Close', size_hint=(0.9, None), height="25dp", pos_hint={'center_x': 0.5},
                               background_normal="atlas://data/images/defaulttheme/vkeyboard_background")
         self.pbutton.bind(on_release=self.close)
 
         self.add_widget(self.playout)
         self.playout.add_widget(self.title)
-        self.playout.add_widget(self.separator)
+        self.playout.add_widget(self.separators)
 
         self.playout.add_widget(self.pscroll)
         self.pscroll.add_widget(self.content)
@@ -777,13 +857,13 @@ class Pop(ModalView):
         self.title.bind(texture_size=self.update_height)
         self.content.bind(texture_size=self.update_height)
 
-        with self.separator.canvas.before:
+        with self.separator2.canvas.before:
             Color(0.7, 0.7, 0.9, 1)
-            self.rect = Rectangle(pos=self.separator.pos,
-                                  size=self.separator.size)
+            self.rect = Rectangle(pos=self.separator2.pos,
+                                  size=self.separator2.size)
 
-        self.separator.bind(pos=self.update_separator,
-                            size=self.update_separator)
+        self.separator2.bind(pos=self.update_separator,
+                             size=self.update_separator)
 
         v.Window.bind(size=self.update_width)
 
@@ -818,20 +898,11 @@ class Pop(ModalView):
         self.center = v.Window.center
 
     def update_separator(self, *args):
-        self.rect.pos = self.separator.pos
-        self.rect.size = self.separator.size
+        self.rect.pos = self.separator2.pos
+        self.rect.size = self.separator2.size
 
     def close(self, instance):
         self.dismiss(force=True)
-
-
-class WrappedLabel(Label):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.bind(
-            width=lambda *x:
-            self.setter('text_size')(self, (self.width, None)),
-            texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
 
 
 class SeparatorX(Widget):
@@ -868,13 +939,17 @@ class SeparatorY(Widget):
         self.rect.size = dp(2), self.height
 
 
+class WrapLabel(Label):
+    pass
+
+
+class WhiteLabel(Label):
+    pass
+
+
+class TintedLabel(Label):
+    pass
+
+
 if __name__ == '__main__':
     SpinoffDexApp().run()
-
-# SQL Query
-# SELECT 'id_' || id as id,
-# CASE
-# 	WHEN pokedex_number < 10 THEN '#00' || pokedex_number
-# 	WHEN pokedex_number < 100 AND pokedex_number >= 10 THEN '#0' || pokedex_number
-# 	ELSE '#' || pokedex_number
-# END AS number, name, type1, type2, joined, favorite, md_ability, md_evolution_chain, md_body_size, md_friend_area, md_get_rate, md_location FROM spinoff_dex

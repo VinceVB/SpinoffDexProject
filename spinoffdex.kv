@@ -13,6 +13,15 @@
             size: self.size
             pos: self.pos
 
+<WrapLabel>:
+    halign: "left"
+    valign: "center"
+    size_hint_y: None
+    text_size : self.width, None
+    height: self.texture_size[1]
+    spacing: dp(10)  # between elements
+    padding: dp(10), dp(10)  # around elements
+
 <Separator_x@Widget>
     size_hint: None, None
     size: self.parent.width, dp(2)
@@ -50,9 +59,22 @@
     # to r 0, g 0, b 0, a 0
 
 <TintedLabel@Label>
+    text: 'Placeholder'
+    color: 1, 1, 1, 1
+    font_size: '16sp'
     canvas:
         Color:
             rgba: 1, 1, 1, 0.1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<WhiteLabel@Label>
+    color: 1, 1, 1, 1
+    font_size: '16sp'
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1
         Rectangle:
             size: self.size
             pos: self.pos
@@ -62,7 +84,9 @@
     on_press:
         app.root.dex_list_scroller.previous_y = app.root.dex_list_scroller.scroll_y  # Remember position in scroller to return to later
         app.root.dex_page_main.number = int(self.page[3:])
+        app.root.manager.list_of_prev_screens.append(app.root.manager.current)
         app.root.manager.current = 'dex_page_main'
+
 
 <MD_MainBotNav@Widget>:
     size_hint: None, None
@@ -76,6 +100,7 @@
             size_hint: None, None
             size: self.parent.width/4, self.parent.height
             on_release:
+                app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                 app.root.manager.current = 'md_main_dex'
         Button:
             text: 'Locations'
@@ -84,6 +109,7 @@
             size: self.parent.width/4, self.parent.height
             on_release:
                 app.root.dex_list_scroller.previous_y = app.root.dex_list_scroller.scroll_y
+                app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                 app.root.manager.current = 'md_main_locations'
         Button:
             text: 'Items'
@@ -91,6 +117,7 @@
             size: self.parent.width/4, self.parent.height
             on_release:
                 app.root.dex_list_scroller.previous_y = app.root.dex_list_scroller.scroll_y
+                app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                 app.root.manager.current = 'md_main_items'
         Button:
             text: 'Moves'
@@ -98,6 +125,7 @@
             size: self.parent.width/4, self.parent.height
             on_release:
                 app.root.dex_list_scroller.previous_y = app.root.dex_list_scroller.scroll_y
+                app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                 app.root.manager.current = 'md_main_moves'
 
 <MD_DexBotNav@Widget>
@@ -114,6 +142,7 @@
             size_hint: None, None
             size: self.parent.width/4, self.parent.height
             on_release:
+                app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                 app.root.manager.current = 'dex_page_main'
 
         Button:
@@ -121,55 +150,59 @@
             size_hint: None, None
             size: self.parent.width/4, self.parent.height
             on_release:
+                app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                 app.root.manager.current = 'dex_page_moves'
         Button:
             text: 'Stats'
             size_hint: None, None
             size: self.parent.width/4, self.parent.height
             on_release:
+                app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                 app.root.manager.current = 'dex_page_stats'
         Button:
             text: 'Quotes'
             size_hint: None, None
             size: self.parent.width/4, self.parent.height
             on_release:
+                app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                 app.root.manager.current = 'dex_page_quotes'
 
 <SpinoffDex>
-    manager: manager
-    dex_page_main: dex_page_main
-    md_dex_grid: md_dex_grid
-    general_image: general_image
-    md_abilities: md_abilities
-    md_ability1: md_ability1
-    md_ability2: md_ability2
-    md_ability_sep: md_ability_sep
-    md_accessories: md_accessories
-    md_joined: md_joined
-    md_body_size: md_body_size
-    md_location: md_location
-    md_friend_area: md_friend_area
-    md_get_rate: md_get_rate
-    md_get_rate2: md_get_rate2
-    md_gummis_box: md_gummis_box
-    md_evo_box: md_evo_box
-    md_moves_names: md_moves_names
-    md_moves_levels: md_moves_levels
-    md_moves_separators: md_moves_separators
-    md_tm_nrs: md_tm_nrs
-    md_tm_names: md_tm_names
-    md_tm_separators: md_tm_separators
-    general_type1: general_type1
-    general_type2: general_type2
-    type_box: type_box
-    dex_list_scroller: dex_list_scroller
-    dex_searchbar: dex_searchbar
-    dex_base_stats: dex_base_stats
-    md_dex_stats: md_dex_stats
+    manager: manager.__self__
+    dex_page_main: dex_page_main.__self__
+    md_dex_grid: md_dex_grid.__self__
+    general_image: general_image.__self__
+    md_abilities: md_abilities.__self__
+    md_ability1: md_ability1.__self__
+    md_ability2: md_ability2.__self__
+    md_ability_sep: md_ability_sep.__self__
+    md_accessories: md_accessories.__self__
+    md_joined: md_joined.__self__
+    md_body_size: md_body_size.__self__
+    md_location: md_location.__self__
+    md_friend_area: md_friend_area.__self__
+    md_get_rate: md_get_rate.__self__
+    md_get_rate2: md_get_rate2.__self__
+    md_gummis_box: md_gummis_box.__self__
+    md_evo_box: md_evo_box.__self__
+    md_moves_names: md_moves_names.__self__
+    md_moves_levels: md_moves_levels.__self__
+    md_moves_separators: md_moves_separators.__self__
+    md_tm_nrs: md_tm_nrs.__self__
+    md_tm_names: md_tm_names.__self__
+    md_tm_separators: md_tm_separators.__self__
+    general_type1: general_type1.__self__
+    general_type2: general_type2.__self__
+    type_box: type_box.__self__
+    dex_list_scroller: dex_list_scroller.__self__
+    dex_searchbar: dex_searchbar.__self__
+    dex_base_stats: dex_base_stats.__self__
+    md_dex_stats: md_dex_stats.__self__
 
     ScreenManager:
         id: manager
         transition: NoTransition()
+        list_of_prev_screens: []
         Screen:
             name: 'md_main_dex'
             on_pre_enter:
@@ -224,11 +257,10 @@
                         size_hint_y: None
                         size: root.width, self.minimum_height
                         row_default_height: '85dp'
-                        spacing: 10   # between elements - 1720/0 1910/10 2100/20
-                        padding: 10  # around elements
+                        spacing: dp(10)  # between elements
+                        padding: dp(10)  # around elements
 
                 MD_MainBotNav:
-
 
         Screen:
             id: dex_page_main
@@ -239,7 +271,7 @@
 
                 general_nr_name.text = str(app.root.read_csv(self.number, 2)) + ' ' + str(app.root.read_csv(self.number, 3))
                 app.root.check_joined(general_nr_name.text[1:4]) # Set image to joined if pokemon is joined
-                general_image.source = 'img\\portraits\\'+general_nr_name.text[1:4]+'.png'  # General Image
+                general_image.source = 'img//portraits//'+general_nr_name.text[1:4]+'.png'  # General Image
                 app.root.set_types(general_nr_name.text[1:4])                               # Type 1 (/ Type 2)
                 md_joined.source = app.root.check_joined(general_nr_name.text[1:4])         # Joined
                 general_class.text = app.root.read_csv(self.number, 9)                      # Classification
@@ -248,7 +280,7 @@
                 app.root.set_stats(general_nr_name.text[1:4])                               # Base Stats
                 app.root.set_abilities(app.root.read_csv(self.number, 14))                  # Abilities
                 app.root.set_evos(general_nr_name.text[1:4])                                # Evolution Chain
-                md_body_size.source = app.root.set_md_body_size(general_nr_name.text[1:4])  # Body size
+                app.root.set_md_body_size(general_nr_name.text[1:4])                        # Body size
                 md_friend_area.text = app.root.read_csv(self.number, 17)                    # MD Friend Area
                 md_get_rate.text = app.root.read_csv(self.number, 18)                       # MD Get rate
                 md_get_rate2.text = app.root.read_csv(self.number, 36) [1:-1]               # MD Get rate min levels
@@ -275,6 +307,7 @@
                         text: 'Back'
                         size_hint_y: 0.1
                         on_press:
+                            app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                             manager.current = 'md_main_dex'
 
                     # ======================================== #
@@ -310,10 +343,16 @@
                             size_hint: None, None
                             size: root.width, dp(60)
                             orientation: 'horizontal'
-                            Image:
-                                id: general_image
-                                size: root.width*0.25, self.parent.height
-                                # allow_stretch: 'True'
+                            AnchorLayout:
+                                anchor_x: 'center'
+                                anchor_y: 'center'
+                                size_hint: None, None
+                                size: (self.parent.width*0.25, self.parent.height)
+                                Image:
+                                    id: general_image
+                                    size_hint_x: None
+                                    width: dp(40)
+                                    allow_stretch: True
                             BoxLayout:
                                 orientation: 'vertical'
                                 size_hint: None, None
@@ -348,11 +387,11 @@
                                     BackgroundLabel:
                                         id: general_type1
                                         size_hint: None, None
-                                        size: self.parent.width-5, self.parent.height/2
+                                        size: self.parent.width-dp(5), self.parent.height/2
                                     BackgroundLabel:
                                         id: general_type2
                                         size_hint: None, None
-                                        size: self.parent.width-5, self.parent.height/2
+                                        size: self.parent.width-dp(5), self.parent.height/2
 
                         Separator_x:
 
@@ -484,10 +523,16 @@
                         BoxLayout:
                             size_hint: None, None
                             size: root.width, '45dp'
-                            Image:
-                                id: md_body_size
+                            AnchorLayout:
+                                anchor_x: 'center'
+                                anchor_y: 'center'
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
+                                Image:
+                                    id: md_body_size
+                                    size_hint_x: None
+                                    allow_stretch: True
+
                             Separator_y:
                             BoxLayout:
                                 orientation: 'vertical'
@@ -503,13 +548,20 @@
                                     on_release:
                                         app.root.popup('Minimum Recruit Levels', ('Minimum Level without Friend Bow: ' + app.root.read_csv(dex_page_main.number, 36)[1:].partition('/')[0] + '\nMinimum Level with Friend Bow: ' + app.root.read_csv(dex_page_main.number, 36)[1:].partition('/')[2][:-1]), '12sp')
                             Separator_y:
-                            ImageButton:
-                                id: md_joined
+
+                            AnchorLayout:
+                                anchor_x: 'center'
+                                anchor_y: 'center'
                                 size_hint: None, None
                                 size: self.parent.width/4, self.parent.height
-                                #allow_stretch: True
-                                on_release:
-                                    app.root.md_join(general_nr_name.text[1:4])
+                                ImageButton:
+                                    id: md_joined
+                                    size_hint_x: None
+                                    width: dp(30)
+
+                                    allow_stretch: True
+                                    on_release:
+                                        app.root.md_join(general_nr_name.text[1:4])
                             Separator_y:
                             BoxLayout:
                                 id: md_gummis_box
@@ -530,11 +582,11 @@
                         Button:
                             id: md_friend_area
                             size_hint: None, None
-                            size: root.width, '30dp'
+                            size: root.width, '40dp'
                             font_size: '14sp'
-                            background_normal: 'img\\friend areas\\' + md_friend_area.text +'.png'
+                            background_normal: 'img//friend areas//' + md_friend_area.text +'.png'
                             on_release:
-                                app.root.popup('image_' + self.background_normal.partition('areas\\')[2].partition('.png')[0], self.background_normal)
+                                app.root.popup('image_' + self.background_normal.partition('areas//')[2].partition('.png')[0], self.background_normal)
 
                         Separator_x:
 
@@ -608,6 +660,7 @@
                         text: 'Back'
                         size_hint_y: 0.05
                         on_press:
+                            app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                             manager.current = 'md_main_dex'
 
 
@@ -719,6 +772,7 @@
                         text: 'Back'
                         size_hint_y: 0.1
                         on_press:
+                            app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                             manager.current = 'md_main_dex'
 
                     # ======================================== #
@@ -800,6 +854,7 @@
                         text: 'Back'
                         size_hint_y: 0.1
                         on_press:
+                            app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                             manager.current = 'md_main_dex'
 
                     GridLayout:
@@ -1080,12 +1135,13 @@
                         size: self.parent.width, '55dp'
                         Image:
                             size_hint: 0.2, 1
-                            source: 'img\\items\\scarf_big.png'
+                            source: 'img//items//scarf_big.png'
                             allow_stretch: 'True'
                         Button:
                             size_hint: 0.8, 1
                             text:'Accessories'
                             on_release:
+                                app.root.manager.list_of_prev_screens.append(app.root.manager.current)
                                 app.root.manager.current = 'md_accessories'
 
 
